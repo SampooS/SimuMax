@@ -210,7 +210,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="tallennuksetButton" layoutX="934.0" layoutY="579.0" mnemonicParsing="false" prefHeight="95.0" prefWidth="268.0" text="TALLENNUKSET">
+            <Button fx:id="tallennuksetButton" layoutX="934.0" layoutY="579.0" mnemonicParsing="false" onAction="#tallenna" prefHeight="95.0" prefWidth="268.0" text="TALLENNUKSET">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

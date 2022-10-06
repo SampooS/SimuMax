@@ -13,6 +13,7 @@ module simulaattorinrunko5 {
 	requires javafx.graphics;
 	requires junit;
 	requires org.junit.jupiter.api;
+	requires java.sql;
 	
 	opens view to javafx.fxml;
 }

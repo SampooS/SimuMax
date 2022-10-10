@@ -9,6 +9,7 @@ public interface ISimulaattorinUI {
 	public int getKassojenMaara();
 	public int getRyhmienMaara();
 	public double getPorrastusAika();
+	public void setSimulaatioLoppui();
 	//public void setLoppuaika(double aika);
 	public IVisualisointi getVisualisointi();
 

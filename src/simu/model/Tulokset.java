@@ -43,6 +43,8 @@ public class Tulokset implements Serializable{
 		return instanssi;
 	}
 	
+	
+	
 	public void setPalvelupiste(Palvelupiste [] palvelupisteet, int ruokalinja, int kassat) {
 		
 		this.palvelupisteet = palvelupisteet;

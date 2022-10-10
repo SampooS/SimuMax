@@ -14,6 +14,7 @@
 <?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.MotionBlur?>
 <?import javafx.scene.effect.SepiaTone?>
 <?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
@@ -29,7 +30,7 @@
 	<children>
       <AnchorPane fx:id="taustakuvapane" prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="720.0" fitWidth="1280.0">
+            <ImageView id="taustakuvarobco" fitHeight="720.0" fitWidth="1280.0">
                <image>
                   <Image url="@../images/tietokone3.jpg" />
                </image>
@@ -37,7 +38,7 @@
                   <ColorAdjust contrast="0.07" hue="0.52" saturation="0.47" />
                </effect>
             </ImageView>
-            <ImageView fitHeight="299.0" fitWidth="918.0" layoutX="172.0" layoutY="145.0" opacity="0.41">
+            <ImageView id="alkuvihreätausta" fitHeight="299.0" fitWidth="918.0" layoutX="172.0" layoutY="145.0" opacity="0.41">
                <image>
                   <Image url="@../images/tietokone2.jpg" />
                </image>
@@ -60,7 +61,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="load" fitHeight="89.0" fitWidth="202.0" layoutX="670.0" layoutY="13.0" onMouseClicked="#loadRuutu" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.87">
+            <ImageView fx:id="load" fitHeight="89.0" fitWidth="202.0" layoutX="650.0" layoutY="13.0" onMouseClicked="#loadRuutu" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.87">
                <image>
                   <Image url="@../images/load.png" />
                </image>
@@ -70,9 +71,9 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane id="ekatButtonitNONvisible" fx:id="ekasivunButtonit" layoutY="583.0" prefHeight="127.0" prefWidth="1278.0" visible="false">
+      <Pane id="ekatButtonitNONvisible" fx:id="ekasivunButtonit" focusTraversable="true" layoutY="583.0" prefHeight="127.0" prefWidth="1278.0" visible="false">
          <children>
-            <ImageView fx:id="hidasta" fitHeight="89.0" fitWidth="202.0" layoutX="420.0" layoutY="13.0" onMouseClicked="#hidasta" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.87">
+            <ImageView fx:id="hidasta" fitHeight="89.0" fitWidth="202.0" layoutX="400.0" layoutY="13.0" onMouseClicked="#hidasta" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.87">
                <image>
                   <Image url="@../images/hidastanappula.png" />
                </image>
@@ -80,7 +81,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="nopeuta" fitHeight="89.0" fitWidth="202.0" layoutX="670.0" layoutY="13.0" onMouseClicked="#nopeuta" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.87">
+            <ImageView fx:id="nopeuta" fitHeight="89.0" fitWidth="202.0" layoutX="650.0" layoutY="13.0" onMouseClicked="#nopeuta" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.87">
                <image>
                   <Image url="@../images/nopeutanappula.png" />
                </image>
@@ -92,7 +93,7 @@
       </Pane>
       <Pane id="tokatButtonitNONvisible" fx:id="tokasivunButtonit" focusTraversable="true" layoutY="583.0" mouseTransparent="true" prefHeight="127.0" prefWidth="1280.0" visible="false">
          <children>
-            <ImageView id="asiakasnappula" fx:id="asiakasButton" fitHeight="89.0" fitWidth="202.0" layoutX="170.0" layoutY="13.0" onMouseClicked="#asiakasPaneeli" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff">
+            <ImageView id="asiakasnappula" fx:id="asiakasButton" fitHeight="89.0" fitWidth="202.0" layoutX="150.0" layoutY="13.0" onMouseClicked="#asiakasPaneeli" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.87">
                <image>
                   <Image url="@../images/asiakasNappula.jpg" />
                </image>
@@ -100,7 +101,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView id="ruokanappula" fx:id="ruokalinjatButton" fitHeight="89.0" fitWidth="202.0" layoutX="420.0" layoutY="13.0" onMouseClicked="#ruokaPaneeli" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff">
+            <ImageView id="ruokanappula" fx:id="ruokalinjatButton" fitHeight="89.0" fitWidth="202.0" layoutX="400.0" layoutY="13.0" onMouseClicked="#ruokaPaneeli" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.87">
                <image>
                   <Image url="@../images/linjastoNappula.jpg" />
                </image>
@@ -108,7 +109,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView id="kassanappula" fx:id="kassatButton" fitHeight="89.0" fitWidth="202.0" layoutX="670.0" layoutY="13.0" onMouseClicked="#kassaPaneeli" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff">
+            <ImageView id="kassanappula" fx:id="kassatButton" fitHeight="89.0" fitWidth="202.0" layoutX="650.0" layoutY="13.0" onMouseClicked="#kassaPaneeli" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.87">
                <image>
                   <Image url="@../images/kassatNappula.jpg" />
                </image>
@@ -116,7 +117,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView id="loadnappula" fx:id="tallennuksetButton" fitHeight="89.0" fitWidth="202.0" layoutX="920.0" layoutY="13.0" onMouseClicked="#tallennusPaneeli" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff">
+            <ImageView id="loadnappula" fx:id="tallennuksetButton" fitHeight="89.0" fitWidth="202.0" layoutX="900.0" layoutY="13.0" onMouseClicked="#tallennusPaneeli" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.87">
                <image>
                   <Image url="@../images/loadnappula2.jpg" />
                </image>
@@ -200,7 +201,7 @@
          <children>
             <Pane id="visible">
                <children>
-                  <ImageView fitHeight="446.0" fitWidth="1214.0" opacity="0.66">
+                  <ImageView id="telkkukuva" fitHeight="446.0" fitWidth="1214.0" opacity="0.66">
                      <image>
                         <Image url="@../images/ruutu.jpg" />
                      </image>
@@ -208,7 +209,7 @@
                         <ColorAdjust brightness="-0.36" contrast="0.24" saturation="-0.02" />
                      </effect>
                   </ImageView>
-                  <ImageView fx:id="nappi1" fitHeight="35.0" fitWidth="49.0" layoutX="1142.0" layoutY="104.0" onMouseClicked="#siirryEkalleSivulle" onMouseEntered="#hoverOn" onMouseExited="#hoverOff">
+                  <ImageView id="ylempinappi" fx:id="nappi1" fitHeight="35.0" fitWidth="49.0" layoutX="1142.0" layoutY="104.0" onMouseClicked="#siirryEkalleSivulle" onMouseEntered="#hoverOn" onMouseExited="#hoverOff">
                      <image>
                         <Image url="@../images/nappi.png" />
                      </image>
@@ -216,7 +217,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <ImageView fx:id="nappi2" fitHeight="35.0" fitWidth="49.0" layoutX="1142.0" layoutY="168.0" onMouseClicked="#siirryTulosNakymaan" onMouseEntered="#hoverOn" onMouseExited="#hoverOff">
+                  <ImageView id="alempinappi" fx:id="nappi2" fitHeight="35.0" fitWidth="49.0" layoutX="1142.0" layoutY="168.0" onMouseClicked="#siirryTulosNakymaan" onMouseEntered="#hoverOn" onMouseExited="#hoverOff">
                      <image>
                         <Image url="@../images/nappi.png" />
                      </image>
@@ -653,6 +654,22 @@
                         <ListView id="tallennuslista" layoutX="141.0" layoutY="102.0" prefHeight="282.0" prefWidth="286.0" style="-fx-background-color: #00000000;" />
                      </children></Pane>
                </children></Pane>
+            <ImageView id="vihreepikkuvalovisible" fx:id="vihreapikkuvalo" fitHeight="4.0" fitWidth="25.0" x="1157.0" y="26.0">
+               <image>
+                  <Image url="@../images/vihreepatukka.jpg" />
+               </image>
+               <effect>
+                  <MotionBlur angle="205.24" radius="4.11" />
+               </effect>
+            </ImageView>
+            <ImageView id="punainenpikkuvaloNONvisible" fx:id="punainenpikkuvalo" fitHeight="4.0" fitWidth="25.0" visible="false" x="1157.0" y="26.0">
+               <image>
+                  <Image url="@../images/vihreepatukka.jpg" />
+               </image>
+               <effect>
+                  <ColorAdjust hue="-1.0" saturation="0.41" />
+               </effect>
+            </ImageView>
          </children>
          <opaqueInsets>
             <Insets />
@@ -661,9 +678,25 @@
             <Bloom threshold="0.23" />
          </effect>
       </Pane>
-		<HBox id="exitButtonvisible" layoutX="1158.0" layoutY="33.0" prefHeight="48.0" prefWidth="84.0">
+		<HBox id="exitandready" layoutX="930.0" layoutY="33.0" prefHeight="48.0" prefWidth="425.0" spacing="30.0">
          <children>
-            <ImageView fx:id="lopeta" fitHeight="48.0" fitWidth="81.0" onMouseClicked="#lopeta" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.9">
+            <ImageView id="readbutton" fx:id="read" fitHeight="48.0" fitWidth="81.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#startRuutuun" opacity="0.82">
+               <image>
+                  <Image url="@../images/read.jpg" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView id="readybutton" fx:id="ready" fitHeight="48.0" fitWidth="81.0" onMouseClicked="#startRuutuun" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.82">
+               <image>
+                  <Image url="@../images/ready.jpg" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView id="exitbutton" fx:id="lopeta" fitHeight="48.0" fitWidth="81.0" onMouseClicked="#lopeta" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.9">
                <image>
                   <Image url="@../images/poweroff.jpg" />
                </image>

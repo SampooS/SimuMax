@@ -75,7 +75,7 @@ public class Visualisointi implements IVisualisointi{
 		this.maxruokajonopalkki = maxruokajonopalkki;
 		this.ruokajonopalkki = ruokajonopalkki;
 		this.animaatioPane = pane;
-		animaatioPane.setVisible(true);
+		//animaatioPane.setVisible(true);
 		this.pisinruokajono = pisinruokajono;
 		this.ruokajono = ruokajono;
 		this.pisinkassajono = pisinkassajono;

@@ -214,4 +214,6 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 		Platform.runLater(() -> ui.getVisualisointi().setKassaKeskiKayttoaste(maara));
 		
 	}
+
+
 }

@@ -31,6 +31,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.Glow;
+import javafx.scene.effect.SepiaTone;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
@@ -46,7 +47,7 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 	private final String ALKURUUTU = "SimulaattoriNakyma.fxml";
 
 	@FXML private TextField asiakasMaara,ryhmaMaara,ruokalinjastoMaara,kassaMaara,porrastusMaara;
-	@FXML private ImageView lopeta;
+
 	@FXML private Pane simulaatioPane;
 	@FXML private Pane asiakasPane;
 	@FXML private Pane ruokaPane;
@@ -79,6 +80,9 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 	@FXML private Label kassaKeskiKayttoaste;
 	@FXML private Label kassaSuoritusteho;
 	
+	@FXML private ImageView lopeta;
+	@FXML private ImageView ready;
+	@FXML private ImageView read;
 	
 	@FXML private ImageView kaynnista;
 	@FXML private ImageView hidasta;
@@ -90,6 +94,8 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 	@FXML private ImageView tallennuksetButton;
 	@FXML private ImageView asiakasButton;
 	
+	@FXML private ImageView vihreapikkuvalo;
+	@FXML private ImageView punainenpikkuvalo;
 	
 	@FXML private Pane alkupane;
 	
@@ -145,28 +151,16 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 		kontrolleri.tallenna();
 	}
 	
+	@Override
+	public void setSimulaatioLoppui() {
+		
+		
+	}
+	
 	@FXML
 	public void loadRuutu() {
 		
-		naytto = 
-		new Visualisointi(
-		simulaatioPane, pisinruokajono,pisinkassajono,
-		asiakas,kello, poistuneet, ruokajono, kassajono,
-		ruokajonopalkki, maxruokajonopalkki,kassajonopalkki,
-		maxkassajonopalkki,saapuneetPalkki,poistuneetPalkki,
-		kelloPalkki);
 		
-		
-		naytto.setAsiakasPane(asiakasFinal, lapiAsiakkaat, keskiAsiakkaat, 
-		keskiJonoAsiakkaat, asiakasPalveluAika,asiakasChart,
-		asiakascategoryaxis,asiakasnumberaxis); 
-		
-		naytto.setRuokalinjastoPane(aktiiviaika, ruokaLinjastoPalveltuAsiakas, kayttoaste, suoritusteho, keskiKayttoaste);
-		
-		naytto.setKassaPane(kassaAktiiviaika, kassaPalveltuAsiakas, kassaKayttoaste, kassaSuoritusteho, kassaKeskiKayttoaste);
-		
-		
-		startButtons.setVisible(false);
 		startButtons.setMouseTransparent(true);
 		
 		tuoLoadRuutu();
@@ -175,32 +169,9 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 		visibility.setPaneVisibility(3);
 	}
 	
-	@FXML
-	public void kaynnistaSimulaatio() {
-		
-		naytto = 
-		new Visualisointi(
-		simulaatioPane, pisinruokajono,pisinkassajono,
-		asiakas,kello, poistuneet, ruokajono, kassajono,
-		ruokajonopalkki, maxruokajonopalkki,kassajonopalkki,
-		maxkassajonopalkki,saapuneetPalkki,poistuneetPalkki,
-		kelloPalkki);
-		
-		
-		naytto.setAsiakasPane(
-		asiakasFinal, lapiAsiakkaat, keskiAsiakkaat, 
-		keskiJonoAsiakkaat, asiakasPalveluAika,asiakasChart,
-		asiakascategoryaxis,asiakasnumberaxis); 
-		
-		naytto.setRuokalinjastoPane(aktiiviaika, ruokaLinjastoPalveltuAsiakas, kayttoaste, suoritusteho, keskiKayttoaste);
-		
-		naytto.setKassaPane(kassaAktiiviaika, kassaPalveltuAsiakas, kassaKayttoaste, kassaSuoritusteho, kassaKeskiKayttoaste);
-	
-		
-		tuoSimulaatioRuutu();
 
-		
-	}
+	
+
 	
 	@FXML
 	private void hidasta() {
@@ -308,11 +279,19 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 		 
 	}
 	
+	private void setReadyButtonColor() {
+		
+		SepiaTone sepia = new SepiaTone();
+		sepia.setLevel(0.9);
+		read.setEffect(sepia);	
+		
+	}
+	
 	@FXML
 	private void hoverOn(Event e) {
 
 		ImageView image = (ImageView) e.getSource();
-		image.setEffect(visualeffects.setHoverOn());	
+		image.setEffect(visualeffects.setHoverOn(1));	
 		
 	}
 	
@@ -321,7 +300,7 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 	private void hoverOff(Event e) {
 		
 		ImageView image = (ImageView) e.getSource();
-		image.setEffect(visualeffects.setHoverOff());
+		image.setEffect(visualeffects.setHoverOff(0));
 			
 	}
 	
@@ -329,7 +308,7 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 	private void controlHoverOn(Event e) {
 
 		ImageView image = (ImageView) e.getSource();
-		image.setEffect(visualeffects.controlsetHoverOn());	
+		image.setEffect(visualeffects.controlsetHoverOn(0.3));	
 		
 	}
 	
@@ -338,7 +317,7 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 	private void controlHoverOff(Event e) {
 		
 		ImageView image = (ImageView) e.getSource();
-		image.setEffect(visualeffects.controlsetHoverOff());
+		image.setEffect(visualeffects.controlsetHoverOff(0));
 			
 	}
 	
@@ -348,7 +327,11 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 	private void siirryTulosNakymaan() {
 		
 		visibility.siirryTulosNakymaan(simuAnimaatioPane, tulospane, ekasivunButtonit, tokasivunButtonit);
-		visibility.setPaneVisibility(4);	
+		visibility.setPaneVisibility(4);
+		punainenpikkuvalo.setVisible(true);
+		ekasivunButtonit.setVisible(false);
+		tokasivunButtonit.setVisible(true);
+		tokasivunButtonit.setOpacity(0.87);
 		
 	}
 	
@@ -357,6 +340,13 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 		
 		visibility.siirrySimulaatioSivulle(simuAnimaatioPane, tulospane, ekasivunButtonit, tokasivunButtonit);
 		visibility.setPaneVisibility(666);
+		punainenpikkuvalo.setVisible(false);
+		ekasivunButtonit.setVisible(true);
+		ekasivunButtonit.setOpacity(0.87);
+		tokasivunButtonit.setVisible(false);
+		simu1.setOpacity(1);
+		simu2.setOpacity(1);
+		simu3.setOpacity(1);
 			
 	}
 	
@@ -396,26 +386,40 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 		
 	}
 	
+	
+	@FXML
+	public void kaynnistaSimulaatio() {
+	
+		tuoSimulaatioRuutu();
+		
+	}
+	
 	private void tuoSimulaatioRuutu() {
 		
-		
+		setReadyButtonColor();
 		simulaatioPane.setOpacity(0);
 		simu1.setOpacity(0);
 		simu2.setOpacity(0);
 		simu3.setOpacity(0);
-		
+		tulospane.setVisible(false);
+		simulaatioPane.setVisible(true);
+		ekasivunButtonit.setOpacity(0);
+   		ekasivunButtonit.setVisible(true);
+   		
 		
 		Timeline timeline = new Timeline(
 				new KeyFrame(Duration.ZERO,
 						new KeyValue(alkupane.opacityProperty(),1),
-						new KeyValue(startButtons.opacityProperty(),1)),
+						new KeyValue(startButtons.opacityProperty(),0.87)),
 				new KeyFrame(Duration.seconds(1),
 						new KeyValue(alkupane.opacityProperty(),0),
 						new KeyValue(startButtons.opacityProperty(),0)),
 				new KeyFrame(Duration.seconds(1),
-						new KeyValue(simulaatioPane.opacityProperty(),0)),
+						new KeyValue(simulaatioPane.opacityProperty(),0),
+						new KeyValue(ekasivunButtonit.opacityProperty(),0)),
 				new KeyFrame(Duration.seconds(2),
-						new KeyValue(simulaatioPane.opacityProperty(),1)),
+						new KeyValue(simulaatioPane.opacityProperty(),1),
+						new KeyValue(ekasivunButtonit.opacityProperty(),0.87)),
 				new KeyFrame(Duration.seconds(2.5)));
 		
 		
@@ -427,32 +431,81 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
     		simu2.setOpacity(1);
     		simu3.setOpacity(1);
        		kontrolleri.kaynnistaSimulointi();
-       		ekasivunButtonit.setVisible(true);
+       		
+
     		
         });
 		
 		
 	}
 	
+	@FXML
+	private void startRuutuun() {
+		
+		startButtons.setVisible(true);
+		startButtons.setMouseTransparent(false);
+		
+		Timeline timeline = new Timeline(
+				new KeyFrame(Duration.ZERO,
+						new KeyValue(simulaatioPane.opacityProperty(),1),
+						new KeyValue(ekasivunButtonit.opacityProperty(),1),
+						new KeyValue(tokasivunButtonit.opacityProperty(),0.87)),
+				new KeyFrame(Duration.seconds(1),
+						new KeyValue(simulaatioPane.opacityProperty(),0),
+						new KeyValue(ekasivunButtonit.opacityProperty(),0),
+						new KeyValue(tokasivunButtonit.opacityProperty(),0)),
+				new KeyFrame(Duration.seconds(1),
+						new KeyValue(alkupane.opacityProperty(),0),
+						new KeyValue(startButtons.opacityProperty(),0)),
+				new KeyFrame(Duration.seconds(2),
+						new KeyValue(alkupane.opacityProperty(),1),
+						new KeyValue(startButtons.opacityProperty(),0.87)),
+				new KeyFrame(Duration.seconds(2.5)));
+		
+		
+
+		
+
+		timeline.play();
+		
+		timeline.setOnFinished(actionEvent -> {
+			
+			simulaatioPane.setVisible(false);
+			//tulospane.setVisible(false);
+			ekasivunButtonit.setVisible(false);
+			tokasivunButtonit.setVisible(false);
+			
+			
+		});
+			
+	}
+	
 	private void tuoLoadRuutu() {
 		
 		
 		simulaatioPane.setOpacity(0);
+		simulaatioPane.setVisible(true);
 		simu1.setOpacity(0);
 		simu2.setOpacity(0);
 		simu3.setOpacity(0);
+		tokasivunButtonit.setOpacity(0);
+		
+		
 		
 		Timeline timeline = new Timeline(
 				new KeyFrame(Duration.ZERO,
 						new KeyValue(alkupane.opacityProperty(),1),
-						new KeyValue(startButtons.opacityProperty(),1)),
+						new KeyValue(startButtons.opacityProperty(),0.87)),
 				new KeyFrame(Duration.seconds(1),
 						new KeyValue(alkupane.opacityProperty(),0),
 						new KeyValue(startButtons.opacityProperty(),0)),
 				new KeyFrame(Duration.seconds(1),
-						new KeyValue(simulaatioPane.opacityProperty(),0)),
+						new KeyValue(simulaatioPane.opacityProperty(),0),
+						new KeyValue(tokasivunButtonit.opacityProperty(),0),
+						new KeyValue(tokasivunButtonit.visibleProperty(),true)),
 				new KeyFrame(Duration.seconds(2),
-						new KeyValue(simulaatioPane.opacityProperty(),1)),
+						new KeyValue(simulaatioPane.opacityProperty(),1),
+						new KeyValue(tokasivunButtonit.opacityProperty(),0.87)),
 				new KeyFrame(Duration.seconds(2.5)));
 		
 		
@@ -463,6 +516,10 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
     		simu1.setOpacity(1);
     		simu2.setOpacity(1);
     		simu3.setOpacity(1);
+    		ekasivunButtonit.setMouseTransparent(false);
+    		tokasivunButtonit.setMouseTransparent(false);
+    		ekasivunButtonit.setVisible(false);
+    		startButtons.setVisible(false);
     		
         });
 		
@@ -482,6 +539,25 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
     	panelista.add(infoPane);
     	
     	visibility = new Visibility(panelista);
+    	
+		naytto = 
+		new Visualisointi(
+		simulaatioPane, pisinruokajono,pisinkassajono,
+		asiakas,kello, poistuneet, ruokajono, kassajono,
+		ruokajonopalkki, maxruokajonopalkki,kassajonopalkki,
+		maxkassajonopalkki,saapuneetPalkki,poistuneetPalkki,
+		kelloPalkki);
+		
+		
+		naytto.setAsiakasPane(
+		asiakasFinal, lapiAsiakkaat, keskiAsiakkaat, 
+		keskiJonoAsiakkaat, asiakasPalveluAika,asiakasChart,
+		asiakascategoryaxis,asiakasnumberaxis); 
+		
+		naytto.setRuokalinjastoPane(aktiiviaika, ruokaLinjastoPalveltuAsiakas, kayttoaste, suoritusteho, keskiKayttoaste);
+		
+		naytto.setKassaPane(kassaAktiiviaika, kassaPalveltuAsiakas, kassaKayttoaste, kassaSuoritusteho, kassaKeskiKayttoaste);
+	
 
 
     }

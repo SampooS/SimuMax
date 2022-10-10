@@ -81,6 +81,9 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI{
                                 	
 	}
 	 
+	public void tallenna() {
+		kontrolleri.tallenna();
+	}
 	
 	@FXML
 	public void kaynnistaSimulaatio() {

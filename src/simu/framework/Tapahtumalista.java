@@ -12,6 +12,7 @@ public class Tapahtumalista {
 	public Tapahtuma poista(){
 
 		return lista.remove();
+		
 	}
 	
 	public void lisaa(Tapahtuma t){

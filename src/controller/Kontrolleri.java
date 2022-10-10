@@ -2,6 +2,7 @@ package controller;
 
 import javafx.application.Platform;
 import simu.framework.IMoottori;
+import simu.model.DBAccessObject;
 import simu.model.OmaMoottori;
 import view.ISimulaattorinUI;
 
@@ -9,10 +10,13 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 	
 	private IMoottori moottori; 
 	private ISimulaattorinUI ui;
+	private DBAccessObject db;
+	
 	
 	public Kontrolleri(ISimulaattorinUI ui) {
 		
 		this.ui = ui;
+		this.db = new DBAccessObject();
 		
 	}
 
@@ -51,7 +55,7 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 	@Override
 	public void tallenna() {
 		
-		// Tehhään jottai koodin naputusta
+		Platform.runLater(() -> db.tallennaAjo(moottori.getTapahtumat()));
 		
 	}
 	

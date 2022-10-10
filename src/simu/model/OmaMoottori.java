@@ -7,6 +7,8 @@ import simu.framework.Moottori;
 import simu.framework.Saapumisprosessi;
 import simu.framework.Tapahtuma;
 import simu.model.Tulokset.Palvelupisteet;
+
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -22,6 +24,7 @@ public class OmaMoottori extends Moottori{
 	private double porrastusAika;
 	private int ryhmienMaara;
 	private int ryhmaNumero = 1;
+	private ArrayList<Tapahtuma> tapahtuneet;
 
 	
 	public OmaMoottori(IKontrolleriMtoV kontrolleri){
@@ -37,6 +40,7 @@ public class OmaMoottori extends Moottori{
 		this.ryhmienMaara = ryhmienMaara;
 		final int ryhmaKoko = asiakkaat/ryhmienMaara;
 		this.porrastusAika = (long)(porrastusMaara * 60000);
+		this.tapahtuneet = new ArrayList<Tapahtuma>();
 		
 
 		palvelupisteet = new Palvelupiste[ruokalinja + rekisteri + 1];
@@ -75,6 +79,10 @@ public class OmaMoottori extends Moottori{
 		ryhmaNumero++;	
 		return ryhmaNumero < ryhmienMaara;
 		
+	}
+	
+	public ArrayList<Tapahtuma> getTapahtumat() {
+		return this.tapahtuneet;
 	}
 	
 	@Override
@@ -134,8 +142,8 @@ public class OmaMoottori extends Moottori{
 					   source = t.getDirection();
 					   a = palvelupisteet[source].otaJonosta();
 				   	   palvelupisteet[linjastot + kassat].lisaaJonoon(a); 
-				   	   
-				break;  
+				   	   tapahtuneet.add(t);
+		   	     break;  
 				
 				// Asiakas heivataan helvettiin simulaatiosta ja loppuaika kirjataan.
 				
@@ -146,6 +154,8 @@ public class OmaMoottori extends Moottori{
 			           a.raportti();
 			           kontrolleri.naytaLapiPaasseetAsiakkaat();
 			           kontrolleri.naytaAsiakkaanLapimenoAika(tulokset.getLapiMenoAika());
+		           
+	             break;
 		}
 			
 		kontrolleri.naytaPisinJonoKassoille(tulokset.getMaXJononpituus(Palvelupisteet.KASSA));	

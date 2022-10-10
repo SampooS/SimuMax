@@ -86,11 +86,6 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 
 	}
 	
-	public void naytaKassojenActive(double aika) {
-		
-		Platform.runLater(() -> ui.getVisualisointi().setKassojenAktiiviaika(aika));
-		
-	}
 	
 	public void naytaAsiakkaidenKeskimaarainenPalveluaika(double aika) { 
 		
@@ -144,7 +139,7 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 	@Override
 	public void naytaKeskiOdotusAika(double aika) {
 		
-		Platform.runLater(() -> ui.getVisualisointi().setOdotusAika(aika));
+		Platform.runLater(() -> ui.getVisualisointi().setAsiakasOdotusAika(aika));
 		
 	}
 
@@ -153,6 +148,70 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 	public void naytaAsiakkaanLapimenoAika(double aika) {
 		
 		Platform.runLater(() -> ui.getVisualisointi().setAsiakkaanLapimenoAika(aika));
+		
+	}
+
+
+	@Override
+	public void naytaRuokalinjastoAsiakkaatPalveltu(int maara) {
+		
+		Platform.runLater(() -> ui.getVisualisointi().setRuokalinjastonAsiakkatPalveltu(maara));
+		
+	}
+
+	@Override
+	public void naytaRuokalinjastonKayttoaste(double maara) {
+		
+		Platform.runLater(() -> ui.getVisualisointi().setRuokalinjastoKayttoaste(maara));
+		
+	}
+
+	@Override
+	public void naytaRuokalinjastonSuoritusteho(double maara) {
+		
+		Platform.runLater(() -> ui.getVisualisointi().setRuokalinjastonSuoritusteho(maara));
+		
+	}
+
+	@Override
+	public void naytaKassaAsiakkaatPalveltu(int maara) {
+		
+		Platform.runLater(() -> ui.getVisualisointi().setKassaPalvellutAsiakkaat(maara));
+		
+	}
+
+	@Override
+	public void naytaKassaKayttoaste(double maara) {
+		
+		Platform.runLater(() -> ui.getVisualisointi().setKassaKayttoaste(maara));
+		
+	}
+
+	@Override
+	public void naytaKassaSuoritusteho(double maara) {
+		
+		Platform.runLater(() -> ui.getVisualisointi().setKassaSuoritusteho(maara));
+		
+	}
+
+	@Override
+	public void naytaKassaAktiiviaika(double aika) {
+		
+		Platform.runLater(() -> ui.getVisualisointi().setKassojenAktiiviaika(aika));
+		
+	}
+
+	@Override
+	public void naytaRuokalinjastonKeskikayttoaste(double maara) {
+		
+		Platform.runLater(() -> ui.getVisualisointi().setRuokalinjastoKeskiKayttoaste(maara));
+		
+	}
+
+	@Override
+	public void naytaKassaKeskikayttoaste(double maara) {
+		
+		Platform.runLater(() -> ui.getVisualisointi().setKassaKeskiKayttoaste(maara));
 		
 	}
 }

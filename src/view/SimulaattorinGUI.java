@@ -1,70 +1,128 @@
 package view;
 
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.ResourceBundle;
+
 import controller.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import simu.framework.Trace;
 import simu.framework.Trace.Level;
 import javafx.scene.*;
+import javafx.scene.chart.AreaChart;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.StackedBarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 
-public class SimulaattorinGUI extends Application implements ISimulaattorinUI{
+public class SimulaattorinGUI extends Application implements ISimulaattorinUI, Initializable{
 
 
 	private IKontrolleriVtoM kontrolleri = new Kontrolleri(this);
 	private IVisualisointi naytto;
+	private Visualeffects visualeffects = new Visualeffects();
+	private Visibility visibility;
 	
 	private final String ALKURUUTU = "SimulaattoriNakyma.fxml";
 
 	@FXML private TextField asiakasMaara,ryhmaMaara,ruokalinjastoMaara,kassaMaara,porrastusMaara;
 	@FXML private ImageView lopeta;
-	@FXML private Pane simulaatioPane, asiakasPane;
+	@FXML private Pane simulaatioPane;
+	@FXML private Pane asiakasPane;
+	@FXML private Pane ruokaPane;
+	@FXML private Pane kassaPane;
+	@FXML private Pane tallennusPane;
+	@FXML private Pane simuAnimaatioPane;
+	@FXML private Pane infoPane;
+	@FXML private Pane startButtons;
+	@FXML private Pane simuButtons;
+	@FXML private Pane tulosButtons;
 	
-	@FXML private Label asiakas,pisinruokajono,ruokajono,kassajono,pisinkassajono,kello,poistuneet,
-						asiakasFinal,lapiAsiakkaat,keskiAsiakkaat,keskiJonoAsiakkaat;
 	
-	@FXML private Button kaynnista,hidasta,nopeuta,tallennuksetButton,pauseButton,
-						 kassatButton,ruokalinjatButton,asiakasButton;
+	@FXML private Label asiakas,pisinruokajono,ruokajono,kassajono,pisinkassajono,kello,poistuneet;
+	
+	@FXML private Label asiakasFinal;
+	@FXML private Label lapiAsiakkaat;
+	@FXML private Label keskiAsiakkaat;
+	@FXML private Label keskiJonoAsiakkaat;
+	@FXML private Label asiakasPalveluAika;
+	
+	@FXML private Label ruokaLinjastoPalveltuAsiakas;
+	@FXML private Label aktiiviaika;
+	@FXML private Label kayttoaste;
+	@FXML private Label keskiKayttoaste;
+	@FXML private Label suoritusteho;
+	
+	@FXML private Label kassaPalveltuAsiakas;
+	@FXML private Label kassaAktiiviaika;
+	@FXML private Label kassaKayttoaste;
+	@FXML private Label kassaKeskiKayttoaste;
+	@FXML private Label kassaSuoritusteho;
+	
+	
+	@FXML private ImageView kaynnista;
+	@FXML private ImageView hidasta;
+	@FXML private ImageView nopeuta;
+	@FXML private ImageView load;
+	
+	@FXML private ImageView ruokalinjatButton;
+	@FXML private ImageView kassatButton;
+	@FXML private ImageView tallennuksetButton;
+	@FXML private ImageView asiakasButton;
+	
+	
+	@FXML private Pane alkupane;
+	
+	@FXML ImageView ruokajonopalkki;
+	@FXML ImageView maxruokajonopalkki;
+	@FXML ImageView kassajonopalkki;
+	@FXML ImageView maxkassajonopalkki;
+	@FXML ImageView saapuneetPalkki;
+	@FXML ImageView poistuneetPalkki;
+	@FXML ImageView kelloPalkki;
+	@FXML AnchorPane taustakuvapane;
+	@FXML VBox simu1;
+	@FXML VBox simu2;
+	@FXML VBox simu3;
+	@FXML ImageView nappi1;
+	@FXML ImageView nappi2;
+	
+	@FXML Pane tulospane;
+	@FXML Pane ekasivunButtonit;
+	@FXML Pane tokasivunButtonit;
+	
+	ArrayList<Pane> panelista;
+	
+	@FXML private BarChart<String,Number> asiakasChart;
+	@FXML private CategoryAxis asiakascategoryaxis;
+	@FXML private NumberAxis asiakasnumberaxis;
+
 	
 	@FXML private ImageView tuloksiin, ekalleSivulle;
 	@FXML private AnchorPane toinentausta, mustaEkaruutu, mustaToinenruutu;
 
 	
-	@Override
-	public void init(){
-		
-		Trace.setTraceLevel(Level.INFO);
-        simulaatioPane = new Pane();
-        asiakas = new Label();
-        pisinruokajono = new Label();
-        ruokajono = new Label();
-        kassajono = new Label();
-        pisinkassajono = new Label();
-        kello = new Label();
-        poistuneet = new Label();
-        tuloksiin = new ImageView();
-        ekalleSivulle = new ImageView();
-        toinentausta = new AnchorPane();
-        mustaEkaruutu = new AnchorPane();
-        mustaToinenruutu = new AnchorPane();
-        asiakasPane = new Pane();
-        asiakasFinal = new Label();
-        lapiAsiakkaat = new Label();
-        keskiAsiakkaat = new Label();
-        keskiJonoAsiakkaat = new Label();
-      		
-	}
+
 
 
 	@Override
@@ -78,6 +136,8 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI{
         primaryStage.centerOnScreen ();
         primaryStage.setFullScreen (false);
         primaryStage.show ();
+        
+
                                 	
 	}
 	 
@@ -86,34 +146,78 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI{
 	}
 	
 	@FXML
+	public void loadRuutu() {
+		
+		naytto = 
+		new Visualisointi(
+		simulaatioPane, pisinruokajono,pisinkassajono,
+		asiakas,kello, poistuneet, ruokajono, kassajono,
+		ruokajonopalkki, maxruokajonopalkki,kassajonopalkki,
+		maxkassajonopalkki,saapuneetPalkki,poistuneetPalkki,
+		kelloPalkki);
+		
+		
+		naytto.setAsiakasPane(asiakasFinal, lapiAsiakkaat, keskiAsiakkaat, 
+		keskiJonoAsiakkaat, asiakasPalveluAika,asiakasChart,
+		asiakascategoryaxis,asiakasnumberaxis); 
+		
+		naytto.setRuokalinjastoPane(aktiiviaika, ruokaLinjastoPalveltuAsiakas, kayttoaste, suoritusteho, keskiKayttoaste);
+		
+		naytto.setKassaPane(kassaAktiiviaika, kassaPalveltuAsiakas, kassaKayttoaste, kassaSuoritusteho, kassaKeskiKayttoaste);
+		
+		
+		startButtons.setVisible(false);
+		startButtons.setMouseTransparent(true);
+		
+		tuoLoadRuutu();
+		
+		visibility.siirryTulosNakymaan(simuAnimaatioPane, tulospane, ekasivunButtonit, tokasivunButtonit);
+		visibility.setPaneVisibility(3);
+	}
+	
+	@FXML
 	public void kaynnistaSimulaatio() {
 		
 		naytto = 
 		new Visualisointi(
 		simulaatioPane, pisinruokajono,pisinkassajono,
-		asiakas,kello, poistuneet, ruokajono, kassajono,asiakasPane,
-		asiakasFinal,lapiAsiakkaat,keskiAsiakkaat,keskiJonoAsiakkaat);
+		asiakas,kello, poistuneet, ruokajono, kassajono,
+		ruokajonopalkki, maxruokajonopalkki,kassajonopalkki,
+		maxkassajonopalkki,saapuneetPalkki,poistuneetPalkki,
+		kelloPalkki);
 		
-		kontrolleri.kaynnistaSimulointi();
+		
+		naytto.setAsiakasPane(
+		asiakasFinal, lapiAsiakkaat, keskiAsiakkaat, 
+		keskiJonoAsiakkaat, asiakasPalveluAika,asiakasChart,
+		asiakascategoryaxis,asiakasnumberaxis); 
+		
+		naytto.setRuokalinjastoPane(aktiiviaika, ruokaLinjastoPalveltuAsiakas, kayttoaste, suoritusteho, keskiKayttoaste);
+		
+		naytto.setKassaPane(kassaAktiiviaika, kassaPalveltuAsiakas, kassaKayttoaste, kassaSuoritusteho, kassaKeskiKayttoaste);
+	
+		
+		tuoSimulaatioRuutu();
+
 		
 	}
 	
 	@FXML
-	public void hidasta() {
+	private void hidasta() {
 		
 		kontrolleri.hidasta();
 		
 	}
 	
 	@FXML
-	public void nopeuta() {
+	private void nopeuta() {
 			
 		kontrolleri.nopeuta();
 		
 	}
 	
 	@FXML
-	public void pause() {
+	private void pause() {
 		
 		kontrolleri.pause();
 		
@@ -121,7 +225,7 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI{
 	
 	
 	@FXML
-	public void lopeta() {
+	private void lopeta() {
 		
 		System.exit(0);	
 		
@@ -134,13 +238,6 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI{
 		
 	}
 	
-	
-	@FXML
-	public void setAsiakasPaneVisibility() {
-		
-		naytto.setAsiakasPaneVisibility(true);		
-		
-	}
 	
 	public int getAsiakasMaara() {
 		
@@ -185,7 +282,7 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI{
 	@Override
 	public long getViive(){
 		
-		return 50;
+		return 30;
 		
 	}
 
@@ -211,60 +308,181 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI{
 		 
 	}
 	
+	@FXML
+	private void hoverOn(Event e) {
+
+		ImageView image = (ImageView) e.getSource();
+		image.setEffect(visualeffects.setHoverOn());	
+		
+	}
 	
-	public void hoverOn() {
+	
+	@FXML
+	private void hoverOff(Event e) {
+		
+		ImageView image = (ImageView) e.getSource();
+		image.setEffect(visualeffects.setHoverOff());
 			
-		Glow glow = new Glow();
-		glow.setLevel(1);
-		tuloksiin.setEffect(glow);
-		ekalleSivulle.setEffect(glow);
-		
 	}
 	
-	public void hoverOff() {
-		
-		Glow glow = new Glow();
-		glow.setLevel(0);
-		tuloksiin.setEffect(glow);
-		ekalleSivulle.setEffect(glow);
+	@FXML
+	private void controlHoverOn(Event e) {
+
+		ImageView image = (ImageView) e.getSource();
+		image.setEffect(visualeffects.controlsetHoverOn());	
 		
 	}
 	
 	
-	public void siirryTulosNakymaan() {
+	@FXML
+	private void controlHoverOff(Event e) {
+		
+		ImageView image = (ImageView) e.getSource();
+		image.setEffect(visualeffects.controlsetHoverOff());
+			
+	}
+	
+	
+	
+	@FXML
+	private void siirryTulosNakymaan() {
+		
+		visibility.siirryTulosNakymaan(simuAnimaatioPane, tulospane, ekasivunButtonit, tokasivunButtonit);
+		visibility.setPaneVisibility(4);	
+		
+	}
+	
+	@FXML
+	private void siirryEkalleSivulle() {
+		
+		visibility.siirrySimulaatioSivulle(simuAnimaatioPane, tulospane, ekasivunButtonit, tokasivunButtonit);
+		visibility.setPaneVisibility(666);
+			
+	}
+	
+	@FXML
+	private void asiakasPaneeli() {
+			
+		visibility.setPaneVisibility(0);
+		
+	}
+	
+	
+	@FXML
+	private void ruokaPaneeli() {
+		
+		visibility.setPaneVisibility(1);	
+		
+	}
+	
+	@FXML
+	private void kassaPaneeli() {
+		
+		visibility.setPaneVisibility(2);
+		
+	}
+	
+	@FXML
+	private void tallennusPaneeli() {
+		
+		visibility.setPaneVisibility(3);
+		
+	}
+	
+	
+	private void boxBlurToBackground() {
+		
+		visualeffects.boxBlurToBackground(taustakuvapane);
+		
+	}
+	
+	private void tuoSimulaatioRuutu() {
+		
+		
+		simulaatioPane.setOpacity(0);
+		simu1.setOpacity(0);
+		simu2.setOpacity(0);
+		simu3.setOpacity(0);
+		
 		
 		Timeline timeline = new Timeline(
 				new KeyFrame(Duration.ZERO,
-						new KeyValue(toinentausta.layoutXProperty(),toinentausta.getLayoutX()),
-						new KeyValue(mustaEkaruutu.opacityProperty(),mustaEkaruutu.getOpacity()),
-						new KeyValue(mustaToinenruutu.opacityProperty(),mustaToinenruutu.getOpacity())),
-				new KeyFrame(Duration.seconds(0.75),
-						new KeyValue(toinentausta.layoutXProperty(),toinentausta.getLayoutX() - 1340),
-						new KeyValue(mustaEkaruutu.opacityProperty(),mustaEkaruutu.getOpacity() + 1),
-						new KeyValue(mustaToinenruutu.opacityProperty(),mustaToinenruutu.getOpacity() - 1)));
+						new KeyValue(alkupane.opacityProperty(),1),
+						new KeyValue(startButtons.opacityProperty(),1)),
+				new KeyFrame(Duration.seconds(1),
+						new KeyValue(alkupane.opacityProperty(),0),
+						new KeyValue(startButtons.opacityProperty(),0)),
+				new KeyFrame(Duration.seconds(1),
+						new KeyValue(simulaatioPane.opacityProperty(),0)),
+				new KeyFrame(Duration.seconds(2),
+						new KeyValue(simulaatioPane.opacityProperty(),1)),
+				new KeyFrame(Duration.seconds(2.5)));
+		
 		
 		timeline.play();
 		
+        timeline.setOnFinished(actionEvent -> {
+  
+    		simu1.setOpacity(1);
+    		simu2.setOpacity(1);
+    		simu3.setOpacity(1);
+       		kontrolleri.kaynnistaSimulointi();
+       		ekasivunButtonit.setVisible(true);
+    		
+        });
 		
 		
 	}
 	
-	public void siirryEkalleSivulle() {
+	private void tuoLoadRuutu() {
+		
+		
+		simulaatioPane.setOpacity(0);
+		simu1.setOpacity(0);
+		simu2.setOpacity(0);
+		simu3.setOpacity(0);
 		
 		Timeline timeline = new Timeline(
 				new KeyFrame(Duration.ZERO,
-						new KeyValue(toinentausta.layoutXProperty(),toinentausta.getLayoutX()),
-						new KeyValue(mustaEkaruutu.opacityProperty(),mustaEkaruutu.getOpacity()),
-						new KeyValue(mustaToinenruutu.opacityProperty(),mustaToinenruutu.getOpacity())),
-				new KeyFrame(Duration.seconds(0.75),
-						new KeyValue(toinentausta.layoutXProperty(),toinentausta.getLayoutX() + 1340),
-						new KeyValue(mustaEkaruutu.opacityProperty(),mustaEkaruutu.getOpacity() - 1),
-						new KeyValue(mustaToinenruutu.opacityProperty(),mustaToinenruutu.getOpacity() + 1)));
+						new KeyValue(alkupane.opacityProperty(),1),
+						new KeyValue(startButtons.opacityProperty(),1)),
+				new KeyFrame(Duration.seconds(1),
+						new KeyValue(alkupane.opacityProperty(),0),
+						new KeyValue(startButtons.opacityProperty(),0)),
+				new KeyFrame(Duration.seconds(1),
+						new KeyValue(simulaatioPane.opacityProperty(),0)),
+				new KeyFrame(Duration.seconds(2),
+						new KeyValue(simulaatioPane.opacityProperty(),1)),
+				new KeyFrame(Duration.seconds(2.5)));
+		
 		
 		timeline.play();
-			
-		naytto.setAsiakasPaneVisibility(false);
+		
+        timeline.setOnFinished(actionEvent -> {
+  
+    		simu1.setOpacity(1);
+    		simu2.setOpacity(1);
+    		simu3.setOpacity(1);
+    		
+        });
 		
 		
-	}	
+	}
+	
+    @Override
+    public final void initialize(URL url, ResourceBundle resourceBundle) {
+
+		boxBlurToBackground();
+		
+    	panelista = new ArrayList<>();
+    	panelista.add(asiakasPane);
+    	panelista.add(ruokaPane);
+    	panelista.add(kassaPane);
+    	panelista.add(tallennusPane);
+    	panelista.add(infoPane);
+    	
+    	visibility = new Visibility(panelista);
+
+
+    }
 }

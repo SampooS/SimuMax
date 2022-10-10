@@ -8,12 +8,12 @@ module simulaattorinrunko5 {
 
 	requires java.desktop;
 	requires javafx.base;
-	requires javafx.controls;
+	requires transitive javafx.controls;
 	requires javafx.fxml;
-	requires javafx.graphics;
 	requires junit;
 	requires org.junit.jupiter.api;
 	requires java.sql;
+	requires transitive javafx.graphics;
 	
-	opens view to javafx.fxml;
+	opens view to javafx.fxml, javafx.controls;
 }

@@ -84,11 +84,22 @@ public abstract class Moottori extends Thread implements IMoottori{
 					
 			for (Palvelupiste p: palvelupisteet){
 				
-				if (!p.onVarattu() && p.onJonossa()){
+				try {
 					
-					p.aloitaPalvelu();
+					if (!p.onVarattu() && p.onJonossa()){
+						
+						p.aloitaPalvelu();
+						
+				}
 					
-			}
+					
+				}catch(Exception e) {
+					
+					e.getStackTrace();
+					
+				}
+				
+
 		}
 	}
 	

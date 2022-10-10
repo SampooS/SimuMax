@@ -6,6 +6,7 @@ import eduni.distributions.ContinuousGenerator;
 import simu.framework.Kello;
 import simu.framework.Tapahtuma;
 import simu.framework.Tapahtumalista;
+import simu.model.Tulokset.Palvelupisteet;
 
 
 public class Palvelupiste {
@@ -17,6 +18,7 @@ public class Palvelupiste {
 	private int maxJono;
 	private double aktiiviAika;
 	private boolean varattu = false;
+
 	
 	
 	public Palvelupiste(ContinuousGenerator generator, Tapahtumalista tapahtumalista, TapahtumanTyyppi tyyppi){
@@ -39,8 +41,9 @@ public class Palvelupiste {
 	public void lisaaJonoon(Asiakas a){
 		
 		jono.add(a);
-		
-		if (jono.size() > maxJono) {maxJono = jono.size();}
+		if (jono.size() > maxJono) {maxJono = jono.size();}	
+		 
+	
 		
 	}
 	
@@ -51,18 +54,21 @@ public class Palvelupiste {
 
 	public Asiakas otaJonosta(){
 		
+
 		varattu = false;
 		return jono.poll();
 		
 	}
 
 	public void aloitaPalvelu(){
+		
+
+					int direction = jono.peek().getDirection();
+					varattu = true;	
+					double palveluaika = generator.sample();
+					aktiiviAika += palveluaika;
+					tapahtumalista.lisaa(new Tapahtuma(skeduloitavanTapahtumanTyyppi,Kello.getInstance().getAika() + palveluaika, direction));			
 			
-		int direction = jono.peek().getDirection();
-		varattu = true;	
-		double palveluaika = generator.sample();
-		aktiiviAika += palveluaika;
-		tapahtumalista.lisaa(new Tapahtuma(skeduloitavanTapahtumanTyyppi,Kello.getInstance().getAika() + palveluaika, direction));
 		
 	}
 	
@@ -76,5 +82,10 @@ public class Palvelupiste {
 		
 		return jono.size() != 0;
 		
+	}
+	
+	public int getPalvellutAsiakkaat() {
+		
+		return Tulokset.getInstance().getRuokaAsiakas();
 	}
 }

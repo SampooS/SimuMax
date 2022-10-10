@@ -2,168 +2,670 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.effect.BoxBlur?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.GaussianBlur?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.SepiaTone?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" styleClass="bodybg" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SimulaattorinGUI">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: black;" styleClass="bodybg" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SimulaattorinGUI">
 	<children>
-		<ImageView fitHeight="720.0" fitWidth="1280.0" nodeOrientation="INHERIT">
-			<image>
-				<Image url="@../images/Taustakuva4.jpg" />
-			</image>
-		</ImageView>
-      <Button fx:id="kaynnista" layoutX="76.0" layoutY="579.0" mnemonicParsing="false" onAction="#kaynnistaSimulaatio" prefHeight="95.0" prefWidth="268.0" text="KÄYNNISTÄ" AnchorPane.bottomAnchor="46.0" AnchorPane.topAnchor="579.0">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <Button fx:id="hidasta" layoutX="362.0" layoutY="579.0" mnemonicParsing="false" onAction="#hidasta" prefHeight="95.0" prefWidth="268.0" text="HIDASTA" AnchorPane.bottomAnchor="46.0" AnchorPane.topAnchor="579.0">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <Button fx:id="nopeuta" layoutX="648.0" layoutY="581.0" mnemonicParsing="false" onAction="#nopeuta" prefHeight="95.0" prefWidth="268.0" text="NOPEUTA" AnchorPane.bottomAnchor="46.0" AnchorPane.topAnchor="579.0">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <Button fx:id="pauseButton" layoutX="934.0" layoutY="585.0" mnemonicParsing="false" onAction="#pause" prefHeight="95.0" prefWidth="268.0" text="PAUSE" AnchorPane.bottomAnchor="46.0" AnchorPane.topAnchor="579.0">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <VBox layoutX="180.0" layoutY="141.0" prefHeight="360.0" prefWidth="206.0">
+      <AnchorPane fx:id="taustakuvapane" prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label prefHeight="43.0" prefWidth="231.0" text="        Asiakkaat" textAlignment="CENTER" textFill="#ffd721">
-               <font>
-                  <Font name="Britannic Bold" size="22.0" />
-               </font>
-            </Label>
-            <TextField fx:id="asiakasMaara" prefHeight="26.0" prefWidth="157.0" />
-            <Label layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="231.0" text="     Ruokalinjastot" textAlignment="CENTER" textFill="#ffd721">
-               <font>
-                  <Font name="Britannic Bold" size="22.0" />
-               </font>
-            </Label>
-            <TextField fx:id="ruokalinjastoMaara" layoutX="10.0" layoutY="53.0" prefHeight="26.0" prefWidth="157.0" />
-            <Label layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="231.0" text="     Porrastusaika" textAlignment="CENTER" textFill="#ffd721">
-               <font>
-                  <Font name="Britannic Bold" size="22.0" />
-               </font>
-            </Label>
-            <TextField fx:id="porrastusMaara" layoutX="10.0" layoutY="123.0" onMouseClicked="#pyyhiPorrastusTeksti" prefHeight="26.0" prefWidth="157.0" text="Minuuteissa.." />
+            <ImageView fitHeight="720.0" fitWidth="1280.0">
+               <image>
+                  <Image url="@../images/tietokone3.jpg" />
+               </image>
+               <effect>
+                  <ColorAdjust contrast="0.07" hue="0.52" saturation="0.47" />
+               </effect>
+            </ImageView>
+            <ImageView fitHeight="299.0" fitWidth="918.0" layoutX="172.0" layoutY="145.0" opacity="0.41">
+               <image>
+                  <Image url="@../images/tietokone2.jpg" />
+               </image>
+               <effect>
+                  <GaussianBlur radius="63.0" />
+               </effect>
+            </ImageView>
          </children>
-      </VBox>
-      <VBox layoutX="436.0" layoutY="141.0" prefHeight="372.0" prefWidth="138.0">
+         <effect>
+            <BoxBlur height="0.0" width="0.0" />
+         </effect>
+      </AnchorPane>
+      <Pane id="startbuttonitvisible" fx:id="startButtons" layoutY="583.0" prefHeight="127.0" prefWidth="1278.0">
          <children>
-            <Label prefHeight="43.0" prefWidth="231.0" text="     Ryhmät" textAlignment="CENTER" textFill="#ffd721">
-               <font>
-                  <Font name="Britannic Bold" size="22.0" />
-               </font>
-            </Label>
-            <TextField fx:id="ryhmaMaara" prefHeight="26.0" prefWidth="157.0" />
-            <Label layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="231.0" text="     Kassat" textAlignment="CENTER" textFill="#ffd721">
-               <font>
-                  <Font name="Britannic Bold" size="22.0" />
-               </font>
-            </Label>
-            <TextField fx:id="kassaMaara" layoutX="10.0" layoutY="53.0" prefHeight="26.0" prefWidth="157.0" />
+            <ImageView fx:id="kaynnista" fitHeight="89.0" fitWidth="202.0" layoutX="400.0" layoutY="13.0" onMouseClicked="#kaynnistaSimulaatio" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.87">
+               <image>
+                  <Image url="@../images/start.jpg" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="load" fitHeight="89.0" fitWidth="202.0" layoutX="670.0" layoutY="13.0" onMouseClicked="#loadRuutu" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.87">
+               <image>
+                  <Image url="@../images/load.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
          </children>
-      </VBox>
-      <Pane fx:id="simulaatioPane" layoutX="161.0" layoutY="125.0" prefHeight="366.0" prefWidth="874.0" style="-fx-background-color: black;" visible="false">
+      </Pane>
+      <Pane id="ekatButtonitNONvisible" fx:id="ekasivunButtonit" layoutY="583.0" prefHeight="127.0" prefWidth="1278.0" visible="false">
          <children>
-            <VBox layoutX="349.0" layoutY="65.0" prefHeight="295.0" prefWidth="325.0">
+            <ImageView fx:id="hidasta" fitHeight="89.0" fitWidth="202.0" layoutX="420.0" layoutY="13.0" onMouseClicked="#hidasta" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.87">
+               <image>
+                  <Image url="@../images/hidastanappula.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="nopeuta" fitHeight="89.0" fitWidth="202.0" layoutX="670.0" layoutY="13.0" onMouseClicked="#nopeuta" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.87">
+               <image>
+                  <Image url="@../images/nopeutanappula.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane id="tokatButtonitNONvisible" fx:id="tokasivunButtonit" focusTraversable="true" layoutY="583.0" mouseTransparent="true" prefHeight="127.0" prefWidth="1280.0" visible="false">
+         <children>
+            <ImageView id="asiakasnappula" fx:id="asiakasButton" fitHeight="89.0" fitWidth="202.0" layoutX="170.0" layoutY="13.0" onMouseClicked="#asiakasPaneeli" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff">
+               <image>
+                  <Image url="@../images/asiakasNappula.jpg" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView id="ruokanappula" fx:id="ruokalinjatButton" fitHeight="89.0" fitWidth="202.0" layoutX="420.0" layoutY="13.0" onMouseClicked="#ruokaPaneeli" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff">
+               <image>
+                  <Image url="@../images/linjastoNappula.jpg" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView id="kassanappula" fx:id="kassatButton" fitHeight="89.0" fitWidth="202.0" layoutX="670.0" layoutY="13.0" onMouseClicked="#kassaPaneeli" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff">
+               <image>
+                  <Image url="@../images/kassatNappula.jpg" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView id="loadnappula" fx:id="tallennuksetButton" fitHeight="89.0" fitWidth="202.0" layoutX="920.0" layoutY="13.0" onMouseClicked="#tallennusPaneeli" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff">
+               <image>
+                  <Image url="@../images/loadnappula2.jpg" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane id="alkuPanevisible" fx:id="alkupane" layoutX="400.0" layoutY="182.0" prefHeight="236.0" prefWidth="474.0">
+         <children>
+            <VBox prefHeight="319.0" prefWidth="202.0">
                <children>
-                  <Label prefHeight="43.0" prefWidth="244.0" text="Asiakas saapuminen:" textAlignment="CENTER" textFill="#ffd721">
+                  <Label prefHeight="43.0" prefWidth="231.0" text="        Asiakkaat" textAlignment="CENTER" textFill="#7bcfa5">
                      <font>
                         <Font name="Britannic Bold" size="22.0" />
                      </font>
                   </Label>
-                  <Label layoutX="10.0" layoutY="53.0" prefHeight="43.0" prefWidth="265.0" text="Ruokalinjaston jono: " textAlignment="CENTER" textFill="#ffd721">
+                  <TextField fx:id="asiakasMaara" opacity="0.75" prefHeight="26.0" prefWidth="157.0" />
+                  <Label layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="231.0" text="     Ruokalinjastot" textAlignment="CENTER" textFill="#7bcfa5">
                      <font>
                         <Font name="Britannic Bold" size="22.0" />
                      </font>
                   </Label>
-                  <Label layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="265.0" text="Ruokalinjaston pisin jono: " textAlignment="CENTER" textFill="#ffd721">
+                  <TextField fx:id="ruokalinjastoMaara" layoutX="10.0" layoutY="53.0" opacity="0.75" prefHeight="26.0" prefWidth="157.0" />
+                  <Label layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="231.0" text="     Porrastusaika" textAlignment="CENTER" textFill="#7bcfa5">
                      <font>
                         <Font name="Britannic Bold" size="22.0" />
                      </font>
                   </Label>
-                  <Label layoutX="10.0" layoutY="96.0" prefHeight="43.0" prefWidth="265.0" text="Kassojen jono:" textAlignment="CENTER" textFill="#ffd721">
-                     <font>
-                        <Font name="Britannic Bold" size="22.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="10.0" layoutY="53.0" prefHeight="43.0" prefWidth="226.0" text="Kassojen pisin jono: " textAlignment="CENTER" textFill="#ffd721">
-                     <font>
-                        <Font name="Britannic Bold" size="22.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="10.0" layoutY="96.0" prefHeight="43.0" prefWidth="226.0" text="Poistuneet asiakkaat:" textAlignment="CENTER" textFill="#ffd721">
-                     <font>
-                        <Font name="Britannic Bold" size="22.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="10.0" layoutY="96.0" prefHeight="43.0" prefWidth="186.0" text="Kello:" textAlignment="CENTER" textFill="#ffd721">
-                     <font>
-                        <Font name="Britannic Bold" size="22.0" />
-                     </font>
-                  </Label>
+                  <TextField fx:id="porrastusMaara" layoutX="10.0" layoutY="123.0" onMouseClicked="#pyyhiPorrastusTeksti" opacity="0.75" prefHeight="26.0" prefWidth="157.0" text="Minuuteissa.." />
                </children>
+               <effect>
+                  <Lighting diffuseConstant="1.35" specularConstant="0.91" specularExponent="31.74" surfaceScale="3.33">
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant elevation="140.78">
+                           <color>
+                              <Color red="0.9578947424888611" green="0.9578947424888611" blue="0.9578947424888611" />
+                           </color>
+                        </Light.Distant>
+                     </light>
+                  </Lighting>
+               </effect>
             </VBox>
-            <VBox layoutX="683.0" layoutY="65.0" prefHeight="296.0" prefWidth="183.0">
+            <VBox layoutX="300.0" prefHeight="198.0" prefWidth="140.0">
                <children>
-                  <Label fx:id="asiakas" prefHeight="43.0" prefWidth="244.0" text="arvo" textAlignment="CENTER" textFill="#ffd721">
+                  <Label prefHeight="43.0" prefWidth="231.0" text="     Ryhmät" textAlignment="CENTER" textFill="#7bcfa5">
                      <font>
                         <Font name="Britannic Bold" size="22.0" />
                      </font>
                   </Label>
-                  <Label fx:id="ruokajono" layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="244.0" text="arvo" textAlignment="CENTER" textFill="#ffd721">
+                  <TextField fx:id="ryhmaMaara" opacity="0.75" prefHeight="26.0" prefWidth="157.0" />
+                  <Label layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="231.0" text="     Kassat" textAlignment="CENTER" textFill="#7bcfa5">
                      <font>
                         <Font name="Britannic Bold" size="22.0" />
                      </font>
                   </Label>
-                  <Label fx:id="pisinruokajono" layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="244.0" text="arvo" textAlignment="CENTER" textFill="#ffd721">
-                     <font>
-                        <Font name="Britannic Bold" size="22.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="kassajono" layoutX="10.0" layoutY="96.0" prefHeight="43.0" prefWidth="244.0" text="arvo" textAlignment="CENTER" textFill="#ffd721">
-                     <font>
-                        <Font name="Britannic Bold" size="22.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="pisinkassajono" layoutX="10.0" layoutY="53.0" prefHeight="43.0" prefWidth="244.0" text="arvo" textAlignment="CENTER" textFill="#ffd721">
-                     <font>
-                        <Font name="Britannic Bold" size="22.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="poistuneet" layoutX="10.0" layoutY="96.0" prefHeight="43.0" prefWidth="244.0" text="arvo" textAlignment="CENTER" textFill="#ffd721">
-                     <font>
-                        <Font name="Britannic Bold" size="22.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="kello" layoutX="10.0" layoutY="140.0" prefHeight="43.0" prefWidth="244.0" text="arvo" textAlignment="CENTER" textFill="#ffd721">
-                     <font>
-                        <Font name="Britannic Bold" size="22.0" />
-                     </font>
-                  </Label>
+                  <TextField fx:id="kassaMaara" layoutX="10.0" layoutY="53.0" opacity="0.75" prefHeight="26.0" prefWidth="157.0" />
                </children>
+               <effect>
+                  <Lighting diffuseConstant="1.35" specularConstant="0.91" specularExponent="31.74" surfaceScale="3.33">
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant elevation="140.78">
+                           <color>
+                              <Color red="0.9052631855010986" green="0.8784405589103699" blue="0.8784405589103699" />
+                           </color>
+                        </Light.Distant>
+                     </light>
+                  </Lighting>
+               </effect>
             </VBox>
+         </children>
+      </Pane>
+      <Pane id="simulaatiopaneNONvisible" fx:id="simulaatioPane" layoutX="31.0" layoutY="101.0" prefHeight="442.0" prefWidth="1214.0" style="-fx-background-color: black;" visible="false">
+         <children>
+            <Pane id="visible">
+               <children>
+                  <ImageView fitHeight="446.0" fitWidth="1214.0" opacity="0.66">
+                     <image>
+                        <Image url="@../images/ruutu.jpg" />
+                     </image>
+                     <effect>
+                        <ColorAdjust brightness="-0.36" contrast="0.24" saturation="-0.02" />
+                     </effect>
+                  </ImageView>
+                  <ImageView fx:id="nappi1" fitHeight="35.0" fitWidth="49.0" layoutX="1142.0" layoutY="104.0" onMouseClicked="#siirryEkalleSivulle" onMouseEntered="#hoverOn" onMouseExited="#hoverOff">
+                     <image>
+                        <Image url="@../images/nappi.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <ImageView fx:id="nappi2" fitHeight="35.0" fitWidth="49.0" layoutX="1142.0" layoutY="168.0" onMouseClicked="#siirryTulosNakymaan" onMouseEntered="#hoverOn" onMouseExited="#hoverOff">
+                     <image>
+                        <Image url="@../images/nappi.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane id="AnimaatioNakymavisible" fx:id="simuAnimaatioPane" prefHeight="442.0" prefWidth="1131.0">
+               <children>
+                  <VBox fx:id="simu1" layoutX="125.0" layoutY="68.0" prefHeight="314.0" prefWidth="258.0">
+                     <children>
+                        <Label prefHeight="43.0" prefWidth="244.0" text="Asiakas saapuminen:" textAlignment="CENTER" textFill="#7bcfa5">
+                           <font>
+                              <Font name="Britannic Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="53.0" prefHeight="43.0" prefWidth="265.0" text="Ruokalinjastojono: " textAlignment="CENTER" textFill="#7bcfa5">
+                           <font>
+                              <Font name="Britannic Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="10.0" prefHeight="42.0" prefWidth="346.0" text="Ruokalinjasto maxjono: " textAlignment="CENTER" textFill="#7bcfa5">
+                           <font>
+                              <Font name="Britannic Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="96.0" prefHeight="43.0" prefWidth="265.0" text="Kassojen jono:" textAlignment="CENTER" textFill="#7bcfa5">
+                           <font>
+                              <Font name="Britannic Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="53.0" prefHeight="43.0" prefWidth="226.0" text="Kassojen pisin jono: " textAlignment="CENTER" textFill="#7bcfa5">
+                           <font>
+                              <Font name="Britannic Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="96.0" prefHeight="43.0" prefWidth="256.0" text="Poistuneet asiakkaat:" textAlignment="CENTER" textFill="#7bcfa5">
+                           <font>
+                              <Font name="Britannic Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="96.0" prefHeight="43.0" prefWidth="186.0" text="Kello:" textAlignment="CENTER" textFill="#7bcfa5">
+                           <font>
+                              <Font name="Britannic Bold" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="simu2" layoutX="382.0" layoutY="68.0" prefHeight="302.0" prefWidth="122.0">
+                     <children>
+                        <Label fx:id="asiakas" prefHeight="43.0" prefWidth="244.0" textAlignment="CENTER" textFill="#7bcfa5">
+                           <font>
+                              <Font name="Britannic Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="ruokajono" layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="244.0" textAlignment="CENTER" textFill="#7bcfa5">
+                           <font>
+                              <Font name="Britannic Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="pisinruokajono" layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="244.0" textAlignment="CENTER" textFill="#7bcfa5">
+                           <font>
+                              <Font name="Britannic Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="kassajono" layoutX="10.0" layoutY="96.0" prefHeight="43.0" prefWidth="244.0" textAlignment="CENTER" textFill="#7bcfa5">
+                           <font>
+                              <Font name="Britannic Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="pisinkassajono" layoutX="10.0" layoutY="53.0" prefHeight="43.0" prefWidth="244.0" textAlignment="CENTER" textFill="#7bcfa5">
+                           <font>
+                              <Font name="Britannic Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="poistuneet" layoutX="10.0" layoutY="96.0" prefHeight="43.0" prefWidth="244.0" textAlignment="CENTER" textFill="#7bcfa5">
+                           <font>
+                              <Font name="Britannic Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="kello" layoutX="10.0" layoutY="140.0" prefHeight="43.0" prefWidth="244.0" textAlignment="CENTER" textFill="#7bcfa5">
+                           <font>
+                              <Font name="Britannic Bold" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <effect>
+                        <Lighting diffuseConstant="1.35" specularConstant="0.91" specularExponent="31.74" surfaceScale="3.33">
+                           <bumpInput>
+                              <Shadow />
+                           </bumpInput>
+                           <light>
+                              <Light.Distant elevation="140.78">
+                                 <color>
+                                    <Color red="0.9263157844543457" green="0.8645613789558411" blue="0.8645613789558411" />
+                                 </color>
+                              </Light.Distant>
+                           </light>
+                        </Lighting>
+                     </effect>
+                  </VBox>
+                  <VBox fx:id="simu3" layoutX="500.0" layoutY="79.0" prefHeight="287.0" prefWidth="466.0" spacing="16.0">
+                     <children>
+                        <ImageView fx:id="saapuneetPalkki" fitHeight="26.0" fitWidth="0.1" pickOnBounds="true">
+                           <image>
+                              <Image url="@../images/saapuneetpalkki.jpg" />
+                           </image>
+                           <effect>
+                              <GaussianBlur />
+                           </effect>
+                        </ImageView>
+                        <ImageView fx:id="ruokajonopalkki" fitHeight="26.0" fitWidth="0.1" pickOnBounds="true">
+                           <image>
+                              <Image url="@../images/vihreepatukka.jpg" />
+                           </image>
+                           <effect>
+                              <GaussianBlur />
+                           </effect>
+                        </ImageView>
+                        <ImageView fx:id="maxruokajonopalkki" fitHeight="26.0" fitWidth="0.1" pickOnBounds="true">
+                           <image>
+                              <Image url="@../images/vihreepatukka.jpg" />
+                           </image>
+                           <effect>
+                              <GaussianBlur />
+                           </effect>
+                        </ImageView>
+                        <ImageView fx:id="kassajonopalkki" fitHeight="26.0" fitWidth="0.1" pickOnBounds="true">
+                           <image>
+                              <Image url="@../images/vihreepatukka.jpg" />
+                           </image>
+                           <effect>
+                              <GaussianBlur />
+                           </effect>
+                        </ImageView>
+                        <ImageView fx:id="maxkassajonopalkki" fitHeight="26.0" fitWidth="0.1" pickOnBounds="true">
+                           <image>
+                              <Image url="@../images/vihreepatukka.jpg" />
+                           </image>
+                           <effect>
+                              <GaussianBlur />
+                           </effect>
+                        </ImageView>
+                        <ImageView fx:id="poistuneetPalkki" fitHeight="26.0" fitWidth="0.1" pickOnBounds="true">
+                           <image>
+                              <Image url="@../images/poistuneetpalkki.jpg" />
+                           </image>
+                           <effect>
+                              <GaussianBlur />
+                           </effect>
+                        </ImageView>
+                        <ImageView fx:id="kelloPalkki" fitHeight="26.0" fitWidth="0.1" pickOnBounds="true">
+                           <image>
+                              <Image url="@../images/kellopalkki.jpg" />
+                           </image>
+                           <effect>
+                              <SepiaTone />
+                           </effect>
+                        </ImageView>
+                     </children>
+                  </VBox>
+               </children>
+            </Pane>
+            <Pane id="tulospaneNONvisible" fx:id="tulospane" mouseTransparent="true" prefHeight="442.0" prefWidth="1139.0" visible="false">
+               <children>
+                  <Pane id="infoNONvisible" fx:id="infoPane" prefHeight="442.0" prefWidth="1139.0" visible="false">
+                     <children>
+                        <VBox layoutX="416.0" layoutY="107.0" prefHeight="250.0" prefWidth="286.0">
+                           <children>
+                              <Label id="palvelupisteet" prefHeight="43.0" prefWidth="241.0" text="   DATADISPLAY INFO:" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </Label>
+                              <Label id="1. Ruokalinjasto" layoutX="10.0" layoutY="53.0" prefHeight="42.0" prefWidth="418.0" text="    1. ASIAKAS DATA" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label id="2. Kassat" layoutX="10.0" layoutY="10.0" prefHeight="42.0" prefWidth="416.0" text="    2. LINJASTO DATA" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label id="3. Ruokasali" layoutX="10.0" layoutY="96.0" prefHeight="42.0" prefWidth="407.0" text="    3. KASSA DATA" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label id="3. Ruokasali" layoutX="10.0" layoutY="138.0" prefHeight="42.0" prefWidth="407.0" text="    4. LOAD SCREEN" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+                  <Pane id="asiakastulosNONvisible" fx:id="asiakasPane" prefHeight="442.0" prefWidth="1139.0" visible="false">
+                     <children>
+                        <VBox layoutX="143.0" layoutY="110.0" prefHeight="227.0" prefWidth="381.0">
+                           <children>
+                              <Label id="saapuneet" prefHeight="43.0" prefWidth="244.0" text="Asiakkaita" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label id="poistuneet" layoutX="10.0" layoutY="53.0" prefHeight="42.0" prefWidth="418.0" text="Poistuneet asiakkaat" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label id="läpimeno aika" layoutX="10.0" layoutY="10.0" prefHeight="42.0" prefWidth="416.0" text="Keskimääräinen läpimenoaika" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label id="jonotusaika" layoutX="10.0" layoutY="96.0" prefHeight="42.0" prefWidth="407.0" text="Keskimääräinen jonotusaika" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label id="palvelussa aika" layoutX="10.0" layoutY="138.0" prefHeight="42.0" prefWidth="407.0" text="Palveluissa vietetty aika" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox layoutX="469.0" layoutY="110.0" prefHeight="212.0" prefWidth="161.0">
+                           <children>
+                              <Label fx:id="asiakasFinal" prefHeight="43.0" prefWidth="244.0" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lapiAsiakkaat" layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="244.0" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="keskiAsiakkaat" layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="244.0" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="keskiJonoAsiakkaat" layoutX="10.0" layoutY="96.0" prefHeight="43.0" prefWidth="157.0" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="asiakasPalveluAika" layoutX="10.0" layoutY="140.0" prefHeight="43.0" prefWidth="157.0" text="kkk" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <BarChart id="asiakaschartti" fx:id="asiakasChart" layoutX="626.0" layoutY="66.0" prefHeight="325.0" prefWidth="356.0" style="-fx-background-color: #00000000;">
+                           <xAxis>
+                              <CategoryAxis fx:id="asiakascategoryaxis" side="BOTTOM" />
+                           </xAxis>
+                           <yAxis>
+                              <NumberAxis fx:id="asiakasnumberaxis" side="LEFT" />
+                           </yAxis>
+                        </BarChart>
+                        <Label id="asiakasinfoorigi" layoutX="462.0" layoutY="55.0" prefHeight="48.0" prefWidth="152.0" text="ASIAKAS INFO" textFill="#7bcfa5">
+                           <font>
+                              <Font name="Britannic Bold" size="22.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane id="ruokalinjatulosNONvisible" fx:id="ruokaPane" prefHeight="442.0" prefWidth="1139.0" visible="false">
+                     <children>
+                        <VBox layoutX="143.0" layoutY="110.0" prefHeight="227.0" prefWidth="381.0">
+                           <children>
+                              <Label id="palveltu" prefHeight="43.0" prefWidth="244.0" text="Asiakkaita palveltu" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label id="aktiiviaika" layoutX="10.0" layoutY="53.0" prefHeight="42.0" prefWidth="418.0" text="Aktiiviaika" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label id="suoritusteho" layoutX="10.0" layoutY="96.0" prefHeight="42.0" prefWidth="407.0" text="Suoritusteho" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label id="käyttöaste" layoutX="10.0" layoutY="10.0" prefHeight="42.0" prefWidth="416.0" text="Käyttöaste tällähetkellä" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label id="keskikäyttöaste" layoutX="10.0" layoutY="138.0" prefHeight="42.0" prefWidth="416.0" text="Keskimääräinen käyttöaste" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox layoutX="469.0" layoutY="110.0" prefHeight="212.0" prefWidth="161.0">
+                           <children>
+                              <Label fx:id="ruokaLinjastoPalveltuAsiakas" prefHeight="43.0" prefWidth="244.0" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="aktiiviaika" layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="244.0" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="suoritusteho" layoutX="10.0" layoutY="96.0" prefHeight="43.0" prefWidth="157.0" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="kayttoaste" layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="244.0" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="keskiKayttoaste" layoutX="10.0" layoutY="140.0" prefHeight="43.0" prefWidth="244.0" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <BarChart layoutX="626.0" layoutY="66.0" prefHeight="325.0" prefWidth="356.0" style="-fx-background-color: #00000000;">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </BarChart>
+                        <Label id="ruokainfoorigi" layoutX="407.0" layoutY="55.0" prefHeight="48.0" prefWidth="225.0" text="RUOKALINJASTOT INFO" textFill="#7bcfa5">
+                           <font>
+                              <Font name="Britannic Bold" size="22.0" />
+                           </font>
+                        </Label>
+                     </children></Pane>
+                  <Pane id="kassatulosNONvisible" fx:id="kassaPane" prefHeight="442.0" prefWidth="1139.0" visible="false">
+                     <children>
+                        <VBox layoutX="143.0" layoutY="110.0" prefHeight="227.0" prefWidth="381.0">
+                           <children>
+                              <Label id="palvellut" prefHeight="43.0" prefWidth="244.0" text="Asiakkaita palveltu" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label id="aktiiviaika" layoutX="10.0" layoutY="53.0" prefHeight="42.0" prefWidth="418.0" text="Aktiiviaika" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label id="suoritusteho" layoutX="10.0" layoutY="96.0" prefHeight="42.0" prefWidth="407.0" text="Suoritusteho" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label id="kayttoaste" layoutX="10.0" layoutY="10.0" prefHeight="42.0" prefWidth="416.0" text="Käyttöaste tällähetkellä" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label id="keskikäyttöaste" layoutX="10.0" layoutY="138.0" prefHeight="42.0" prefWidth="407.0" text="Keskimääräinen käyttöaste" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox layoutX="469.0" layoutY="110.0" prefHeight="212.0" prefWidth="161.0">
+                           <children>
+                              <Label fx:id="kassaPalveltuAsiakas" prefHeight="43.0" prefWidth="244.0" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="kassaAktiiviaika" layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="244.0" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="kassaSuoritusteho" layoutX="10.0" layoutY="96.0" prefHeight="43.0" prefWidth="157.0" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="kassaKayttoaste" layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="244.0" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="kassaKeskiKayttoaste" layoutX="10.0" layoutY="140.0" prefHeight="43.0" prefWidth="157.0" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <BarChart layoutX="626.0" layoutY="66.0" prefHeight="325.0" prefWidth="356.0" style="-fx-background-color: #00000000;">
+                           <xAxis>
+                              <CategoryAxis side="BOTTOM" />
+                           </xAxis>
+                           <yAxis>
+                              <NumberAxis side="LEFT" />
+                           </yAxis>
+                        </BarChart>
+                        <Label id="kassainfoorigi" layoutX="480.0" layoutY="55.0" prefHeight="48.0" prefWidth="152.0" text="KASSAT INFO" textFill="#7bcfa5">
+                           <font>
+                              <Font name="Britannic Bold" size="22.0" />
+                           </font>
+                        </Label>
+                     </children></Pane>
+                  <Pane id="tallennuksetPaneNONvisible" fx:id="tallennusPane" prefHeight="442.0" prefWidth="1139.0" visible="false">
+                     <children>
+                        <Label id="tallennuksetinfo" layoutX="457.0" layoutY="55.0" prefHeight="48.0" prefWidth="224.0" text="TALLENNUKSET INFO" textFill="#7bcfa5">
+                           <font>
+                              <Font name="Britannic Bold" size="22.0" />
+                           </font>
+                        </Label>
+                        <ListView id="tallennuslista" layoutX="141.0" layoutY="102.0" prefHeight="282.0" prefWidth="286.0" style="-fx-background-color: #00000000;" />
+                     </children></Pane>
+               </children></Pane>
          </children>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
+         <effect>
+            <Bloom threshold="0.23" />
+         </effect>
       </Pane>
-		<HBox layoutX="1182.0" layoutY="15.0" prefHeight="48.0" prefWidth="82.0">
+		<HBox id="exitButtonvisible" layoutX="1158.0" layoutY="33.0" prefHeight="48.0" prefWidth="84.0">
          <children>
-            <ImageView fx:id="lopeta" fitHeight="48.0" fitWidth="77.0" onMouseClicked="#lopeta">
+            <ImageView fx:id="lopeta" fitHeight="48.0" fitWidth="81.0" onMouseClicked="#lopeta" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.9">
                <image>
-                  <Image url="@../images/lopeta.jpg" />
+                  <Image url="@../images/poweroff.jpg" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -171,103 +673,5 @@
             </ImageView>
          </children>
 		</HBox>
-      <ImageView fx:id="tuloksiin" fitHeight="342.0" fitWidth="97.0" layoutX="1178.0" layoutY="150.0" onMouseClicked="#siirryTulosNakymaan" onMouseEntered="#hoverOn" onMouseExited="#hoverOff">
-         <image>
-            <Image url="@../images/tuloksiinnappi.jpg" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ImageView>
-      <AnchorPane fx:id="mustaEkaruutu" layoutX="124.0" layoutY="63.0" mouseTransparent="true" opacity="0.0" prefHeight="657.0" prefWidth="1156.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <AnchorPane fx:id="toinentausta" layoutX="1340.0" prefHeight="720.0" prefWidth="1280.0">
-         <children>
-            <ImageView fitHeight="720.0" fitWidth="1280.0">
-               <image>
-                  <Image url="@../images/TaustakuvaToinenSivu.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="ekalleSivulle" fitHeight="339.0" fitWidth="106.0" layoutY="149.0" onMouseClicked="#siirryEkalleSivulle" onMouseEntered="#hoverOn" onMouseExited="#hoverOff">
-               <image>
-                  <Image url="@../images/ekallesivullenappi.jpg" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
-            <Button fx:id="asiakasButton" layoutX="77.0" layoutY="578.0" mnemonicParsing="false" onAction="#setAsiakasPaneVisibility" prefHeight="95.0" prefWidth="268.0" text="ASIAKAS" AnchorPane.bottomAnchor="46.0" AnchorPane.topAnchor="579.0">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="ruokalinjatButton" layoutX="362.0" layoutY="579.0" mnemonicParsing="false" prefHeight="95.0" prefWidth="268.0" text="RUOKALINJASTOT">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="kassatButton" layoutX="649.0" layoutY="579.0" mnemonicParsing="false" prefHeight="95.0" prefWidth="268.0" text="KASSAT">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="tallennuksetButton" layoutX="934.0" layoutY="579.0" mnemonicParsing="false" onAction="#tallenna" prefHeight="95.0" prefWidth="268.0" text="TALLENNUKSET">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Pane fx:id="asiakasPane" layoutX="307.0" layoutY="147.0" prefHeight="314.0" prefWidth="709.0" visible="false">
-               <children>
-                  <VBox layoutX="110.0" layoutY="74.0" prefHeight="221.0" prefWidth="425.0">
-                     <children>
-                        <Label prefHeight="43.0" prefWidth="244.0" text="Asiakkaita" textAlignment="CENTER" textFill="#ffd721">
-                           <font>
-                              <Font name="Britannic Bold" size="22.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="10.0" layoutY="53.0" prefHeight="42.0" prefWidth="418.0" text="Annetussa ajassa läpi päässeet asiakkaat" textAlignment="CENTER" textFill="#ffd721">
-                           <font>
-                              <Font name="Britannic Bold" size="22.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="10.0" layoutY="10.0" prefHeight="42.0" prefWidth="416.0" text="Asiakkaan keskimääräinen läpimenoaika" textAlignment="CENTER" textFill="#ffd721">
-                           <font>
-                              <Font name="Britannic Bold" size="22.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="10.0" layoutY="96.0" prefHeight="42.0" prefWidth="407.0" text="Asiakkaan keskimääräinen jonotusaika" textAlignment="CENTER" textFill="#ffd721">
-                           <font>
-                              <Font name="Britannic Bold" size="22.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox layoutX="544.0" layoutY="75.0" prefHeight="169.0" prefWidth="244.0">
-                     <children>
-                        <Label fx:id="asiakasFinal" prefHeight="43.0" prefWidth="244.0" text="arvo" textAlignment="CENTER" textFill="#ffd721">
-                           <font>
-                              <Font name="Britannic Bold" size="22.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lapiAsiakkaat" layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="244.0" text="arvo" textAlignment="CENTER" textFill="#ffd721">
-                           <font>
-                              <Font name="Britannic Bold" size="22.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="keskiAsiakkaat" layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="244.0" text="arvo" textAlignment="CENTER" textFill="#ffd721">
-                           <font>
-                              <Font name="Britannic Bold" size="22.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="keskiJonoAsiakkaat" layoutX="10.0" layoutY="96.0" prefHeight="43.0" prefWidth="244.0" text="arvo" textAlignment="CENTER" textFill="#ffd721">
-                           <font>
-                              <Font name="Britannic Bold" size="22.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-               </children></Pane>
-            <AnchorPane fx:id="mustaToinenruutu" mouseTransparent="true" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-         </children>
-      </AnchorPane>
 	</children>
 </AnchorPane>

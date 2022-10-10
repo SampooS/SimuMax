@@ -1,5 +1,7 @@
 package simu.model;
 
+import eduni.distributions.ContinuousGenerator;
+import eduni.distributions.Generator;
 import eduni.distributions.Negexp;
 import eduni.distributions.Normal;
 import simu.framework.Kello;
@@ -7,6 +9,7 @@ import simu.framework.Moottori;
 import simu.framework.Saapumisprosessi;
 import simu.framework.Tapahtuma;
 import simu.model.Tulokset.Palvelupisteet;
+import view.Alkuarvot;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -26,6 +29,7 @@ public class OmaMoottori extends Moottori{
 	private int ryhmaNumero = 1;
 	private ArrayList<Tapahtuma> tapahtuneet;
 
+
 	
 	public OmaMoottori(IKontrolleriMtoV kontrolleri){
 		
@@ -33,34 +37,37 @@ public class OmaMoottori extends Moottori{
 
 	}
 	
-	public void setSimulointiLahtoArvot(int ruokalinja, int rekisteri, int asiakkaat, int ryhmienMaara, double porrastusMaara) {
+	public void setSimulointiLahtoArvot(int ruokalinja, int rekisteri, int asiakkaat, int ryhmienmaara, double porrastusMaara) {
 			
-		this.linjastot = ruokalinja;
+		this.linjastot = ruokalinja * 3; //Testi........
 		this.kassat = rekisteri;
-		this.ryhmienMaara = ryhmienMaara;
+		this.ryhmienMaara = ryhmienmaara;
 		final int ryhmaKoko = asiakkaat/ryhmienMaara;
 		this.porrastusAika = (long)(porrastusMaara * 60000);
 		this.tapahtuneet = new ArrayList<Tapahtuma>();
 		
-
-		palvelupisteet = new Palvelupiste[ruokalinja + rekisteri + 1];
+		Alkuarvot.getInstance().setAlkuarvot(linjastot,kassat,asiakkaat,ryhmienMaara,porrastusAika);
 	
-		for (int i = 0; i < ruokalinja; i++) {
+		palvelupisteet = new Palvelupiste[linjastot + kassat + 1];
+	
+		for (int i = 0; i < linjastot; i++) {
 			
-			palvelupisteet[i]=new Palvelupiste(new Normal(30000,5000, (1 + i + (long)Math.random() * 8765)), tapahtumalista, TapahtumanTyyppi.DEP1);
-			
-		}
-		
-		for (int i = ruokalinja; i < ruokalinja + rekisteri; i++) {
-			
-			palvelupisteet[i]=new Palvelupiste(new Normal(10000, 3000, (1 + i +(long)Math.random() * 5678)), tapahtumalista, TapahtumanTyyppi.DEP2);
+			palvelupisteet[i]=new Palvelupiste(new Normal(60000,15000, (1 + i + (long)Math.random() * 8765)), tapahtumalista, TapahtumanTyyppi.DEP1);
 			
 		}
 		
-		palvelupisteet[ruokalinja+rekisteri]=new Palvelupiste(new Normal(1, 1), tapahtumalista, TapahtumanTyyppi.DEP3);	
+		for (int i = linjastot; i < linjastot + kassat; i++) {
+			
+			palvelupisteet[i]=new Palvelupiste(new Normal(18000, 5000, (1 + i +(long)Math.random() * 5678)), tapahtumalista, TapahtumanTyyppi.DEP2);
+			
+		}
+	
+		
+		
+		palvelupisteet[linjastot+kassat]=new Palvelupiste(new Normal(1, 1), tapahtumalista, TapahtumanTyyppi.DEP3);	
 		ryhmaSaapumisProsessi = new RyhmaSaapumisProsessi(tapahtumalista,TapahtumanTyyppi.RYHMASAAPUMINEN,porrastusAika);
 		saapumisprosessi = new Saapumisprosessi(new Negexp(1000,1000), tapahtumalista, TapahtumanTyyppi.ARR1,ryhmaKoko);
-		tulokset.setPalvelupiste(palvelupisteet, ruokalinja, rekisteri);
+		tulokset.setPalvelupiste(palvelupisteet, linjastot, kassat);
 		
 		
 	}
@@ -83,6 +90,16 @@ public class OmaMoottori extends Moottori{
 	
 	public ArrayList<Tapahtuma> getTapahtumat() {
 		return this.tapahtuneet;
+	}
+	
+	private double getRuokasaliAika() {
+		
+		ContinuousGenerator generator = new Normal(900000, 300000);
+		
+		double saliaika = generator.sample();
+		tulokset.setRuokasaliAika(saliaika);
+		return saliaika;
+		
 	}
 	
 	@Override
@@ -119,7 +136,7 @@ public class OmaMoottori extends Moottori{
 						if(onkoVielaRyhmia()) {
 						
 							ryhmaSaapumisProsessi.generoiSeuraava();
-						
+
 						}
 				break;
 				
@@ -150,22 +167,41 @@ public class OmaMoottori extends Moottori{
 			case DEP3: 
 				
 				       a = palvelupisteet[linjastot + kassat].otaJonosta();
-					   a.setPoistumisaika(Kello.getInstance().getAika());
+					   a.setPoistumisaika(Kello.getInstance().getAika() + getRuokasaliAika());
 			           a.raportti();
 			           kontrolleri.naytaLapiPaasseetAsiakkaat();
-			           kontrolleri.naytaAsiakkaanLapimenoAika(tulokset.getLapiMenoAika());
 		           
 	             break;
 		}
 			
-		kontrolleri.naytaPisinJonoKassoille(tulokset.getMaXJononpituus(Palvelupisteet.KASSA));	
-		kontrolleri.naytaRuokaJononPituus(tulokset.getJononpituus(Palvelupisteet.RUOKALINJASTO));
-		kontrolleri.naytaKassojenActive(tulokset.getAktiiviAika_B(Palvelupisteet.KASSA));
-		kontrolleri.naytaAsiakkaidenKeskimaarainenPalveluaika(tulokset.getAsiakkaidenPalveluAika_S());
-		kontrolleri.naytaPisinJonoRuokalinjastolle(tulokset.getMaXJononpituus(Palvelupisteet.RUOKALINJASTO));
-	   	kontrolleri.naytaKassaJononPituus(tulokset.getJononpituus(Palvelupisteet.KASSA));	
-		kontrolleri.naytaRuokalinjastonAktiiviaika(tulokset.getAktiiviAika_B(Palvelupisteet.RUOKALINJASTO));
 		kontrolleri.naytaKellonAika(Kello.getInstance().getAika());
+		kontrolleri.naytaRuokaJononPituus(tulokset.getJononpituus(Palvelupisteet.RUOKALINJASTO));
+		kontrolleri.naytaPisinJonoRuokalinjastolle(tulokset.getMaXJononpituus(Palvelupisteet.RUOKALINJASTO));
+		kontrolleri.naytaKassaJononPituus(tulokset.getJononpituus(Palvelupisteet.KASSA));
+		kontrolleri.naytaPisinJonoKassoille(tulokset.getKassaMaxJono());
+		
+		
+		kontrolleri.naytaAsiakkaidenKeskimaarainenPalveluaika(tulokset.getAsiakkaidenPalveluAika_S());
+		kontrolleri.naytaKeskiOdotusAika(tulokset.getKeskimaarainenJonotusAika());
+        kontrolleri.naytaAsiakkaanLapimenoAika(tulokset.getkeskimaarainenLapiMenoAika());
+        
+		
+		kontrolleri.naytaRuokalinjastoAsiakkaatPalveltu(tulokset.getPalvelupisteenPalvelematAsiakkaat(Palvelupisteet.RUOKALINJASTO));
+		kontrolleri.naytaRuokalinjastonAktiiviaika(tulokset.getAktiiviAika_B(Palvelupisteet.RUOKALINJASTO));
+		kontrolleri.naytaRuokalinjastonKayttoaste(tulokset.getKayttoaste_U(Palvelupisteet.RUOKALINJASTO));
+		kontrolleri.naytaRuokalinjastonKeskikayttoaste(tulokset.getKeskiKayttoaste(Palvelupisteet.RUOKALINJASTO));
+		kontrolleri.naytaRuokalinjastonSuoritusteho(tulokset.getSuoritusteho_X(Palvelupisteet.RUOKALINJASTO));
+		
+		
+		kontrolleri.naytaKassaAsiakkaatPalveltu(tulokset.getPalvelupisteenPalvelematAsiakkaat(Palvelupisteet.KASSA));
+		kontrolleri.naytaKassaAktiiviaika(tulokset.getAktiiviAika_B(Palvelupisteet.KASSA));
+		kontrolleri.naytaKassaKayttoaste(tulokset.getKayttoaste_U(Palvelupisteet.KASSA));
+		kontrolleri.naytaKassaKeskikayttoaste(tulokset.getKeskiKayttoaste(Palvelupisteet.KASSA));
+		kontrolleri.naytaKassaSuoritusteho(tulokset.getSuoritusteho_X(Palvelupisteet.KASSA));
+		
+
+		
+
 			
 	}
 
@@ -180,11 +216,10 @@ public class OmaMoottori extends Moottori{
 		System.out.println(Asiakas.kikkeli + " kikkeliä");
 		
 		//System.out.println("W = " + tulokset.getOdotusAika_W());
-		kontrolleri.naytaKeskiOdotusAika(tulokset.getOdotusAika_W()); // Jottain pittee tehä // se on tehty :D
-		
+		kontrolleri.naytaKeskiOdotusAika(tulokset.getKeskimaarainenJonotusAika()); // Jottain pittee tehä // se on tehty :D
+		kontrolleri.tallenna();
 		//kontrolleri.naytaLoppuaika(Kello.getInstance().getAika());
-			
-		
+				
 		
 	}
 	

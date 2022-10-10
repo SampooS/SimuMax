@@ -21,8 +21,8 @@ public class DBAccessObject implements IDao {
 		
 		try {
 			DBAccessObject.connection = DriverManager.getConnection(
-					"jdbc:mariadb://localhost:3306/ruokaladb",
-					"API", "API"
+					"jdbc:mariadb://localhost:3306/ruokaladbtest",
+					"root", "olso"
 			);
 		} catch (SQLException e) {
 			e.printStackTrace();

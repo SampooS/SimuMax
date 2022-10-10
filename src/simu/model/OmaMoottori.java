@@ -169,7 +169,9 @@ public class OmaMoottori extends Moottori{
 		
 		System.out.println(Asiakas.kikkeli + " kikkeliä");
 		
-		//System.out.println("W = " + tulokset.getOdotusAika_W());
+		//tulokset.setPalvellutAsiakkaat_C(Asiakas.kikkeli); 	// jos halutaan käyttää getPalvellutAsiakkaat_C() poistaa komenti.
+		
+		System.out.println("W = " + tulokset.getOdotusAika_W()/1000);	// vain testi.
 		kontrolleri.naytaKeskiOdotusAika(tulokset.getOdotusAika_W()); // Jottain pittee tehä // se on tehty :D
 		
 		//kontrolleri.naytaLoppuaika(Kello.getInstance().getAika());

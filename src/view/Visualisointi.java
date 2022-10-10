@@ -118,6 +118,7 @@ public class Visualisointi implements IVisualisointi{
 		lapiAsiakkaat.setText(": " + Integer.toString(poistuneetMaara));
 		
 		
+		
 	}
 
 

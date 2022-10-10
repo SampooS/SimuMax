@@ -58,7 +58,7 @@ public class Tulokset implements Serializable{
 		
 		//return kaikki/asiakaslista.get(asiakaslista.size() - 1).getId();
 		//vaihdetaan tarvitaessa kun halutaan selvitää yhden palvelupisteen service time
-		return getAktiiviAika_B(Palvelupisteet.KAIKKI)/getPalvellutAsiakkaat_C();
+		return getAktiiviAika_B(Palvelupisteet.KAIKKI)/asiakaslista.get(asiakaslista.size() - 1).getId();
 	}
 
 
@@ -128,8 +128,9 @@ public class Tulokset implements Serializable{
 
 	public double getKokonaisAika_T() {
 		
-		return Kello.getInstance().getAika();
+		//return Kello.getInstance().getAika();
 		//return kokonaisAika_T; //vaihdan sen testia varten
+		return 12600000;
 	}
 
 
@@ -156,23 +157,31 @@ public class Tulokset implements Serializable{
 	public double getOdotusAika_W() { 		// Waiting time W läpimenoaikojen summa. ????????????????????????????????
 		
 		
-		double summa = 0.0;
 		
-		
-		
+		  double summa = 0.0;
+		  
 		for (int i = 0; i < asiakaslista.size(); i++) {
 			
 			summa += (asiakaslista.get(i).getLapimenoAika_Ri());
 			
 		}
 		
+		double ruoka = getAktiiviAika_B(Palvelupisteet.RUOKALINJASTO);
+		double kassa = getAktiiviAika_B(Palvelupisteet.KASSA);
+		double kaikki = ruoka + kassa;
+				
 		
-		return (summa/1000);
+		return (summa - kaikki) /(asiakaslista.size()-1) ;
+		
+	
+		
+		
+		
 	}
 	
 	public double getResponseTime_R() {
 		
-		return (double) (getOdotusAika_W() / getPalvellutAsiakkaat_C())/1000;
+		return (double) (getOdotusAika_W() / getPalvellutAsiakkaat_C());
 		
 	}
 	

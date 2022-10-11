@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.chart.BarChart?>
@@ -46,6 +47,22 @@
                   <GaussianBlur radius="63.0" />
                </effect>
             </ImageView>
+            <ImageView id="write" fitHeight="48.0" fitWidth="81.0" layoutX="30.0" layoutY="33.0" opacity="0.82">
+               <image>
+                  <Image url="@../images/write.jpg" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="NONE" />
+               </cursor>
+            </ImageView>
+            <ImageView id="writered" fx:id="write" fitHeight="48.0" fitWidth="81.0" layoutX="30.0" layoutY="33.0" visible="false">
+               <image>
+                  <Image url="@../images/writered.jpg" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="WAIT" />
+               </cursor>
+            </ImageView>
          </children>
          <effect>
             <BoxBlur height="0.0" width="0.0" />
@@ -53,7 +70,7 @@
       </AnchorPane>
       <Pane id="startbuttonitvisible" fx:id="startButtons" layoutY="583.0" prefHeight="127.0" prefWidth="1278.0">
          <children>
-            <ImageView fx:id="kaynnista" fitHeight="89.0" fitWidth="202.0" layoutX="400.0" layoutY="13.0" onMouseClicked="#kaynnistaSimulaatio" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.87">
+            <ImageView fx:id="kaynnista" fitHeight="89.0" fitWidth="202.0" layoutX="400.0" layoutY="13.0" onMouseClicked="#kaynnistaSimulaatio" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.94">
                <image>
                   <Image url="@../images/start.jpg" />
                </image>
@@ -61,7 +78,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="load" fitHeight="89.0" fitWidth="202.0" layoutX="650.0" layoutY="13.0" onMouseClicked="#loadRuutu" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.87">
+            <ImageView fx:id="load" fitHeight="89.0" fitWidth="202.0" layoutX="650.0" layoutY="13.0" onMouseClicked="#loadRuutu" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.94">
                <image>
                   <Image url="@../images/load.png" />
                </image>
@@ -73,7 +90,7 @@
       </Pane>
       <Pane id="ekatButtonitNONvisible" fx:id="ekasivunButtonit" focusTraversable="true" layoutY="583.0" prefHeight="127.0" prefWidth="1278.0" visible="false">
          <children>
-            <ImageView fx:id="hidasta" fitHeight="89.0" fitWidth="202.0" layoutX="400.0" layoutY="13.0" onMouseClicked="#hidasta" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.87">
+            <ImageView fx:id="hidasta" fitHeight="89.0" fitWidth="202.0" layoutX="400.0" layoutY="13.0" onMouseClicked="#hidasta" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.94">
                <image>
                   <Image url="@../images/hidastanappula.png" />
                </image>
@@ -81,7 +98,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="nopeuta" fitHeight="89.0" fitWidth="202.0" layoutX="650.0" layoutY="13.0" onMouseClicked="#nopeuta" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.87">
+            <ImageView fx:id="nopeuta" fitHeight="89.0" fitWidth="202.0" layoutX="650.0" layoutY="13.0" onMouseClicked="#nopeuta" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.94">
                <image>
                   <Image url="@../images/nopeutanappula.png" />
                </image>
@@ -93,7 +110,7 @@
       </Pane>
       <Pane id="tokatButtonitNONvisible" fx:id="tokasivunButtonit" focusTraversable="true" layoutY="583.0" mouseTransparent="true" prefHeight="127.0" prefWidth="1280.0" visible="false">
          <children>
-            <ImageView id="asiakasnappula" fx:id="asiakasButton" fitHeight="89.0" fitWidth="202.0" layoutX="150.0" layoutY="13.0" onMouseClicked="#asiakasPaneeli" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.87">
+            <ImageView id="asiakasnappula" fx:id="asiakasButton" fitHeight="89.0" fitWidth="202.0" layoutX="150.0" layoutY="13.0" onMouseClicked="#asiakasPaneeli" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.94">
                <image>
                   <Image url="@../images/asiakasNappula.jpg" />
                </image>
@@ -101,7 +118,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView id="ruokanappula" fx:id="ruokalinjatButton" fitHeight="89.0" fitWidth="202.0" layoutX="400.0" layoutY="13.0" onMouseClicked="#ruokaPaneeli" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.87">
+            <ImageView id="ruokanappula" fx:id="ruokalinjatButton" fitHeight="89.0" fitWidth="202.0" layoutX="400.0" layoutY="13.0" onMouseClicked="#ruokaPaneeli" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.94">
                <image>
                   <Image url="@../images/linjastoNappula.jpg" />
                </image>
@@ -109,7 +126,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView id="kassanappula" fx:id="kassatButton" fitHeight="89.0" fitWidth="202.0" layoutX="650.0" layoutY="13.0" onMouseClicked="#kassaPaneeli" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.87">
+            <ImageView id="kassanappula" fx:id="kassatButton" fitHeight="89.0" fitWidth="202.0" layoutX="650.0" layoutY="13.0" onMouseClicked="#kassaPaneeli" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.94">
                <image>
                   <Image url="@../images/kassatNappula.jpg" />
                </image>
@@ -117,7 +134,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView id="loadnappula" fx:id="tallennuksetButton" fitHeight="89.0" fitWidth="202.0" layoutX="900.0" layoutY="13.0" onMouseClicked="#tallennusPaneeli" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.87">
+            <ImageView id="loadnappula" fx:id="tallennuksetButton" fitHeight="89.0" fitWidth="202.0" layoutX="900.0" layoutY="13.0" onMouseClicked="#tallennusPaneeli" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.94">
                <image>
                   <Image url="@../images/loadnappula2.jpg" />
                </image>
@@ -148,7 +165,7 @@
                         <Font name="Britannic Bold" size="22.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="porrastusMaara" layoutX="10.0" layoutY="123.0" onMouseClicked="#pyyhiPorrastusTeksti" opacity="0.75" prefHeight="26.0" prefWidth="157.0" text="Minuuteissa.." />
+                  <TextField fx:id="porrastusMaara" layoutX="10.0" layoutY="123.0" onMouseClicked="#pyyhiPorrastusTeksti" opacity="0.75" prefHeight="26.0" prefWidth="157.0" />
                </children>
                <effect>
                   <Lighting diffuseConstant="1.35" specularConstant="0.91" specularExponent="31.74" surfaceScale="3.33">
@@ -382,6 +399,9 @@
                      </children>
                   </VBox>
                </children>
+               <effect>
+                  <Bloom threshold="0.23" />
+               </effect>
             </Pane>
             <Pane id="tulospaneNONvisible" fx:id="tulospane" mouseTransparent="true" prefHeight="442.0" prefWidth="1139.0" visible="false">
                <children>
@@ -420,6 +440,9 @@
                            </children>
                         </VBox>
                      </children>
+                     <effect>
+                        <Bloom threshold="0.23" />
+                     </effect>
                   </Pane>
                   <Pane id="asiakastulosNONvisible" fx:id="asiakasPane" prefHeight="442.0" prefWidth="1139.0" visible="false">
                      <children>
@@ -495,6 +518,9 @@
                            </font>
                         </Label>
                      </children>
+                     <effect>
+                        <Bloom threshold="0.23" />
+                     </effect>
                   </Pane>
                   <Pane id="ruokalinjatulosNONvisible" fx:id="ruokaPane" prefHeight="442.0" prefWidth="1139.0" visible="false">
                      <children>
@@ -569,7 +595,10 @@
                               <Font name="Britannic Bold" size="22.0" />
                            </font>
                         </Label>
-                     </children></Pane>
+                     </children>
+                     <effect>
+                        <Bloom threshold="0.23" />
+                     </effect></Pane>
                   <Pane id="kassatulosNONvisible" fx:id="kassaPane" prefHeight="442.0" prefWidth="1139.0" visible="false">
                      <children>
                         <VBox layoutX="143.0" layoutY="110.0" prefHeight="227.0" prefWidth="381.0">
@@ -643,15 +672,76 @@
                               <Font name="Britannic Bold" size="22.0" />
                            </font>
                         </Label>
-                     </children></Pane>
+                     </children>
+                     <effect>
+                        <Bloom threshold="0.23" />
+                     </effect></Pane>
                   <Pane id="tallennuksetPaneNONvisible" fx:id="tallennusPane" prefHeight="442.0" prefWidth="1139.0" visible="false">
                      <children>
                         <Label id="tallennuksetinfo" layoutX="457.0" layoutY="55.0" prefHeight="48.0" prefWidth="224.0" text="TALLENNUKSET INFO" textFill="#7bcfa5">
                            <font>
                               <Font name="Britannic Bold" size="22.0" />
                            </font>
+                           <effect>
+                              <Bloom threshold="0.23" />
+                           </effect>
                         </Label>
-                        <ListView id="tallennuslista" layoutX="141.0" layoutY="102.0" prefHeight="282.0" prefWidth="286.0" style="-fx-background-color: #00000000;" />
+                        <ListView id="tallennuslista" fx:id="loadlist" layoutX="165.0" layoutY="116.0" onMouseClicked="#tallennusEsitiedot" prefHeight="250.0" prefWidth="211.0" stylesheets="@../../OtonTeema.css">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <styleClass>
+                              <String fx:value="list-cell" />
+                              <String fx:value="list-view" />
+                           </styleClass></ListView>
+                        <Pane id="esitiedotpaneNONvisible" fx:id="esitiedotpane" layoutX="575.0" layoutY="127.0" prefHeight="227.0" prefWidth="407.0" visible="false">
+                           <children>
+                              <VBox layoutX="30.0" layoutY="28.0" prefHeight="199.0" prefWidth="168.0">
+                                 <children>
+                                    <Label prefHeight="55.0" prefWidth="139.0" text="ASIAKKAITA" textFill="#7bcfa5">
+                                       <font>
+                                          <Font name="Britannic Bold" size="22.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="10.0" prefHeight="55.0" prefWidth="189.0" text="RUOKALINJOJA" textFill="#7bcfa5">
+                                       <font>
+                                          <Font name="Britannic Bold" size="22.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="65.0" prefHeight="55.0" prefWidth="139.0" text="KASSOJA" textFill="#7bcfa5">
+                                       <font>
+                                          <Font name="Britannic Bold" size="22.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <effect>
+                                    <Bloom threshold="0.23" />
+                                 </effect>
+                              </VBox>
+                              <VBox layoutX="220.0" layoutY="28.0" prefHeight="199.0" prefWidth="168.0">
+                                 <children>
+                                    <Label fx:id="esiasiakas" prefHeight="55.0" prefWidth="139.0" text="ASIAKKAITA" textFill="#7bcfa5">
+                                       <font>
+                                          <Font name="Britannic Bold" size="22.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="esiruokalinja" layoutX="10.0" layoutY="10.0" prefHeight="55.0" prefWidth="189.0" text="RUOKALINJOJA" textFill="#7bcfa5">
+                                       <font>
+                                          <Font name="Britannic Bold" size="22.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="esikassa" layoutX="10.0" layoutY="65.0" prefHeight="55.0" prefWidth="139.0" text="KASSOJA" textFill="#7bcfa5">
+                                       <font>
+                                          <Font name="Britannic Bold" size="22.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <effect>
+                                    <Bloom threshold="0.23" />
+                                 </effect>
+                              </VBox>
+                           </children>
+                        </Pane>
                      </children></Pane>
                </children></Pane>
             <ImageView id="vihreepikkuvalovisible" fx:id="vihreapikkuvalo" fitHeight="4.0" fitWidth="25.0" x="1157.0" y="26.0">
@@ -674,13 +764,10 @@
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
-         <effect>
-            <Bloom threshold="0.23" />
-         </effect>
       </Pane>
 		<HBox id="exitandready" layoutX="930.0" layoutY="33.0" prefHeight="48.0" prefWidth="425.0" spacing="30.0">
          <children>
-            <ImageView id="readbutton" fx:id="read" fitHeight="48.0" fitWidth="81.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#startRuutuun" opacity="0.82">
+            <ImageView id="readbutton" fx:id="read" fitHeight="48.0" fitWidth="81.0" layoutX="10.0" layoutY="10.0" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.94">
                <image>
                   <Image url="@../images/read.jpg" />
                </image>
@@ -688,7 +775,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView id="readybutton" fx:id="ready" fitHeight="48.0" fitWidth="81.0" onMouseClicked="#startRuutuun" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.82">
+            <ImageView id="readybutton" fx:id="ready" fitHeight="48.0" fitWidth="81.0" onMouseClicked="#startRuutuun" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.94">
                <image>
                   <Image url="@../images/ready.jpg" />
                </image>
@@ -696,7 +783,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView id="exitbutton" fx:id="lopeta" fitHeight="48.0" fitWidth="81.0" onMouseClicked="#lopeta" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.9">
+            <ImageView id="exitbutton" fx:id="lopeta" fitHeight="48.0" fitWidth="81.0" onMouseClicked="#lopeta" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.94">
                <image>
                   <Image url="@../images/poweroff.jpg" />
                </image>

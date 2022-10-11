@@ -36,7 +36,7 @@ public class Saapumisprosessi {
 	
 	public void setUusiRyhma() {
 		
-		ryhma = ryhmaKokonen;
+		ryhma += ryhmaKokonen;
 		
 	}
 	

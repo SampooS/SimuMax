@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.ArrayList;
+
 public interface IKontrolleriMtoV {
 	
 		//public void naytaLoppuaika(double aika);
@@ -34,4 +36,6 @@ public interface IKontrolleriMtoV {
 		public void naytaKassaAktiiviaika(double aika);
 		
 		public void tallenna();
+		public void setLoadlist(ArrayList<String> lista);
+		
 }

@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import simu.framework.*;
+import view.Alkuarvot;
 
 /**
  * @author Sampo Savolainen
@@ -21,7 +22,7 @@ public class DBAccessObject implements IDao {
 		
 		try {
 			DBAccessObject.connection = DriverManager.getConnection(
-					"jdbc:mariadb://localhost:3306/ruokaladbtest",
+					"jdbc:mariadb://localhost:3306/ruokaladb",
 					"root", "olso"
 			);
 		} catch (SQLException e) {
@@ -174,11 +175,13 @@ public void tallennaAjo(ArrayList<Tapahtuma> tapahtumat) {
 	private static void addAsiakas(Asiakas asiakas, int ajoId) {
 		
 		try {
+			/*
 			System.out.println("insert into asiakkaat (saapumisaika, poistumisaika, ajoId) values (" + 
 					asiakas.getSaapumisaika() + ", " +
 					asiakas.getPoistumisaika() + ", " +
 					ajoId
 					);
+					*/
 			query("insert into asiakkaat (saapumisaika, poistumisaika, ajoId) values (" + 
 			asiakas.getSaapumisaika() + ", " +
 			asiakas.getPoistumisaika() + ", " +
@@ -201,12 +204,13 @@ public void tallennaAjo(ArrayList<Tapahtuma> tapahtumat) {
 	
 	private static void addTapahtuma(Tapahtuma tapahtuma, int ajoId) {
 		try {
+			/*
 			System.out.println("insert into tapahtumat (tapahtumaAika, tapahtumaTyyppi, suunta, ajoId) values (" +
 					tapahtuma.getAika() + ", " +
 					tapahtuma.getTyyppi() + ", " +
 					tapahtuma.getDirection() + ", " +
 					ajoId + ");"
-			);
+			);*/
 			
 			query("insert into tapahtumat (tapahtumaAika, tapahtumaTyyppi, suunta, ajoId) values (" +
 					tapahtuma.getAika() + ", " +
@@ -233,8 +237,80 @@ public void tallennaAjo(ArrayList<Tapahtuma> tapahtumat) {
 			palautettava[0] = rs.getInt(1);
 			palautettava[1] = rs.getInt(2);
 			palautettava[2] = rs.getInt(3);
+			palautettava[3] = rs.getInt(4);
 			
 			return palautettava;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	@Override
+	public ArrayList<Alkuarvot> getKaikkiAjot() {
+		
+		ArrayList<Alkuarvot> alkuarvot = new ArrayList<>();
+
+		
+		
+		try {
+			
+			ResultSet results;
+			results = query("Select count(ajoId) from ajot");
+			results.next();
+			
+			
+			int count = results.getInt(1);
+			
+			
+			
+			ResultSet rs = query("select ruokalinjat, kassat, asiakkaita from ajot");
+
+			rs.next();
+
+			for(int i = 0; i < count; i++) {
+				
+				alkuarvot.add(new Alkuarvot(rs.getInt(1),rs.getInt(2),rs.getInt(3)));
+				
+				rs.next(); 
+				
+			}
+							
+			return alkuarvot;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	@Override
+	public String[] getAjoTimeStamp() {
+		
+		try {
+			
+			ResultSet results;
+			results = query("Select count(ajoId) from ajot");
+			results.next();
+			
+			int count = results.getInt(1);
+			
+			String[] palautettava = new String[count];
+			
+			ResultSet rs = query("select ajoAika from ajot");
+			
+			rs.next();
+			
+			for(int i = 0; i < palautettava.length; i++) {
+				
+				palautettava[i] = rs.getString(1);
+				rs.next();
+				
+			}
+			
+
+			
+			return palautettava;
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;

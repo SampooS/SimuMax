@@ -66,7 +66,9 @@ public class Tulokset implements Serializable{
 
 	public int getAsiakkaat_A() {
 		
-		return asiakasMaara_A;
+		
+		System.out.println(asiakaslista.size() + "ksdkfiarigjairjg");
+		return asiakaslista.size();
 	}
 
 
@@ -389,12 +391,7 @@ public class Tulokset implements Serializable{
 			
 	}
 	
-	public double getPorrastusMaara() {
-		
-		
-		return Alkuarvot.getInstance().getRyhmienMaara() * Alkuarvot.getInstance().getPorrastusMaara();
-		
-	}
+
 	
 	
 	public double getkeskimaarainenLapiMenoAika() { //keskimääräinen arvo....toimii näin Mohammed, johtuen "raportti metodista, ei tarvitse koskea.

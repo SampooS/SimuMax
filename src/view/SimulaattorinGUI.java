@@ -58,6 +58,7 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 	@FXML private Pane startButtons;
 	@FXML private Pane simuButtons;
 	@FXML private Pane tulosButtons;
+	@FXML private Pane esitiedotpane;
 	
 	
 	@FXML private Label asiakas,pisinruokajono,ruokajono,kassajono,pisinkassajono,kello,poistuneet;
@@ -80,8 +81,13 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 	@FXML private Label kassaKeskiKayttoaste;
 	@FXML private Label kassaSuoritusteho;
 	
+	@FXML private Label esiasiakas;
+	@FXML private Label esiruokalinja;
+	@FXML private Label esikassa;
+	
 	@FXML private ImageView lopeta;
 	@FXML private ImageView ready;
+	@FXML private ImageView write;
 	@FXML private ImageView read;
 	
 	@FXML private ImageView kaynnista;
@@ -126,9 +132,10 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 	
 	@FXML private ImageView tuloksiin, ekalleSivulle;
 	@FXML private AnchorPane toinentausta, mustaEkaruutu, mustaToinenruutu;
-
 	
-
+	@FXML private ListView<String> loadlist;
+	
+	
 
 
 	@Override
@@ -162,8 +169,9 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 		
 		
 		startButtons.setMouseTransparent(true);
-		
+
 		tuoLoadRuutu();
+
 		
 		visibility.siirryTulosNakymaan(simuAnimaatioPane, tulospane, ekasivunButtonit, tokasivunButtonit);
 		visibility.setPaneVisibility(3);
@@ -203,6 +211,16 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 	}
 	
 	@FXML
+	private void tallennusEsitiedot() {
+		
+		
+		kontrolleri.setAjolist();
+		
+		//naytto.setEsitiedotRuudulle(arvo);
+		
+	}
+	
+	@FXML
 	public void pyyhiPorrastusTeksti() {
 		
 		porrastusMaara.setText("");
@@ -231,14 +249,34 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 	@Override
 	public int getRyhmienMaara() {
 		
-		return Integer.parseInt(ryhmaMaara.getText());
+		if(!ryhmaMaara.getText().isEmpty()) {
+			
+			return Integer.parseInt(ryhmaMaara.getText());
+			
+		}else {
+			
+			return 1;
+			
+		}
+		
+		
 		
 	}
 
 	@Override
 	public double getPorrastusAika() {
 		
-		return Double.parseDouble(porrastusMaara.getText());
+		if(!porrastusMaara.getText().isEmpty()) {
+			
+			return Double.parseDouble(porrastusMaara.getText());
+			
+		}else {
+			
+			return 0;
+			
+		}
+		
+		
 		
 	}
 	
@@ -246,7 +284,7 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 	public double getAika(){
 		
 		// 3.5 Tuntia, tämä on ravintolan ruokailun oikean maailman aika. 
-		return 12600000;
+		return 18600000;
 		
 	}
 
@@ -281,9 +319,7 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 	
 	private void setReadyButtonColor() {
 		
-		SepiaTone sepia = new SepiaTone();
-		sepia.setLevel(0.9);
-		read.setEffect(sepia);	
+		write.setVisible(true);
 		
 	}
 	
@@ -308,7 +344,7 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 	private void controlHoverOn(Event e) {
 
 		ImageView image = (ImageView) e.getSource();
-		image.setEffect(visualeffects.controlsetHoverOn(0.3));	
+		image.setEffect(visualeffects.controlsetHoverOn(0.5));	
 		
 	}
 	
@@ -375,6 +411,7 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 	@FXML
 	private void tallennusPaneeli() {
 		
+		kontrolleri.getLoadlist();
 		visibility.setPaneVisibility(3);
 		
 	}
@@ -483,6 +520,8 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 	private void tuoLoadRuutu() {
 		
 		
+		
+		
 		simulaatioPane.setOpacity(0);
 		simulaatioPane.setVisible(true);
 		simu1.setOpacity(0);
@@ -520,11 +559,13 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
     		tokasivunButtonit.setMouseTransparent(false);
     		ekasivunButtonit.setVisible(false);
     		startButtons.setVisible(false);
+    		kontrolleri.getLoadlist();
     		
         });
 		
 		
 	}
+
 	
     @Override
     public final void initialize(URL url, ResourceBundle resourceBundle) {
@@ -557,7 +598,10 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 		naytto.setRuokalinjastoPane(aktiiviaika, ruokaLinjastoPalveltuAsiakas, kayttoaste, suoritusteho, keskiKayttoaste);
 		
 		naytto.setKassaPane(kassaAktiiviaika, kassaPalveltuAsiakas, kassaKayttoaste, kassaSuoritusteho, kassaKeskiKayttoaste);
-	
+		
+
+		naytto.setLoadPane(loadlist,esitiedotpane,esiasiakas,esiruokalinja,esikassa);
+		
 
 
     }

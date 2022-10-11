@@ -2,10 +2,13 @@ package view;
 
 
 import java.time.Duration;
+import java.util.ArrayList;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.BarChart;
@@ -14,6 +17,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.StackedBarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Effect;
@@ -21,6 +25,9 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import simu.model.Asiakas;
 
 
 public class Visualisointi implements IVisualisointi{
@@ -58,6 +65,9 @@ public class Visualisointi implements IVisualisointi{
 	private int poistuneetCharttiin = 0;
 	int asiakasLkm = 0;
 	
+	private ListView<String> loadlist;
+	private Pane esitiedotpane;
+	private Label esiasiakas,esiruokalinja,esikassa;
 
 	public Visualisointi(	
 			
@@ -378,7 +388,7 @@ public class Visualisointi implements IVisualisointi{
 		GaussianBlur blur = new GaussianBlur();
 		blur.setRadius(10);
 		kellopalkki.setEffect(blur);
-		kellopalkki.setFitWidth(aika/26500);
+		kellopalkki.setFitWidth(aika/39000);
 		
 	}
 
@@ -515,6 +525,73 @@ public class Visualisointi implements IVisualisointi{
 	@Override
 	public void setAsiakasKeskiPalveluAika(double aika) {
 		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	// Loadpane stup.....................................................................................................................................
+	@Override
+	public void setLoadPane(ListView<String> loadlist,Pane esitiedotPane,Label esiasiakas,Label esiruokalinja,Label esikassa) {
+		
+		this.loadlist = loadlist;
+		this.esitiedotpane = esitiedotPane;
+		this.esiasiakas = esiasiakas;
+		this.esiruokalinja = esiruokalinja;
+		this.esikassa = esikassa;
+		
+		
+	}
+
+
+
+
+	@Override
+	public void setLoadlist(ArrayList<String> tallennukset) {
+		
+		ObservableList<String> loadings = FXCollections.observableArrayList();
+		
+		for(String tieto: tallennukset) {
+			
+			loadings.add(tieto);
+		}
+		
+		loadlist.getItems().addAll(loadings);
+		loadlist.setStyle("-fx-cell-background-color: #000000;");
+		System.out.println(loadlist.getItems());
+		
+		
+		
+		
+	}
+	
+	
+	public void tallennusEsitiedot() {
+		
+		
+		
+		
+	}
+	
+	@Override
+	public void setEsitiedotRuudulle(ArrayList<Alkuarvot> arvot) {
+		
+		
+		
+		Alkuarvot a = arvot.get(loadlist.getFocusModel().getFocusedIndex());
+		
+		esitiedotpane.setVisible(true);
+		
+		esiasiakas.setText(Integer.toString(a.getAsiakkaat()));
+		esiruokalinja.setText(Integer.toString(a.getRuokalinja() / 10));
+		esikassa.setText(Integer.toString(a.getKassat()));
+		
+	}
+	
+	
+	public ListView<String> getLoadList() {
+		
+		return loadlist;
 		
 	}
 

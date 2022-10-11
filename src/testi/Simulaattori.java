@@ -24,7 +24,7 @@ public class Simulaattori extends Application {
 
 	}
 	
-	public static double getEndTime() {return 12600000;}
+	public static double getEndTime() {return 18600000;}
 
 	@Override
 	public void start(Stage arg0) throws Exception {

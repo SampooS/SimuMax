@@ -4,20 +4,15 @@ package view;
 public class Alkuarvot {
 
 	
-	private static Alkuarvot instanssi;
 	private int ruokalinja, kassat, asiakkaat, ryhmienMaara, muuttuvaRyhma;
 	private double porrastusMaara;
 
-	public static Alkuarvot getInstance() {
+	public Alkuarvot(int ruokalinja, int kassat, int asiakkaat) {
 		
+		this.ruokalinja = ruokalinja;
+		this.kassat = kassat;
+		this.asiakkaat = asiakkaat;
 		
-		if (instanssi == null){
-			
-			instanssi = new Alkuarvot();
-			
-		}
-		
-		return instanssi;
 	}
 	
 	
@@ -62,13 +57,6 @@ public class Alkuarvot {
 
 	public double getPorrastusMaara() {
 		return porrastusMaara;
-	}
-	
-	public void setMuuttuvaRyhma() {
-		
-		
-		porrastusMaara *= muuttuvaRyhma;
-		muuttuvaRyhma++;
 	}
 	
 	

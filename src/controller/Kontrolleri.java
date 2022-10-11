@@ -1,9 +1,12 @@
 package controller;
 
+import java.util.ArrayList;
+
 import javafx.application.Platform;
 import simu.framework.IMoottori;
 import simu.model.DBAccessObject;
 import simu.model.OmaMoottori;
+import view.Alkuarvot;
 import view.ISimulaattorinUI;
 
 public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
@@ -212,6 +215,38 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 	public void naytaKassaKeskikayttoaste(double maara) {
 		
 		Platform.runLater(() -> ui.getVisualisointi().setKassaKeskiKayttoaste(maara));
+		
+	}
+
+	@Override
+	public void setLoadlist(ArrayList<String> lista) {
+		
+		Platform.runLater(() -> ui.getVisualisointi().setLoadlist(lista));
+		
+	}
+
+	@Override
+	public void getLoadlist() {
+		
+
+		String[] ajot = db.getAjoTimeStamp();
+		ArrayList<String> sendajot = new ArrayList<>();
+		
+		for(int i = 0; i < ajot.length; i++) {
+			
+			sendajot.add(ajot[i]);
+			
+		}
+		
+		setLoadlist(sendajot);
+	}
+
+	@Override
+	public void setAjolist() {
+		
+		
+		Platform.runLater(() -> ui.getVisualisointi().setEsitiedotRuudulle(db.getKaikkiAjot()));
+		
 		
 	}
 

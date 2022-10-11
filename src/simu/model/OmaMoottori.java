@@ -28,7 +28,8 @@ public class OmaMoottori extends Moottori{
 	private int ryhmienMaara;
 	private int ryhmaNumero = 1;
 	private ArrayList<Tapahtuma> tapahtuneet;
-
+	private int linjastodirection;
+	private int kassadirection;
 
 	
 	public OmaMoottori(IKontrolleriMtoV kontrolleri){
@@ -39,20 +40,20 @@ public class OmaMoottori extends Moottori{
 	
 	public void setSimulointiLahtoArvot(int ruokalinja, int rekisteri, int asiakkaat, int ryhmienmaara, double porrastusMaara) {
 			
-		this.linjastot = ruokalinja * 3; //Testi........
+		this.linjastot = ruokalinja * 10; //Testi........
 		this.kassat = rekisteri;
 		this.ryhmienMaara = ryhmienmaara;
 		final int ryhmaKoko = asiakkaat/ryhmienMaara;
 		this.porrastusAika = (long)(porrastusMaara * 60000);
 		this.tapahtuneet = new ArrayList<Tapahtuma>();
+		this.linjastodirection = 0;
+		this.kassadirection = linjastot;
 		
-		Alkuarvot.getInstance().setAlkuarvot(linjastot,kassat,asiakkaat,ryhmienMaara,porrastusAika);
-	
 		palvelupisteet = new Palvelupiste[linjastot + kassat + 1];
 	
 		for (int i = 0; i < linjastot; i++) {
 			
-			palvelupisteet[i]=new Palvelupiste(new Normal(60000,15000, (1 + i + (long)Math.random() * 8765)), tapahtumalista, TapahtumanTyyppi.DEP1);
+			palvelupisteet[i]=new Palvelupiste(new Normal(120000,60000, (1 + i + (long)Math.random() * 8765)), tapahtumalista, TapahtumanTyyppi.DEP1);
 			
 		}
 		
@@ -66,7 +67,7 @@ public class OmaMoottori extends Moottori{
 		
 		palvelupisteet[linjastot+kassat]=new Palvelupiste(new Normal(1, 1), tapahtumalista, TapahtumanTyyppi.DEP3);	
 		ryhmaSaapumisProsessi = new RyhmaSaapumisProsessi(tapahtumalista,TapahtumanTyyppi.RYHMASAAPUMINEN,porrastusAika);
-		saapumisprosessi = new Saapumisprosessi(new Negexp(1000,1000), tapahtumalista, TapahtumanTyyppi.ARR1,ryhmaKoko);
+		saapumisprosessi = new Saapumisprosessi(new Negexp(6000,3000), tapahtumalista, TapahtumanTyyppi.ARR1,ryhmaKoko);
 		tulokset.setPalvelupiste(palvelupisteet, linjastot, kassat);
 		
 		
@@ -77,7 +78,13 @@ public class OmaMoottori extends Moottori{
 	protected void alustukset() {
 		
 		saapumisprosessi.generoiSeuraava(); 
-		ryhmaSaapumisProsessi.generoiSeuraava();
+		
+		if(ryhmienMaara > 1) {
+			
+			ryhmaSaapumisProsessi.generoiSeuraava();
+			
+		}
+		
 		
 	}
 	
@@ -109,7 +116,6 @@ public class OmaMoottori extends Moottori{
 		int direction = 0;
 		int source;
 
-		
 		// switch tapahtuman tyypin mukaan, aka miss� vaiheessa kuljetaan, oikea jono l�ytyy asiakkaaseen tallennetulla "direction" muuttujalla (palvelupiste-taulun indeksi)
 		
 		switch (t.getTyyppi()){
@@ -124,7 +130,18 @@ public class OmaMoottori extends Moottori{
 						palvelupisteet[direction].lisaaJonoon(asiakas);	
 						tulokset.lisaaAsiakasTulosListalle(asiakas);
 						saapumisprosessi.generoiSeuraava();	
-						kontrolleri.visualisoiAsiakas();	
+						kontrolleri.visualisoiAsiakas();
+						
+						if(linjastodirection <= linjastot) {
+							
+							linjastodirection++;
+							
+						}else {
+							
+							
+							linjastodirection = 0;
+							
+						}
 								
 				break;
 				
@@ -149,6 +166,17 @@ public class OmaMoottori extends Moottori{
 					   direction = new Random().nextInt() % kassat + linjastot;
 					   a.setDirection(direction);
 				   	   palvelupisteet[direction].lisaaJonoon(a);
+				   	   
+				   	   
+				   	   if(kassadirection <= linjastot + kassat ) {
+				   		   
+				   		   kassadirection++;
+				   		   
+				   	   }else {
+				   		   
+				   		   kassadirection = linjastot;			   		   
+				   		   
+				   	   }
 						   	   
 				break;
 				
@@ -159,7 +187,7 @@ public class OmaMoottori extends Moottori{
 					   source = t.getDirection();
 					   a = palvelupisteet[source].otaJonosta();
 				   	   palvelupisteet[linjastot + kassat].lisaaJonoon(a); 
-				   	   tapahtuneet.add(t);
+				   	   tapahtuneet.add(t);// ..........................................................................................onko oikeassa kohdassa???
 		   	     break;  
 				
 				// Asiakas heivataan helvettiin simulaatiosta ja loppuaika kirjataan.
@@ -170,13 +198,14 @@ public class OmaMoottori extends Moottori{
 					   a.setPoistumisaika(Kello.getInstance().getAika() + getRuokasaliAika());
 			           a.raportti();
 			           kontrolleri.naytaLapiPaasseetAsiakkaat();
+			           
 		           
 	             break;
 		}
 			
 		kontrolleri.naytaKellonAika(Kello.getInstance().getAika());
 		kontrolleri.naytaRuokaJononPituus(tulokset.getJononpituus(Palvelupisteet.RUOKALINJASTO));
-		kontrolleri.naytaPisinJonoRuokalinjastolle(tulokset.getMaXJononpituus(Palvelupisteet.RUOKALINJASTO));
+		kontrolleri.naytaPisinJonoRuokalinjastolle(tulokset.getRuokalinjastoMaxJono());
 		kontrolleri.naytaKassaJononPituus(tulokset.getJononpituus(Palvelupisteet.KASSA));
 		kontrolleri.naytaPisinJonoKassoille(tulokset.getKassaMaxJono());
 		

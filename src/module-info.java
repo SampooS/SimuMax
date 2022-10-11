@@ -14,6 +14,7 @@ module simulaattorinrunko5 {
 	requires org.junit.jupiter.api;
 	requires java.sql;
 	requires transitive javafx.graphics;
+	requires java.scripting;
 	
 	opens view to javafx.fxml, javafx.controls;
 }

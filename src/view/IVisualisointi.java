@@ -1,9 +1,15 @@
 package view;
 
+import java.util.ArrayList;
+
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import simu.model.Asiakas;
 
 public interface IVisualisointi {
 
@@ -13,6 +19,7 @@ public interface IVisualisointi {
 	BarChart<String,Number> asiakasChart,CategoryAxis asiakascategoryaxis,NumberAxis asiakasnumberaxis);
 	public void setRuokalinjastoPane(Label aktiiviaika,Label palvellutAsiakkaat,Label kayttoaste,Label suoritusteho,Label keskiKayttoaste);
 	public void setKassaPane(Label aktiiviaika,Label palvellutAsiakkaat,Label kayttoaste,Label suoritusteho,Label keskiKayttoaste);
+	public void setLoadPane(ListView<String> loadlist,Pane esitiedotpane,Label esiasiakas,Label esiruokalinja,Label esikassa);
 	
 	
 	public void setPisinJonoKassoille(int jononpituus);
@@ -43,6 +50,12 @@ public interface IVisualisointi {
 	public void setKassaSuoritusteho(double maara);
 	public void setKassojenAktiiviaika(double aika);
 	
+	public void setLoadlist(ArrayList<String> tallennukset);
+	
+	public void tallennusEsitiedot();
+	public ListView<String> getLoadList();
+	public void setEsitiedotRuudulle(ArrayList<Alkuarvot> arvot);
+
 		
 }
 

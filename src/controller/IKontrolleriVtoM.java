@@ -1,5 +1,8 @@
 package controller;
 
+import java.util.ArrayList;
+
+import view.Alkuarvot;
 
 public interface IKontrolleriVtoM {
 	
@@ -8,5 +11,7 @@ public interface IKontrolleriVtoM {
 		public void hidasta();
 		public void tallenna();
 		public void pause();
+		public void getLoadlist();
+		public void setAjolist();
 		
 }

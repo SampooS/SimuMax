@@ -66,6 +66,9 @@ public class Visualisointi implements IVisualisointi{
 	ImageView lapimeno;
 	ImageView jonotusaika;
 	ImageView palveluaika;
+	ImageView ruokaaktiivi;
+	ImageView ruokakaytto;
+	ImageView ruokakeskikaytto;
 	
 	
 	private int asiakasmaara = 0;
@@ -131,13 +134,18 @@ public class Visualisointi implements IVisualisointi{
 			
 	}
 	
-	public void setRuokalinjastoPane(Label aktiiviaika, Label palvellutAsiakkaat, Label kayttoaste, Label suoritusteho, Label keskiKayttoaste) {
+	public void setRuokalinjastoPane(Label aktiiviaika, Label palvellutAsiakkaat, Label kayttoaste, 
+	Label suoritusteho, Label keskiKayttoaste,ImageView ruokaaktiivi,ImageView ruokakaytto,ImageView ruokakeskikaytto) {
 		
 		this.aktiiviaika = aktiiviaika;
 		this.palvellutAsiakkaat = palvellutAsiakkaat;
 		this.kayttoaste = kayttoaste;
 		this.suoritusteho = suoritusteho;
 		this.keskiKayttoaste = keskiKayttoaste;
+		this.ruokaaktiivi = ruokaaktiivi;
+		this.ruokakaytto = ruokakaytto;
+		this.ruokakeskikaytto = ruokakeskikaytto;
+		
 		
 	}
 	
@@ -316,29 +324,7 @@ public class Visualisointi implements IVisualisointi{
 
 
 
-	@Override
-	public void setLapiPaasseetAsiakkaat(int poistumismaara) {
-		
-		
-		
-		poistuneet.setText(Integer.toString(poistumismaara));
-		
-		lapiAsiakkaat.setText(": " + Integer.toString(poistumismaara));
-		
-		if(poistumismaara > 1) {
-			
-			poistuneetpalkki.setFitWidth(poistumismaara/2.1);
-			
-		}else {
-			
-			poistuneetpalkki.setFitWidth(poistumismaara);
-			
-		}
-		
-		
-		
-		
-	}
+
 
 	@Override
 	public void setKellonAika(double aika) {
@@ -355,13 +341,37 @@ public class Visualisointi implements IVisualisointi{
 
 	// -> Asiakkaan visualisoinnit ---------------------------------------------------------------------------------------------------------------
 
-
+	@Override
+	public void setLapiPaasseetAsiakkaat(int poistumismaara) {
+		
+		
+		
+		poistuneet.setText(Integer.toString(poistumismaara));
+		
+		lapiAsiakkaat.setText(": " + Integer.toString(poistumismaara));
+		
+		if(poistumismaara > 1) {
+			
+			poistuneetpalkki.setFitWidth(poistumismaara/2.1);
+			poistunut.setFitHeight(poistumismaara/3.2);
+			
+		}else {
+			
+			poistuneetpalkki.setFitWidth(poistumismaara);
+			poistunut.setFitHeight(poistumismaara);
+			
+		}
+		
+		
+		
+		
+	}
 
 	@Override
 	public void setAsiakasOdotusAika(double aika) {
 		
 		keskiJonoAsiakkaat.setText(": " + String.format("%.0f", aika/1000) + " s");
-		
+		jonotusaika.setFitHeight(aika/17000);
 	}
 
 
@@ -369,25 +379,18 @@ public class Visualisointi implements IVisualisointi{
 	public void setAsiakkaanLapimenoAika(double aika) {
 		
 		keskiAsiakkaat.setText(": " + String.format("%.0f", aika/1000) + " s");
-		
+		lapimeno.setFitHeight(aika/17000);
 	}
 	
 	@Override
 	public void setAsiakkaidenKeskimaarainenPalveluaika(double aika) {
 		
 		asiakasPalveluAika.setText(": " + String.format("%.0f", aika/1000) + " s");
-		
+		palveluaika.setFitHeight(aika/17000);
 	}
 	
 	@Override
 	public void setAsiakasChart(int saapunuta, int poistunuta, double lapimenoa, double jonotusaikaa, double palveluaikaa) {
-		
-		
-		saapunut.setFitHeight(saapunuta);
-		poistunut.setFitHeight(poistunuta);
-		lapimeno.setFitHeight(lapimenoa);
-		jonotusaika.setFitHeight(jonotusaikaa);
-		palveluaika.setFitHeight(palveluaikaa);
 		
 		
 		
@@ -402,10 +405,12 @@ public class Visualisointi implements IVisualisointi{
 		if(asiakasmaara > 1) {
 			
 			saapuneetpalkki.setFitWidth(asiakasmaara/2.1);
+			saapunut.setFitHeight(asiakasmaara/3.2);
 			
 		}else {
 			
 			saapuneetpalkki.setFitWidth(asiakasmaara);
+			saapunut.setFitHeight(asiakasmaara);
 			
 		}
 	}
@@ -416,7 +421,7 @@ public class Visualisointi implements IVisualisointi{
 	@Override
 	public void setRuokalinjastonAsiakkatPalveltu(int maara) {
 		
-		palvellutAsiakkaat.setText(": " + maara);
+		
 		
 	}
 
@@ -428,6 +433,7 @@ public class Visualisointi implements IVisualisointi{
 		
 		
 		kayttoaste.setText(": " + String.format("%.2f", maara * 100) + " %");
+		ruokakaytto.setFitHeight(maara * 300);
 		
 	}
 
@@ -437,7 +443,7 @@ public class Visualisointi implements IVisualisointi{
 	@Override
 	public void setRuokalinjastonSuoritusteho(double maara) {
 		
-		suoritusteho.setText(": " + maara + " %");
+		
 		
 	}
 	
@@ -445,6 +451,15 @@ public class Visualisointi implements IVisualisointi{
 	public void setRuokalinjastonAktiiviaika(double aika) {
 
 		aktiiviaika.setText(": " + String.format("%.0f", aika/1000) + " s");
+		ruokaaktiivi.setFitHeight((aika/1000)/20);
+		
+	}
+	
+	@Override
+	public void setRuokalinjastoKeskiKayttoaste(double maara) {
+		
+		keskiKayttoaste.setText(": " + String.format("%.2f", maara * 100) + " %");
+		ruokakeskikaytto.setFitHeight(maara * 300);
 		
 	}
 	
@@ -465,7 +480,7 @@ public class Visualisointi implements IVisualisointi{
 	@Override
 	public void setKassaPalvellutAsiakkaat(int maara) {
 		
-		kassaPalvellutAsiakkaat.setText(": " + maara);
+		
 		
 	}
 
@@ -485,19 +500,14 @@ public class Visualisointi implements IVisualisointi{
 	@Override
 	public void setKassaSuoritusteho(double maara) {
 		
-		kassaSuoritusteho.setText(": " + maara + " %");
+		
 		
 	}
 
 
 
 
-	@Override
-	public void setRuokalinjastoKeskiKayttoaste(double maara) {
-		
-		keskiKayttoaste.setText(": " + String.format("%.2f", maara * 100) + " %");
-		
-	}
+
 
 
 

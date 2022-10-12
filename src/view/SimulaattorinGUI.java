@@ -74,6 +74,10 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 	@FXML private Label kayttoaste;
 	@FXML private Label keskiKayttoaste;
 	@FXML private Label suoritusteho;
+	@FXML private ImageView ruokaaktiivi;
+	@FXML private ImageView ruokakaytto;
+	@FXML private ImageView ruokakeskikaytto;
+	
 	
 	@FXML private Label kassaPalveltuAsiakas;
 	@FXML private Label kassaAktiiviaika;
@@ -615,7 +619,8 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 		keskiJonoAsiakkaat, asiakasPalveluAika,saapunut,
 		poistunut,lapimeno,jonotusaika,palveluaika); 
 		
-		naytto.setRuokalinjastoPane(aktiiviaika, ruokaLinjastoPalveltuAsiakas, kayttoaste, suoritusteho, keskiKayttoaste);
+		naytto.setRuokalinjastoPane(aktiiviaika, ruokaLinjastoPalveltuAsiakas, 
+		kayttoaste, suoritusteho, keskiKayttoaste,ruokaaktiivi,ruokakaytto,ruokakeskikaytto);
 		
 		naytto.setKassaPane(kassaAktiiviaika, kassaPalveltuAsiakas, kassaKayttoaste, kassaSuoritusteho, kassaKeskiKayttoaste);
 		

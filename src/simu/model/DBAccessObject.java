@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import simu.framework.*;
+import simu.model.Tulokset.Palvelupisteet;
 
 /**
  * @author Sampo Savolainen
@@ -86,6 +87,37 @@ public void tallennaAjo(ArrayList<Tapahtuma> tapahtumat) {
 		
 		for (Palvelupiste piste : palvelupisteet) {
 			addPP(piste, ajoId);
+		}
+		
+		// band-aid
+		
+		try {
+			Tulokset t = Tulokset.getInstance();
+			
+			query("insert into tulokset (ajoId, maxJonoRuoka, maxJonoKassa, palveluaika, keskiJonotus, saapuneet, poistuneet, keskiThroughTime, palveltuLinja, palveltuKassa, aktiiviaikaLinja, aktiiviaikaKassa, kayttoasteLinja, kayttoasteKassa, keskikayttoLinja, keskikayttoKassa, suoritustehoLinja, suoritustehoKassa) values (" + 
+					ajoId + ", " +
+					t.getMaXJononpituus(Palvelupisteet.RUOKALINJASTO) + ", " +
+					t.getMaXJononpituus(Palvelupisteet.KASSA) + ", " +
+					t.getAsiakkaidenPalveluAika_S() + ", " +
+					t.getKeskimaarainenJonotusAika() + ", " +
+					t.getSaapuneetasiakkaat() + ", " +
+					t.getPoistuneetasiakkaat() + ", " +
+					t.getkeskimaarainenLapiMenoAika() + ", " +
+					t.getPalvellutAsiakkaat_C(Palvelupisteet.RUOKALINJASTO) + ", " +
+					t.getPalvellutAsiakkaat_C(Palvelupisteet.KASSA) + ", " +
+					t.getAktiiviAika_B(Palvelupisteet.RUOKALINJASTO) + ", " +
+					t.getAktiiviAika_B(Palvelupisteet.KASSA) + ", " +
+					t.getKayttoaste_U(Palvelupisteet.RUOKALINJASTO) + ", " +
+					t.getKayttoaste_U(Palvelupisteet.KASSA) + ", " +
+					t.getKeskiKayttoaste(Palvelupisteet.RUOKALINJASTO) + ", " +
+					t.getKeskiKayttoaste(Palvelupisteet.KASSA) + ", " +
+					t.getSuoritusteho_X(Palvelupisteet.RUOKALINJASTO) + ", " +
+					t.getSuoritusteho_X(Palvelupisteet.KASSA) + ");"
+					);
+			
+		} catch (SQLException e) {
+			System.out.println("tulosten tallentaminen failed, PERSE");
+			e.printStackTrace();
 		}
 		
 	}
@@ -438,13 +470,15 @@ private static void addPP(Palvelupiste piste, int ajoId) {
 		
 		// ladataan tapahtumat
 		
-		
-		
+	}
+	
+	public static ResultSet lataaDummy(int ajoId) throws SQLException {
+		return query("select maxJonoRuoka, maxJonoKassa, palveluaika, keskiJonotus, saapuneet, poistuneet, keskiThroughTime, palveltuLinja, palveltuKassa, aktiiviaikaLinja, aktiiviaikaKassa, kayttoasteLinja, kayttoasteKassa, keskikayttoLinja, keskikayttoKassa, suoritustehoLinja, suoritustehoKassa from tulokset where ajoId=" + ajoId);
 	}
 	
 	private Alkuarvot getAlkuarvot(int ajoId) throws SQLException {
 		// ruokalinjat, kassat, asiakkaat, ryhmien määrä, porrastus
-		ResultSet rs = query("select ruokalinjat, kassat, asiakkaita, asiakkaita, ryhmia, porrastusaika from ajot where ajoId=" + ajoId);
+		ResultSet rs = query("select ruokalinjat, kassat, asiakkaita, ryhmia, porrastusaika from ajot where ajoId=" + ajoId);
 		rs.next();
 		Alkuarvot ladattu = new Alkuarvot(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getDouble(5));
 		

@@ -71,8 +71,7 @@ public class Palvelupiste {
 					varattu = true;	
 					double palveluaika = generator.sample();
 					aktiiviAika += palveluaika;
-					tapahtumalista.lisaa(new Tapahtuma(skeduloitavanTapahtumanTyyppi,Kello.getInstance().getAika() + palveluaika, direction));			
-			
+					tapahtumalista.lisaa(new Tapahtuma(skeduloitavanTapahtumanTyyppi,Kello.getInstance().getAika() + palveluaika, direction));
 		
 	}
 	

@@ -1,5 +1,6 @@
 package controller;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -257,6 +258,12 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 	public void setLoadToTulokset(int index) {
 		
 		db.lataaTuloksiin(index);
+		try {
+			Tulokset.getInstance().setDummy(index);
+		} catch (SQLException e) {
+			System.out.println("Dummy tulosten asettaminen ei onnistunut");
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -267,6 +274,7 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 		moottori.setLatausTulokset();
 		
 	}
+	
 
 	@Override
 	public void setAsiakasChart(int saapunut, int poistunut, double lapimeno, double jonotusaika, double palveluaika) {

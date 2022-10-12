@@ -11,6 +11,8 @@ import simu.framework.Tapahtuma;
 import simu.model.Tulokset.Palvelupisteet;
 import testi.Simulaattori;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -255,6 +257,8 @@ public class OmaMoottori extends Moottori{
 		
 		kontrolleri.naytaKellonAika(Simulaattori.getEndTime());
 		
+		/*
+		 * 
 		kontrolleri.visualisoiAsiakas(tulokset.getSaapuneetasiakkaat());
 		kontrolleri.naytaLapiPaasseetAsiakkaat(tulokset.getPoistuneetasiakkaat());
 		
@@ -284,8 +288,54 @@ public class OmaMoottori extends Moottori{
 		kontrolleri.naytaKassaKayttoaste(tulokset.getKayttoaste_U(Palvelupisteet.KASSA));
 		kontrolleri.naytaKassaKeskikayttoaste(tulokset.getKeskiKayttoaste(Palvelupisteet.KASSA));
 		//kontrolleri.naytaKassaSuoritusteho(tulokset.getSuoritusteho_X(Palvelupisteet.KASSA));
+		*/
 		
 		
+	}
+	
+	public void setLataukset() {
+		try {
+		ResultSet rs = Tulokset.getInstance().dummy;
+		
+		rs.next();
+		
+		
+		
+		
+		kontrolleri.visualisoiAsiakas(rs.getInt(6));
+		kontrolleri.naytaLapiPaasseetAsiakkaat(rs.getInt(7));
+		
+		kontrolleri.naytaRuokaJononPituus(rs.getInt(1));
+		kontrolleri.naytaPisinJonoRuokalinjastolle(rs.getInt(1));
+		kontrolleri.naytaKassaJononPituus(rs.getInt(2));
+		kontrolleri.naytaPisinJonoKassoille(rs.getInt(2));
+		
+		
+		kontrolleri.naytaAsiakkaidenKeskimaarainenPalveluaika(rs.getDouble(3));
+		kontrolleri.naytaKeskiOdotusAika(rs.getDouble(4));
+        kontrolleri.naytaAsiakkaanLapimenoAika(rs.getDouble(6));
+        kontrolleri.setAsiakasChart(rs.getInt(5), rs.getInt(6),
+        rs.getDouble(6), rs.getDouble(4), rs.getDouble(3));
+        
+        
+		
+		kontrolleri.naytaRuokalinjastoAsiakkaatPalveltu(rs.getInt(7));
+		kontrolleri.naytaRuokalinjastonAktiiviaika(rs.getDouble(9));
+		kontrolleri.naytaRuokalinjastonKayttoaste(rs.getDouble(11));
+		kontrolleri.naytaRuokalinjastonKeskikayttoaste(rs.getDouble(13));
+		kontrolleri.naytaRuokalinjastonSuoritusteho(rs.getDouble(15));
+		
+		
+		kontrolleri.naytaKassaAsiakkaatPalveltu(rs.getInt(8));
+		kontrolleri.naytaKassaAktiiviaika(rs.getDouble(10));
+		kontrolleri.naytaKassaKayttoaste(rs.getDouble(12));
+		kontrolleri.naytaKassaKeskikayttoaste(rs.getDouble(14));
+		kontrolleri.naytaKassaSuoritusteho(rs.getDouble(16));
+		
+		} catch (SQLException e) {
+		System.out.println("May god help us all.");
+		e.printStackTrace();
+		}
 		
 	}
 

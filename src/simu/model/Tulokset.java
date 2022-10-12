@@ -1,6 +1,8 @@
 package simu.model;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import simu.framework.Kello;
@@ -35,6 +37,8 @@ public class Tulokset implements Serializable{
 	
 	private Alkuarvot alkuarvot;
 	
+	public ResultSet dummy;
+	
 	public enum Palvelupisteet{RUOKALINJASTO, KASSA, RUOKASALI, KAIKKI}
 	
 	private static Tulokset instanssi;
@@ -45,6 +49,10 @@ public class Tulokset implements Serializable{
 			instanssi = new Tulokset();	
 		}
 		return instanssi;
+	}
+	
+	public void setDummy(int i) throws SQLException {
+		this.dummy = DBAccessObject.lataaDummy(i);
 	}
 	
 	

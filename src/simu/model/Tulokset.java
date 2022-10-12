@@ -195,7 +195,6 @@ public class Tulokset implements Serializable{
 		ruokasalilista.add(maara);
 		
 	}
-	
 
 	public double getKeskimaarainenRuokasaliAika() {
 		

@@ -18,6 +18,7 @@ public class Palvelupiste {
 	private int maxJono;
 	private double aktiiviAika;
 	private boolean varattu = false;
+	private int palveltu;
 
 	
 	
@@ -28,7 +29,7 @@ public class Palvelupiste {
 		this.skeduloitavanTapahtumanTyyppi = tyyppi;
 		this.maxJono = 0;
 		this.aktiiviAika = 0;
-			
+		this.palveltu = 0;
 	}
 	
 	public Palvelupiste(double aika) {
@@ -73,6 +74,8 @@ public class Palvelupiste {
 					aktiiviAika += palveluaika;
 					tapahtumalista.lisaa(new Tapahtuma(skeduloitavanTapahtumanTyyppi,Kello.getInstance().getAika() + palveluaika, direction));
 		
+					palveltu++;
+						
 	}
 	
 	public double getActiveTime() {return aktiiviAika;}
@@ -109,6 +112,6 @@ public class Palvelupiste {
 	
 	public int getPalvellutAsiakkaat() {
 		
-		return Tulokset.getInstance().getRuokaAsiakas();
+		return palveltu;		
 	}
 }

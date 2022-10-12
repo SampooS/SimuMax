@@ -9,12 +9,8 @@ import view.Alkuarvot;
 
 public class Tulokset implements Serializable{
 	
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	public int asiakasMaara_A; // A arrival count
+	//public int asiakasMaara_A; // A arrival count
 	private double aktiiviAika_B; // B Busy time
 	public int palvellutAsiakkaat_C = 0; // C completed count
 	public double kokonaisAika_T; // T simuloinnin aika 
@@ -39,7 +35,6 @@ public class Tulokset implements Serializable{
 	
 	public static Tulokset getInstance() {
 		
-		
 		if (instanssi == null){
 			instanssi = new Tulokset();	
 		}
@@ -54,6 +49,11 @@ public class Tulokset implements Serializable{
 		this.asiakkaat = asiakkaat;
 		
 	}
+
+	
+	public void setRyhmat(int ryhmat) {
+		this.ryhmat = ryhmat;
+	}
 	
 	
 	public int getRyhmat() {
@@ -61,9 +61,18 @@ public class Tulokset implements Serializable{
 		return ryhmat;
 	}
 	
+	public void setPorrastusAika(int porrastusaika) {
+		this.porrastusaika = porrastusaika;
+	}
+	
 	public double getPorrastusAika() {
 		
 		return porrastusaika;
+	}
+	
+	public void setAsiakkaat(int asiakkaat) {
+		
+		this.asiakkaat = asiakkaat;
 	}
 	
 	public int getAsiakkaat() {
@@ -92,6 +101,7 @@ public class Tulokset implements Serializable{
 
 
 
+	/*
 	public int getAsiakkaat_A() {
 		
 		return asiakaslista.size();
@@ -101,9 +111,9 @@ public class Tulokset implements Serializable{
 	public void setAsiakkaat_A(int asiakasMaara_A) {
 		this.asiakasMaara_A = asiakasMaara_A;
 	}
+	*/
 	
 	public void setRuokaAsiakas() {
-		
 		
 		ruokaAsiakas++;
 		
@@ -122,6 +132,7 @@ public class Tulokset implements Serializable{
 		
 	}
 	
+
 	public double getKeskimaarainenRuokasaliAika() {
 		
 		double aika = 0;
@@ -198,7 +209,7 @@ public class Tulokset implements Serializable{
 			
 		case RUOKASALI: 	return 0;
 			
-		case KAIKKI: 		return asiakaslista.size();	
+		case KAIKKI: 		return asiakaslista.size()-1;	
 			
 	}
 		return 0;
@@ -215,7 +226,6 @@ public class Tulokset implements Serializable{
 	public double getKokonaisAika_T() {
 		
 		return Kello.getInstance().getAika();
-		//return kokonaisAika_T; //vaihdan sen testia varten
 	}
 	
 	public double getEndTime() {
@@ -269,7 +279,7 @@ public class Tulokset implements Serializable{
 		
 		//return kaikki/asiakaslista.get(asiakaslista.size() - 1).getId();
 		//vaihdetaan tarvitaessa kun halutaan selvitää yhden palvelupisteen service time
-		return kaikki/asiakaslista.size();
+		return kaikki/asiakaslista.size()-1;
 	}
 	
 	public double getResponseTime_R() {
@@ -431,7 +441,7 @@ public class Tulokset implements Serializable{
 		}
 		//asiakaslista.get(asiakaslista.size() - 1).getKeskimaarainenLapimenoAika()
 		
-		return (lapimeno / asiakaslista.size());
+		return (lapimeno / asiakaslista.size()-1);
 		
 	}
 	
@@ -440,6 +450,10 @@ public class Tulokset implements Serializable{
 		return asiakaslista;
 		
 		
+	}
+	
+	public void setAsiakasLista(ArrayList<Asiakas> list) {
+		this.asiakaslista = list;
 	}
 	
 	public String toString() {

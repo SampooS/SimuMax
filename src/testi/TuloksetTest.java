@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import simu.framework.Kello;
 import simu.model.Asiakas;
 import simu.model.Palvelupiste;
 import simu.model.Tulokset;
@@ -24,10 +25,20 @@ class TuloksetTest {
 	private static ArrayList<Asiakas> asiakaslista = new ArrayList<>();
 	private static int ruokalinja  = 5;
 	private static int kassat = 6;
-	//private enum Palvelupisteet{RUOKALINJASTO, KASSA, RUOKASALI, KAIKKI}
+	private static Kello kello;
+	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		tulokset = new Tulokset();
+		tulokset = Tulokset.getInstance();
+		kello = Kello.getInstance();
+		kello.setAika(12600000);
+		
+		Asiakas as;
+		for(int i = 0; i < 100; i++) {
+			as = new Asiakas();
+			tulokset.lisaaAsiakasTulosListalle(as);
+		}
+		
 	}
 
 	@AfterAll
@@ -66,7 +77,7 @@ class TuloksetTest {
 		//fail("Not yet implemented");
 		Asiakas asiakas = new Asiakas();
 		tulokset.lisaaAsiakasTulosListalle(asiakas);
-		assertEquals(true, !Tulokset.asiakaslista.isEmpty(),"lisääminen ei onnistu");
+		assertEquals(true, !Tulokset.asiakaslista.isEmpty(),"lisÃ¤Ã¤minen ei onnistu");
 	}
 	@DisplayName("Onko service time laskettu oikein?")
 	@Test
@@ -79,23 +90,25 @@ class TuloksetTest {
 		for(int i = ruokalinja; i<ruokalinja + kassat;i++) {
 			myllypuro[i] = new Palvelupiste(300);
 		}
-		
-		tulokset.setPalvellutAsiakkaat_C(1500);
-		assertEquals(2.866,tulokset.getAsiakkaidenPalveluAika_S(),0.001,"Service time on laskettu väärin");
+		System.out.println(tulokset.getAktiiviAika_B(Palvelupisteet.KAIKKI));
+		System.out.println("Ruokasali: " + tulokset.getAktiiviAika_B(Palvelupisteet.RUOKASALI));
+		System.out.println("Asiakkaat: " + tulokset.getPalvellutAsiakkaat_C(Palvelupisteet.KAIKKI));
+		//System.out.println("palvelemat asiakkaat: " + tulokset.getPalvelupisteenPalvelematAsiakkaat(Palvelupisteet.KAIKKI));
+		assertEquals(3.5833,tulokset.getAsiakkaidenPalveluAika_S(),0.0001,"Service time on laskettu vÃ¤Ã¤rin");
 	}
 
 	@Test
-	void testGetAsiakkaat_A() {
-		tulokset.asiakasMaara_A = 100;
-		tulokset.getAsiakkaat_A();
-		assertEquals(100,tulokset.asiakasMaara_A,"Getterin metodi ei toimi oikein");
+	void testGetAsiakkaat() {
+		tulokset.asiakkaat = 100;
+		
+		assertEquals(100,tulokset.getAsiakkaat(),"Getterin metodi ei toimi oikein");
 	}
 
 	@Test
 	void testSetAsiakkaat_A() {
 		
-		tulokset.setAsiakkaat_A(200);
-		assertEquals(200,tulokset.asiakasMaara_A,"Setterin metodi ei toimi oikein");
+		tulokset.setAsiakkaat(150);
+		assertEquals(150,tulokset.getAsiakkaat(),"Setterin metodi ei toimi oikein");
 	}
 
 	@Test
@@ -111,39 +124,42 @@ class TuloksetTest {
 			myllypuro[i] = new Palvelupiste(300);
 		}
 		
-		assertEquals(4300,tulokset.getAktiiviAika_B(Palvelupisteet.KAIKKI),"Metodi ei toimi oikein");
+		assertEquals(358.333,tulokset.getAktiiviAika_B(Palvelupisteet.KAIKKI),0.001,"Metodi ei toimi oikein");
 		
 	}
 
-	@DisplayName("Onko palvellut asikkaat = 90 haettu oikein?")
+	@DisplayName("Onko palvellut asikkaat = 100 haettu oikein?")
 	@Test
 	void testGetPalvellutAsiakkaat_C() {
-		tulokset.palvellutAsiakkaat_C =90;
-		tulokset.getPalvellutAsiakkaat_C();
-		assertEquals(90,tulokset.palvellutAsiakkaat_C,"getPalvellutAsiakkaat_C metodi ei toimi");
+		
+		assertEquals(100,tulokset.getPalvellutAsiakkaat_C(Palvelupisteet.KAIKKI),0.001,"getPalvellutAsiakkaat_C metodi ei toimi");
 	}
+	/*
 	@DisplayName("Onko palvellut asiakkaat = 200 asetettu oikein?")
 	@Test
 	void testSetPalvellutAsiakkaat_C() {
 		tulokset.setPalvellutAsiakkaat_C(200);
 		assertEquals(200,tulokset.getPalvellutAsiakkaat_C(),"setPalvellutAsiakkaat_C Metodi ei toimii");
 	}
+	*/
 	@DisplayName("Onko kokonaisaika = 3000 haettu oikein?")
 	@Test
 	void testGetKokonaisAika_T() {
-		tulokset.kokonaisAika_T = 3000.0;
-		tulokset.getKokonaisAika_T();
-		assertEquals(3000.0,tulokset.kokonaisAika_T,"getKokonaisAika_T metodi ei toimi");
+		
+		assertEquals(12600000,tulokset.getKokonaisAika_T(),"getKokonaisAika_T metodi ei toimi");
 	}
+	/*
 	@DisplayName("Onko kokonaisaika = 3000 asetettu oikein?")
 	@Test
 	void testSetKokonaisAika_T() {
 		tulokset.setKokonaisAika_T(3000.0);
 		assertEquals(3000.0,tulokset.getKokonaisAika_T(),"setKokonaisAika_T metodi ei toimi");
 	}
+	*/
 	@DisplayName("Onko kayttoaste haettu oikein?")
 	@Test
 	void testGetKayttoaste_U() {
+		
 		
 		tulokset.setPalvelupiste(myllypuro, ruokalinja, kassat);
 		
@@ -154,10 +170,11 @@ class TuloksetTest {
 			myllypuro[i] = new Palvelupiste(300);
 		}
 		
-		tulokset.setKokonaisAika_T(6000);
-		assertEquals(0.716,tulokset.getKayttoaste_U(),0.001,"Väärä käyttöaste arvo.");
+		
+		assertEquals(0.0000284,tulokset.getKayttoaste_U(Palvelupisteet.KAIKKI),0.0000001,"VÃ¤Ã¤rÃ¤ kÃ¤yttÃ¶aste arvo.");
 		
 	}
+	/*
 	@DisplayName("Onko suoritusteho laskettu oikein kun T = 300 ja C = 1000")
 	@Test
 	void testGetSuoritusteho_X() {
@@ -165,5 +182,5 @@ class TuloksetTest {
 		tulokset .setKokonaisAika_T(300);
 		assertEquals(3.33, tulokset.getSuoritusteho_X(),0.01,"Suoritusteho ei laskettu oikein");
 	}
-
+*/
 }

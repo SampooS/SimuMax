@@ -20,7 +20,8 @@ public interface IVisualisointi {
 	Label keskiJonoAsiakkaat,Label asiakasPalveluAika, ImageView saapunut,
 	ImageView poistunut,ImageView lapimeno,ImageView jonotusaika,ImageView palveluaika
 	);
-	public void setRuokalinjastoPane(Label aktiiviaika,Label palvellutAsiakkaat,Label kayttoaste,Label suoritusteho,Label keskiKayttoaste);
+	public void setRuokalinjastoPane(Label aktiiviaika,Label palvellutAsiakkaat,Label kayttoaste,Label suoritusteho,Label keskiKayttoaste,
+	ImageView ruokaaktiivi,ImageView ruokakaytto,ImageView ruokakeskikaytto);
 	public void setKassaPane(Label aktiiviaika,Label palvellutAsiakkaat,Label kayttoaste,Label suoritusteho,Label keskiKayttoaste);
 	public void setLoadPane(ListView<String> loadlist,Pane esitiedotpane,Label esiasiakas,Label esiruokalinja,Label esikassa,Label esiryhmia,Label esiporrastusaika);
 	

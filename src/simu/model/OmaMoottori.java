@@ -29,6 +29,8 @@ public class OmaMoottori extends Moottori{
 	private ArrayList<Tapahtuma> tapahtuneet;
 	private int linjastodirection;
 	private int kassadirection;
+	private int saapuminen = 0;
+	private int poistuminen = 0;
 
 	
 	public OmaMoottori(IKontrolleriMtoV kontrolleri){
@@ -50,8 +52,11 @@ public class OmaMoottori extends Moottori{
 		
 		palvelupisteet = new Palvelupiste[linjastot + kassat + 1];
 		
+		tulokset = Tulokset.getInstance();
+		tulokset.alustaTulokset();
 		tulokset.setAlkuarvot(ryhmienMaara, porrastusMaara, asiakkaat);
-	
+		tulokset.setPalvelupiste(palvelupisteet, linjastot, kassat);
+		
 		for (int i = 0; i < linjastot; i++) {
 			
 			palvelupisteet[i]=new Palvelupiste(new Normal(120000,60000, (1 + i + (long)Math.random() * 8765)), tapahtumalista, TapahtumanTyyppi.DEP1);
@@ -69,7 +74,8 @@ public class OmaMoottori extends Moottori{
 		palvelupisteet[linjastot+kassat]=new Palvelupiste(new Normal(1, 1), tapahtumalista, TapahtumanTyyppi.DEP3);	
 		ryhmaSaapumisProsessi = new RyhmaSaapumisProsessi(tapahtumalista,TapahtumanTyyppi.RYHMASAAPUMINEN,porrastusAika);
 		saapumisprosessi = new Saapumisprosessi(new Negexp(6000,3000), tapahtumalista, TapahtumanTyyppi.ARR1,ryhmaKoko);
-		tulokset.setPalvelupiste(palvelupisteet, linjastot, kassat);
+		
+		
 		
 		
 	}
@@ -78,6 +84,7 @@ public class OmaMoottori extends Moottori{
 	@Override
 	protected void alustukset() {
 		
+		Kello.getInstance().setAika(0);
 		saapumisprosessi.generoiSeuraava(); 
 		
 		if(ryhmienMaara > 1) {
@@ -130,8 +137,10 @@ public class OmaMoottori extends Moottori{
 						asiakas.setDirection(direction);
 						palvelupisteet[direction].lisaaJonoon(asiakas);	
 						tulokset.lisaaAsiakasTulosListalle(asiakas);
-						saapumisprosessi.generoiSeuraava();	
-						kontrolleri.visualisoiAsiakas();
+						saapumisprosessi.generoiSeuraava();
+						saapuminen++;
+						kontrolleri.visualisoiAsiakas(saapuminen);
+						tulokset.setSaapuneetasiakkaat(saapuminen);
 						
 						if(linjastodirection <= linjastot) {
 							
@@ -198,7 +207,9 @@ public class OmaMoottori extends Moottori{
 				       a = palvelupisteet[linjastot + kassat].otaJonosta();
 					   a.setPoistumisaika(Kello.getInstance().getAika() + getRuokasaliAika());
 			           a.raportti();
-			           kontrolleri.naytaLapiPaasseetAsiakkaat();
+			           poistuminen++;
+			           tulokset.setPoistuneetasiakkaat(poistuminen);
+			           kontrolleri.naytaLapiPaasseetAsiakkaat(poistuminen);
 			           
 		           
 	             break;
@@ -233,6 +244,42 @@ public class OmaMoottori extends Moottori{
 		
 
 			
+	}
+	
+	@Override
+	public void setLatausTulokset() {
+		
+		
+		
+		kontrolleri.visualisoiAsiakas(tulokset.getSaapuneetasiakkaat());
+		kontrolleri.naytaLapiPaasseetAsiakkaat(tulokset.getPoistuneetasiakkaat());
+		
+		kontrolleri.naytaRuokaJononPituus(tulokset.getJononpituus(Palvelupisteet.RUOKALINJASTO));
+		kontrolleri.naytaPisinJonoRuokalinjastolle(tulokset.getRuokalinjastoMaxJono());
+		kontrolleri.naytaKassaJononPituus(tulokset.getJononpituus(Palvelupisteet.KASSA));
+		kontrolleri.naytaPisinJonoKassoille(tulokset.getKassaMaxJono());
+		
+		
+		kontrolleri.naytaAsiakkaidenKeskimaarainenPalveluaika(tulokset.getAsiakkaidenPalveluAika_S());
+		kontrolleri.naytaKeskiOdotusAika(tulokset.getKeskimaarainenJonotusAika());
+        kontrolleri.naytaAsiakkaanLapimenoAika(tulokset.getkeskimaarainenLapiMenoAika());
+        
+		
+		kontrolleri.naytaRuokalinjastoAsiakkaatPalveltu(tulokset.getPalvelupisteenPalvelematAsiakkaat(Palvelupisteet.RUOKALINJASTO));
+		kontrolleri.naytaRuokalinjastonAktiiviaika(tulokset.getAktiiviAika_B(Palvelupisteet.RUOKALINJASTO));
+		kontrolleri.naytaRuokalinjastonKayttoaste(tulokset.getKayttoaste_U(Palvelupisteet.RUOKALINJASTO));
+		kontrolleri.naytaRuokalinjastonKeskikayttoaste(tulokset.getKeskiKayttoaste(Palvelupisteet.RUOKALINJASTO));
+		kontrolleri.naytaRuokalinjastonSuoritusteho(tulokset.getSuoritusteho_X(Palvelupisteet.RUOKALINJASTO));
+		
+		
+		kontrolleri.naytaKassaAsiakkaatPalveltu(tulokset.getPalvelupisteenPalvelematAsiakkaat(Palvelupisteet.KASSA));
+		kontrolleri.naytaKassaAktiiviaika(tulokset.getAktiiviAika_B(Palvelupisteet.KASSA));
+		kontrolleri.naytaKassaKayttoaste(tulokset.getKayttoaste_U(Palvelupisteet.KASSA));
+		kontrolleri.naytaKassaKeskikayttoaste(tulokset.getKeskiKayttoaste(Palvelupisteet.KASSA));
+		kontrolleri.naytaKassaSuoritusteho(tulokset.getSuoritusteho_X(Palvelupisteet.KASSA));
+		
+		
+		
 	}
 
 	

@@ -383,6 +383,8 @@ private static void addPP(Palvelupiste piste, int ajoId) {
 		Alkuarvot ladattava = getAlkuarvot(ajoId);
 		
 		Tulokset.getInstance().setAlkuarvot(ladattava.getRyhmienMaara(), ladattava.getPorrastusMaara(), ladattava.getAsiakkaat());
+		Tulokset.getInstance().setSaapuneetasiakkaat(ladattava.getAsiakkaat());
+		Tulokset.getInstance().setPoistuneetasiakkaat(ladattava.getAsiakkaat());
 		
 		} catch (SQLException e) {
 			System.out.println("Alkuarvojen asettaminen ei onnistunut");
@@ -391,6 +393,8 @@ private static void addPP(Palvelupiste piste, int ajoId) {
 		// Ladataan asiakaslista
 		
 		try {
+			
+			
 			
 			Tulokset.getInstance().setAsiakasLista(lataaAsiakkaat(ajoId));
 			Tulokset.getInstance().setAsiakkaat(lataaAsiakkaat(ajoId).size());
@@ -440,7 +444,7 @@ private static void addPP(Palvelupiste piste, int ajoId) {
 	
 	private Alkuarvot getAlkuarvot(int ajoId) throws SQLException {
 		// ruokalinjat, kassat, asiakkaat, ryhmien määrä, porrastus
-		ResultSet rs = query("select (ruokalinjat, kassat, asiakkaita, asiakkaita, ryhmia, porrastusasika) from ajot where ajoId=" + ajoId);
+		ResultSet rs = query("select ruokalinjat, kassat, asiakkaita, asiakkaita, ryhmia, porrastusaika from ajot where ajoId=" + ajoId);
 		rs.next();
 		Alkuarvot ladattu = new Alkuarvot(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getDouble(5));
 		
@@ -455,7 +459,9 @@ private static void addPP(Palvelupiste piste, int ajoId) {
 		ResultSet count = query("select count (asiakasId) from asiakkaat where ajoId=" + ajoId);
 		count.next();
 		int max = count.getInt(1);
-		ResultSet rs = query("select (saapumisaika, poistumisaika) from asiakkaat where ajoId=" + ajoId);
+		
+		System.out.println(max + "...............................................................................................");
+		ResultSet rs = query("select saapumisaika, poistumisaika from asiakkaat where ajoId=" + ajoId);
 		rs.next();
 		
 		ArrayList<Asiakas> asiakaslista = new ArrayList<Asiakas>();
@@ -468,8 +474,13 @@ private static void addPP(Palvelupiste piste, int ajoId) {
 			uusi.setPoistumisaika(rs.getDouble(2));
 			
 			asiakaslista.add(uusi);
-			System.out.println("Asiakas ladattu");
+			System.out.println("Asiakas ladattu" + uusi.getId());
 			rs.next();
+		}
+		
+		for(Asiakas asiakas:asiakaslista) {
+			System.out.println(asiakas.getId());
+			
 		}
 		return asiakaslista;
 	}
@@ -485,7 +496,7 @@ private static void addPP(Palvelupiste piste, int ajoId) {
 		
 		int max = count.getInt(1);
 		
-		ResultSet rs = query ("select (aktiiviaika, maxJono, tyyppi) from palvelupisteet where ajoId=" + ajoId);
+		ResultSet rs = query ("select aktiiviaika, maxJono, tyyppi from palvelupisteet where ajoId=" + ajoId);
 		rs.next();
 		
 		ArrayList<Palvelupiste> pisteet = new ArrayList<Palvelupiste>();

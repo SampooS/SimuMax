@@ -22,6 +22,8 @@ public class Tulokset implements Serializable{
 	public int ryhmat;
 	public double porrastusaika;
 	public int asiakkaat;
+	public int saapuneetasiakkaat;
+	public int poistuneetasiakkaat;
 	
 	private int kassaMaxjono;
 	private int ruokaMaxJono;
@@ -41,11 +43,24 @@ public class Tulokset implements Serializable{
 	}
 	
 	
+	public void alustaTulokset() {	
+		
+		asiakaslista.clear();
+		asiakaslista = new ArrayList<>();
+		ruokasalilista.clear();
+		ruokasalilista = new ArrayList<>();
+		palvelupisteet = new Palvelupiste[0];
+		kassaMaxjono = 0;
+		ruokaMaxJono = 0;
+		
+	}
+	
+	
 	public void setAlkuarvot(int ryhmat, double porrastusaika, int asiakkaat) {
 		
 		this.ryhmat = ryhmat;
 		this.porrastusaika = porrastusaika;
-		this.palvellutAsiakkaat_C = asiakkaat;
+		this.asiakkaat = asiakkaat;
 		
 	}
 	
@@ -83,6 +98,32 @@ public class Tulokset implements Serializable{
 	public int getAsiakkaat() {
 		
 		return asiakkaat;
+	}
+	
+	public void setSaapuneetasiakkaat(int maara) {
+		
+		this.saapuneetasiakkaat = 0;
+		saapuneetasiakkaat = maara;
+		
+	}
+	
+	public void setPoistuneetasiakkaat(int maara) {
+		
+		this.poistuneetasiakkaat = 0;
+		poistuneetasiakkaat = maara;
+		
+	}
+	
+	public int getSaapuneetasiakkaat() {
+		
+		return saapuneetasiakkaat;
+		
+	}
+	
+	public int getPoistuneetasiakkaat() {
+		
+		return poistuneetasiakkaat;
+		
 	}
 	
 	

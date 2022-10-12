@@ -567,6 +567,16 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 		
 		
 	}
+	
+	@FXML
+	public void lataaVanhaAjoTuloksiin() {
+		
+		System.out.println(loadlist.getSelectionModel().getSelectedIndex() + 1 +" ajoid................................................................");
+		
+		kontrolleri.setLoadToTulokset(loadlist.getSelectionModel().getSelectedIndex() + 1);  //................................................................................
+		kontrolleri.getLoadTulokset();
+		
+	}
 
 	
     @Override

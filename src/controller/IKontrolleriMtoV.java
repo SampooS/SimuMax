@@ -15,8 +15,8 @@ public interface IKontrolleriMtoV {
 		public void naytaRuokaJononPituus(int maara);
 		
 		
-		public void visualisoiAsiakas();
-		public void naytaLapiPaasseetAsiakkaat();
+		public void visualisoiAsiakas(int asiakasmaara);
+		public void naytaLapiPaasseetAsiakkaat(int poistumismaara);
 		public void naytaKeskiOdotusAika(double aika);
 		public void naytaAsiakkaanLapimenoAika(double aika);
 		public void naytaAsiakkaidenKeskimaarainenPalveluaika(double aika);

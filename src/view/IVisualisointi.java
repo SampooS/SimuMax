@@ -30,10 +30,10 @@ public interface IVisualisointi {
 	public void setKellonAika(double aika);
 	
 	
-	public void uusiAsiakas();
+	public void uusiAsiakas(int asiakasmaara);
 	public void setAsiakkaanLapimenoAika(double aika);
 	public void setAsiakkaidenKeskimaarainenPalveluaika(double ka);
-	public void setLapiPaasseetAsiakkaat();
+	public void setLapiPaasseetAsiakkaat(int poistumismaara);
 	public void setAsiakasOdotusAika(double aika);
 	public void setAsiakasKeskiPalveluAika(double aika);
 	

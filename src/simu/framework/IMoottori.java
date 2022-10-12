@@ -9,4 +9,5 @@ public interface IMoottori {
 	public void setSimulointiLahtoArvot(int ruokalinja, int rekisteri, int asiakkaat, int ryhmaMaara, double porrastusMaara);
 	public long getViive();
 	public ArrayList<Tapahtuma> getTapahtumat();
+	public void setLatausTulokset();
 }

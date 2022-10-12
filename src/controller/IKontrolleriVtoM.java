@@ -13,5 +13,7 @@ public interface IKontrolleriVtoM {
 		public void pause();
 		public void getLoadlist();
 		public void setAjolist();
+		public void setLoadToTulokset(int index);
+		public void getLoadTulokset();
 		
 }

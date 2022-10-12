@@ -3,6 +3,7 @@ package view;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -176,9 +177,8 @@ public class Visualisointi implements IVisualisointi{
 	}
 	
 	
-	public void uusiAsiakas() {
+	public void uusiAsiakas(int asiakasmaara) {
 		
-		asiakasmaara++;
 		asiakas.setText(Integer.toString(asiakasmaara));
 		asiakasFinal.setText(": " + Integer.toString(asiakasmaara));
 		
@@ -191,9 +191,6 @@ public class Visualisointi implements IVisualisointi{
 			saapuneetpalkki.setFitWidth(asiakasmaara);
 			
 		}
-		
-		
-		
 	}
 	
 
@@ -358,22 +355,21 @@ public class Visualisointi implements IVisualisointi{
 
 
 	@Override
-	public void setLapiPaasseetAsiakkaat() {
+	public void setLapiPaasseetAsiakkaat(int poistumismaara) {
 		
 		
-		poistuneetMaara++;
 		
-		poistuneet.setText(Integer.toString(poistuneetMaara));
+		poistuneet.setText(Integer.toString(poistumismaara));
 		
-		lapiAsiakkaat.setText(": " + Integer.toString(poistuneetMaara));
+		lapiAsiakkaat.setText(": " + Integer.toString(poistumismaara));
 		
-		if(poistuneetMaara > 1) {
+		if(poistumismaara > 1) {
 			
-			poistuneetpalkki.setFitWidth(poistuneetMaara/2.1);
+			poistuneetpalkki.setFitWidth(poistumismaara/2.1);
 			
 		}else {
 			
-			poistuneetpalkki.setFitWidth(poistuneetMaara);
+			poistuneetpalkki.setFitWidth(poistumismaara);
 			
 		}
 		
@@ -558,6 +554,8 @@ public class Visualisointi implements IVisualisointi{
 			
 			loadings.add(tieto);
 		}
+		
+		
 		loadlist.getItems().clear();
 		loadlist.getItems().addAll(loadings);
 		loadlist.setStyle("-fx-cell-background-color: #000000;");
@@ -580,6 +578,7 @@ public class Visualisointi implements IVisualisointi{
 	public void setEsitiedotRuudulle(ArrayList<Alkuarvot> arvot) {
 		
 		
+		//Collections.reverse(arvot);
 		
 		Alkuarvot a = arvot.get(loadlist.getFocusModel().getFocusedIndex());
 		

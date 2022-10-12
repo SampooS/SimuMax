@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javafx.application.Platform;
 import simu.framework.IMoottori;
@@ -75,9 +76,9 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 	*/
 
 	@Override
-	public void visualisoiAsiakas() {
+	public void visualisoiAsiakas(int asiakasmaara) {
 	
-		Platform.runLater(() -> ui.getVisualisointi().uusiAsiakas() );
+		Platform.runLater(() -> ui.getVisualisointi().uusiAsiakas(asiakasmaara) );
 		
 	}
 	
@@ -102,9 +103,9 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 	
 	}
 	
-	public void naytaLapiPaasseetAsiakkaat() {
+	public void naytaLapiPaasseetAsiakkaat(int poistumismaara) {
 		
-		Platform.runLater(() -> ui.getVisualisointi().setLapiPaasseetAsiakkaat());
+		Platform.runLater(() -> ui.getVisualisointi().setLapiPaasseetAsiakkaat(poistumismaara));
 		
 	}
 	
@@ -238,6 +239,7 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 			
 		}
 		
+		//Collections.reverse(sendajot);
 		setLoadlist(sendajot);
 	}
 
@@ -247,6 +249,21 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 		
 		Platform.runLater(() -> ui.getVisualisointi().setEsitiedotRuudulle(db.getKaikkiAjot()));
 		
+		
+	}
+
+	@Override
+	public void setLoadToTulokset(int index) {
+		
+		db.lataaTuloksiin(index);
+		
+	}
+	
+	@Override
+	public void getLoadTulokset() {
+		
+		//moottori = new OmaMoottori(this);
+		moottori.setLatausTulokset();
 		
 	}
 

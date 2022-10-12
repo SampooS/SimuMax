@@ -126,8 +126,8 @@ public abstract class Moottori extends Thread implements IMoottori{
 	}
 	
 	
-			
-
+	public abstract void setLatausTulokset();		
+	
 	protected abstract void alustukset(); // Määritellään simu.model-pakkauksessa Moottorin aliluokassa
 	
 	protected abstract void suoritaTapahtuma(Tapahtuma t);  // Määritellään simu.model-pakkauksessa Moottorin aliluokassa

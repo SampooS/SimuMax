@@ -787,7 +787,7 @@
       </Pane>
 		<HBox id="exitandready" layoutX="930.0" layoutY="33.0" prefHeight="48.0" prefWidth="425.0" spacing="30.0">
          <children>
-            <ImageView id="readbutton" fx:id="read" fitHeight="48.0" fitWidth="81.0" layoutX="10.0" layoutY="10.0" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.94">
+            <ImageView id="readbutton" fx:id="read" fitHeight="48.0" fitWidth="81.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#lataaVanhaAjoTuloksiin" onMouseEntered="#controlHoverOn" onMouseExited="#controlHoverOff" opacity="0.94">
                <image>
                   <Image url="@../images/read.jpg" />
                </image>

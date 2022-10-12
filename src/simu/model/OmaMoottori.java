@@ -280,7 +280,7 @@ public class OmaMoottori extends Moottori{
 		kontrolleri.naytaRuokalinjastonAktiiviaika(tulokset.getAktiiviAika_B(Palvelupisteet.RUOKALINJASTO));
 		kontrolleri.naytaRuokalinjastonKayttoaste(tulokset.getKayttoaste_U(Palvelupisteet.RUOKALINJASTO));
 		kontrolleri.naytaRuokalinjastonKeskikayttoaste(tulokset.getKeskiKayttoaste(Palvelupisteet.RUOKALINJASTO));
-		//kontrolleri.naytaRuokalinjastonSuoritusteho(tulokset.getSuoritusteho_X(Palvelupisteet.RUOKALINJASTO));
+		kontrolleri.naytaRuokalinjastonSuoritusteho(tulokset.getSuoritusteho_X(Palvelupisteet.RUOKALINJASTO));
 		
 		
 		//kontrolleri.naytaKassaAsiakkaatPalveltu(tulokset.getPalvelupisteenPalvelematAsiakkaat(Palvelupisteet.KASSA));

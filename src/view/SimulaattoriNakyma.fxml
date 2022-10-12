@@ -504,14 +504,14 @@
                               </Label>
                            </children>
                         </VBox>
-                        <Pane layoutX="633.0" layoutY="107.0" prefHeight="212.0" prefWidth="322.0">
+                        <Pane layoutX="606.0" layoutY="263.0" prefHeight="35.0" prefWidth="336.0" rotate="180.0">
                            <children>
-                              <ImageView fx:id="saapunut" fitHeight="0.1" fitWidth="37.0">
+                              <ImageView fx:id="palveluaika" fitHeight="0.1" fitWidth="37.0">
                                  <image>
                                     <Image url="@../images/pystypatukka.jpg" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="poistunut" fitHeight="0.1" fitWidth="37.0" layoutX="70.0">
+                              <ImageView fx:id="jonotusaika" fitHeight="0.1" fitWidth="37.0" layoutX="70.0">
                                  <image>
                                     <Image url="@../images/pystypatukka.jpg" />
                                  </image>
@@ -521,39 +521,39 @@
                                     <Image url="@../images/pystypatukka.jpg" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="jonotusaika" fitHeight="0.1" fitWidth="37.0" layoutX="210.0">
+                              <ImageView fx:id="poistunut" fitHeight="0.1" fitWidth="37.0" layoutX="210.0">
                                  <image>
                                     <Image url="@../images/pystypatukka.jpg" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="palveluaika" fitHeight="0.1" fitWidth="37.0" layoutX="280.0">
+                              <ImageView fx:id="saapunut" fitHeight="0.1" fitWidth="37.0" layoutX="280.0">
                                  <image>
                                     <Image url="@../images/pystypatukka.jpg" />
                                  </image>
                               </ImageView>
                            </children>
                         </Pane>
-                        <Label id="saapunut" layoutX="627.0" layoutY="325.0" prefHeight="48.0" prefWidth="78.0" text="SAAPUNUT" textFill="#7bcfa5">
+                        <Label id="saapunut" layoutX="622.0" layoutY="282.0" prefHeight="48.0" prefWidth="78.0" text="SAAPUNUT" textFill="#7bcfa5">
                            <font>
                               <Font name="Britannic Bold" size="10.0" />
                            </font>
                         </Label>
-                        <Label id="saapunut" layoutX="695.7999877929688" layoutY="325.0" prefHeight="48.0" prefWidth="82.0" text="POISTUNUT" textFill="#7bcfa5">
+                        <Label id="saapunut" layoutX="691.0" layoutY="282.0" prefHeight="48.0" prefWidth="82.0" text="POISTUNUT" textFill="#7bcfa5">
                            <font>
                               <Font name="Britannic Bold" size="10.0" />
                            </font>
                         </Label>
-                        <Label id="saapunut" layoutX="769.4000244140625" layoutY="325.0" prefHeight="48.0" prefWidth="85.0" text="LÄPIMENO" textFill="#7bcfa5">
+                        <Label id="saapunut" layoutX="762.0" layoutY="282.0" prefHeight="48.0" prefWidth="85.0" text="LÄPIMENO" textFill="#7bcfa5">
                            <font>
                               <Font name="Britannic Bold" size="10.0" />
                            </font>
                         </Label>
-                        <Label id="saapunut" layoutX="834.0" layoutY="325.0" prefHeight="48.0" prefWidth="64.0" text="JONOTUSAIKA" textFill="#7bcfa5">
+                        <Label id="saapunut" layoutX="825.0" layoutY="282.0" prefHeight="48.0" prefWidth="64.0" text="JONOTUSAIKA" textFill="#7bcfa5">
                            <font>
                               <Font name="Britannic Bold" size="10.0" />
                            </font>
                         </Label>
-                        <Label id="saapunut" layoutX="907.0" layoutY="325.0" prefHeight="48.0" prefWidth="64.0" text="PALVELUAIKA" textFill="#7bcfa5">
+                        <Label id="saapunut" layoutX="897.0" layoutY="282.0" prefHeight="48.0" prefWidth="64.0" text="PALVELUAIKA" textFill="#7bcfa5">
                            <font>
                               <Font name="Britannic Bold" size="10.0" />
                            </font>
@@ -565,19 +565,9 @@
                   </Pane>
                   <Pane id="ruokalinjatulosNONvisible" fx:id="ruokaPane" prefHeight="442.0" prefWidth="1139.0" visible="false">
                      <children>
-                        <VBox layoutX="143.0" layoutY="110.0" prefHeight="227.0" prefWidth="381.0">
+                        <VBox layoutX="143.0" layoutY="200.0" prefHeight="186.0" prefWidth="381.0">
                            <children>
-                              <Label id="palveltu" prefHeight="43.0" prefWidth="244.0" text="Asiakkaita palveltu" textAlignment="CENTER" textFill="#7bcfa5">
-                                 <font>
-                                    <Font name="Britannic Bold" size="22.0" />
-                                 </font>
-                              </Label>
                               <Label id="aktiiviaika" layoutX="10.0" layoutY="53.0" prefHeight="42.0" prefWidth="418.0" text="Aktiiviaika" textAlignment="CENTER" textFill="#7bcfa5">
-                                 <font>
-                                    <Font name="Britannic Bold" size="22.0" />
-                                 </font>
-                              </Label>
-                              <Label id="suoritusteho" layoutX="10.0" layoutY="96.0" prefHeight="42.0" prefWidth="407.0" text="Suoritusteho" textAlignment="CENTER" textFill="#7bcfa5">
                                  <font>
                                     <Font name="Britannic Bold" size="22.0" />
                                  </font>
@@ -594,46 +584,62 @@
                               </Label>
                            </children>
                         </VBox>
-                        <VBox layoutX="469.0" layoutY="110.0" prefHeight="212.0" prefWidth="161.0">
+                        <VBox layoutX="469.0" layoutY="198.0" prefHeight="172.0" prefWidth="161.0">
                            <children>
-                              <Label fx:id="ruokaLinjastoPalveltuAsiakas" prefHeight="43.0" prefWidth="244.0" textAlignment="CENTER" textFill="#7bcfa5">
+                              <Label fx:id="aktiiviaika" layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="244.0" text="aktiivi" textAlignment="CENTER" textFill="#7bcfa5">
                                  <font>
                                     <Font name="Britannic Bold" size="22.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="aktiiviaika" layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="244.0" textAlignment="CENTER" textFill="#7bcfa5">
+                              <Label fx:id="kayttoaste" layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="244.0" text="käyttöaste" textAlignment="CENTER" textFill="#7bcfa5">
                                  <font>
                                     <Font name="Britannic Bold" size="22.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="suoritusteho" layoutX="10.0" layoutY="96.0" prefHeight="43.0" prefWidth="157.0" textAlignment="CENTER" textFill="#7bcfa5">
-                                 <font>
-                                    <Font name="Britannic Bold" size="22.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="kayttoaste" layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="244.0" textAlignment="CENTER" textFill="#7bcfa5">
-                                 <font>
-                                    <Font name="Britannic Bold" size="22.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="keskiKayttoaste" layoutX="10.0" layoutY="140.0" prefHeight="43.0" prefWidth="244.0" textAlignment="CENTER" textFill="#7bcfa5">
+                              <Label fx:id="keskiKayttoaste" layoutX="10.0" layoutY="140.0" prefHeight="43.0" prefWidth="244.0" text="keskikaytto" textAlignment="CENTER" textFill="#7bcfa5">
                                  <font>
                                     <Font name="Britannic Bold" size="22.0" />
                                  </font>
                               </Label>
                            </children>
                         </VBox>
-                        <BarChart layoutX="626.0" layoutY="66.0" prefHeight="325.0" prefWidth="356.0" style="-fx-background-color: #00000000;">
-                          <xAxis>
-                            <CategoryAxis side="BOTTOM" />
-                          </xAxis>
-                          <yAxis>
-                            <NumberAxis side="LEFT" />
-                          </yAxis>
-                        </BarChart>
                         <Label id="ruokainfoorigi" layoutX="407.0" layoutY="55.0" prefHeight="48.0" prefWidth="225.0" text="RUOKALINJASTOT INFO" textFill="#7bcfa5">
                            <font>
                               <Font name="Britannic Bold" size="22.0" />
+                           </font>
+                        </Label>
+                        <HBox layoutX="695.0" layoutY="49.0" prefHeight="250.0" prefWidth="231.0" rotate="180.0" spacing="50.0">
+                           <children>
+                              <ImageView fx:id="ruokakeskikaytto" fitHeight="0.1" fitWidth="37.0">
+                                 <image>
+                                    <Image url="@../images/pystypatukka.jpg" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="ruokakaytto" fitHeight="0.1" fitWidth="37.0" layoutX="10.0" layoutY="10.0">
+                                 <image>
+                                    <Image url="@../images/pystypatukka.jpg" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="ruokaaktiivi" fitHeight="0.1" fitWidth="37.0" layoutX="48.0" layoutY="10.0">
+                                 <image>
+                                    <Image url="@../images/pystypatukka.jpg" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <Label id="aktiivi" layoutX="705.0" layoutY="288.0" prefHeight="48.0" prefWidth="58.0" text="AKTIIVIAIKA" textFill="#7bcfa5">
+                           <font>
+                              <Font name="Britannic Bold" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label id="aktiivi" layoutX="803.0" layoutY="288.0" prefHeight="48.0" prefWidth="58.0" text="KÄYTTÖ" textFill="#7bcfa5">
+                           <font>
+                              <Font name="Britannic Bold" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label id="aktiivi" layoutX="882.0" layoutY="288.0" prefHeight="48.0" prefWidth="58.0" text="KÄYTTÖ AVG." textFill="#7bcfa5">
+                           <font>
+                              <Font name="Britannic Bold" size="10.0" />
                            </font>
                         </Label>
                      </children>

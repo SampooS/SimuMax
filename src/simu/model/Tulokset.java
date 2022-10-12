@@ -45,13 +45,7 @@ public class Tulokset implements Serializable{
 		
 		this.ryhmat = ryhmat;
 		this.porrastusaika = porrastusaika;
-		this.asiakkaat = asiakkaat;
-		
-	}
-
-	public void setData(double aktiiviaika, int asiakkaita, double kokonaisaika, ArrayList<Asiakas> asiakkaat) {
-		
-		
+		this.palvellutAsiakkaat_C = asiakkaat;
 		
 	}
 	

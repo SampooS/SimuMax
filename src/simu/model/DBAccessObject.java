@@ -379,8 +379,15 @@ private static void addPP(Palvelupiste piste, int ajoId) {
 	
 	public void lataaTuloksiin(int ajoId) {
 		
+		try {
+		Alkuarvot ladattava = getAlkuarvot(ajoId);
 		
+		Tulokset.getInstance().setAlkuarvot(ladattava.getRyhmienMaara(), ladattava.getPorrastusMaara(), ladattava.getAsiakkaat());
 		
+		} catch (SQLException e) {
+			System.out.println("Alkuarvojen asettaminen ei onnistunut");
+			e.printStackTrace();
+		}
 		// Ladataan asiakaslista
 		
 		try {
@@ -429,6 +436,15 @@ private static void addPP(Palvelupiste piste, int ajoId) {
 		
 		
 		
+	}
+	
+	private Alkuarvot getAlkuarvot(int ajoId) throws SQLException {
+		// ruokalinjat, kassat, asiakkaat, ryhmien määrä, porrastus
+		ResultSet rs = query("select (ruokalinjat, kassat, asiakkaita, asiakkaita, ryhmia, porrastusasika) from ajot where ajoId=" + ajoId);
+		rs.next();
+		Alkuarvot ladattu = new Alkuarvot(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getDouble(5));
+		
+		return ladattu;
 	}
 	
 	/*

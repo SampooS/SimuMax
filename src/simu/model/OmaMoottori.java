@@ -321,14 +321,14 @@ public class OmaMoottori extends Moottori{
 		
 		kontrolleri.naytaRuokalinjastoAsiakkaatPalveltu(rs.getInt(7));
 		kontrolleri.naytaRuokalinjastonAktiiviaika(rs.getDouble(9));
-		kontrolleri.naytaRuokalinjastonKayttoaste(rs.getDouble(11));
+		kontrolleri.naytaRuokalinjastonKayttoaste(0.1);
 		kontrolleri.naytaRuokalinjastonKeskikayttoaste(rs.getDouble(13));
 		kontrolleri.naytaRuokalinjastonSuoritusteho(rs.getDouble(15));
 		
 		
 		kontrolleri.naytaKassaAsiakkaatPalveltu(rs.getInt(8));
 		kontrolleri.naytaKassaAktiiviaika(rs.getDouble(10));
-		kontrolleri.naytaKassaKayttoaste(rs.getDouble(12));
+		kontrolleri.naytaKassaKayttoaste(0.1);
 		kontrolleri.naytaKassaKeskikayttoaste(rs.getDouble(14));
 		kontrolleri.naytaKassaSuoritusteho(rs.getDouble(16));
 		

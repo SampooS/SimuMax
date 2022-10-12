@@ -271,7 +271,7 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 	public void getLoadTulokset() {
 		
 		//moottori = new OmaMoottori(this);
-		moottori.setLatausTulokset();
+		moottori.setLataukset();
 		
 	}
 	

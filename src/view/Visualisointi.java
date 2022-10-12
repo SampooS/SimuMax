@@ -438,9 +438,22 @@ public class Visualisointi implements IVisualisointi{
 	@Override
 	public void setRuokalinjastoKayttoaste(double maara) {
 		
+		if(maara < 1) {
+			
+			maara = 0;
+			kayttoaste.setText(": " + String.format("%.2f", maara * 100) + " %");
+			ruokakaytto.setFitHeight(0.1);
+			
+		}else {
+			
+			kayttoaste.setText(": " + String.format("%.2f", maara * 100) + " %");
+			ruokakaytto.setFitHeight(maara * 260);
+			
+		}
 		
-		kayttoaste.setText(": " + String.format("%.2f", maara * 100) + " %");
-		ruokakaytto.setFitHeight(maara * 300);
+
+		
+		
 		
 	}
 
@@ -466,7 +479,7 @@ public class Visualisointi implements IVisualisointi{
 	public void setRuokalinjastoKeskiKayttoaste(double maara) {
 		
 		keskiKayttoaste.setText(": " + String.format("%.2f", maara * 100) + " %");
-		ruokakeskikaytto.setFitHeight(maara * 300);
+		ruokakeskikaytto.setFitHeight(maara * 260);
 		
 	}
 	
@@ -498,8 +511,21 @@ public class Visualisointi implements IVisualisointi{
 	@Override
 	public void setKassaKayttoaste(double maara) {
 		
-		kassaKayttoaste.setText(": " + String.format("%.2f", maara * 100) + " %");
-		kassakaytto.setFitHeight(maara * 300);
+		
+		if(maara < 1) {
+			
+			maara = 0;
+			kassaKayttoaste.setText(": " + String.format("%.2f", maara * 100) + " %");
+			kassakaytto.setFitHeight(0.1);
+			
+			
+		}else {
+			
+			kassaKayttoaste.setText(": " + String.format("%.2f", maara * 100) + " %");
+			kassakaytto.setFitHeight(maara * 260);
+			
+		}
+
 		
 	}
 
@@ -517,7 +543,7 @@ public class Visualisointi implements IVisualisointi{
 	public void setKassaKeskiKayttoaste(double maara) {
 		
 		kassaKeskikayttoaste.setText(": " + String.format("%.2f", maara * 100) + " %");
-		kassakeskikaytto.setFitHeight(maara * 300);
+		kassakeskikaytto.setFitHeight(maara * 260);
 		
 	}
 

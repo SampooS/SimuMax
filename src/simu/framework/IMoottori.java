@@ -10,4 +10,5 @@ public interface IMoottori {
 	public long getViive();
 	public ArrayList<Tapahtuma> getTapahtumat();
 	public void setLatausTulokset();
+	public void setLataukset();
 }

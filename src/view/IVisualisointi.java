@@ -19,7 +19,7 @@ public interface IVisualisointi {
 	BarChart<String,Number> asiakasChart,CategoryAxis asiakascategoryaxis,NumberAxis asiakasnumberaxis);
 	public void setRuokalinjastoPane(Label aktiiviaika,Label palvellutAsiakkaat,Label kayttoaste,Label suoritusteho,Label keskiKayttoaste);
 	public void setKassaPane(Label aktiiviaika,Label palvellutAsiakkaat,Label kayttoaste,Label suoritusteho,Label keskiKayttoaste);
-	public void setLoadPane(ListView<String> loadlist,Pane esitiedotpane,Label esiasiakas,Label esiruokalinja,Label esikassa);
+	public void setLoadPane(ListView<String> loadlist,Pane esitiedotpane,Label esiasiakas,Label esiruokalinja,Label esikassa,Label esiryhmia,Label esiporrastusaika);
 	
 	
 	public void setPisinJonoKassoille(int jononpituus);

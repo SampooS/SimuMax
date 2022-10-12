@@ -1,5 +1,16 @@
 
+.list-view{
+	
+	-fx-background-color: #00000000;
+	-fx-overflow: hidden;
+}
 
+.scroll-bar{
+	
+	-fx-background-color:#00000000;
+	
+	
+}
 .list-cell:filled:selected:focused, .list-cell:filled:selected {
     -fx-background-color: #2f4270;
     -fx-text-fill: #7bcfa5;
@@ -27,11 +38,7 @@
     -fx-font-size:17.0;
 }
 
-.list-view{
-	
-	-fx-background-color: #00000000;
-	-fx-overflow: hidden;
-}
+
 
 
 

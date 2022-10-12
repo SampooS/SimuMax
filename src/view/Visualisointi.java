@@ -67,7 +67,7 @@ public class Visualisointi implements IVisualisointi{
 	
 	private ListView<String> loadlist;
 	private Pane esitiedotpane;
-	private Label esiasiakas,esiruokalinja,esikassa;
+	private Label esiasiakas,esiruokalinja,esikassa,esiryhmia,esiporrastusaika;
 
 	public Visualisointi(	
 			
@@ -532,13 +532,15 @@ public class Visualisointi implements IVisualisointi{
 
 	// Loadpane stup.....................................................................................................................................
 	@Override
-	public void setLoadPane(ListView<String> loadlist,Pane esitiedotPane,Label esiasiakas,Label esiruokalinja,Label esikassa) {
+	public void setLoadPane(ListView<String> loadlist,Pane esitiedotPane,Label esiasiakas,Label esiruokalinja,Label esikassa, Label esiryhmia,Label esiporrastusaika) {
 		
 		this.loadlist = loadlist;
 		this.esitiedotpane = esitiedotPane;
 		this.esiasiakas = esiasiakas;
 		this.esiruokalinja = esiruokalinja;
 		this.esikassa = esikassa;
+		this.esiryhmia = esiryhmia;
+		this.esiporrastusaika = esiporrastusaika;
 		
 		
 	}
@@ -555,7 +557,7 @@ public class Visualisointi implements IVisualisointi{
 			
 			loadings.add(tieto);
 		}
-		
+		loadlist.getItems().clear();
 		loadlist.getItems().addAll(loadings);
 		loadlist.setStyle("-fx-cell-background-color: #000000;");
 		System.out.println(loadlist.getItems());
@@ -582,9 +584,12 @@ public class Visualisointi implements IVisualisointi{
 		
 		esitiedotpane.setVisible(true);
 		
-		esiasiakas.setText(Integer.toString(a.getAsiakkaat()));
-		esiruokalinja.setText(Integer.toString(a.getRuokalinja() / 10));
-		esikassa.setText(Integer.toString(a.getKassat()));
+		esiasiakas.setText(": " + Integer.toString(a.getAsiakkaat()));
+		esiruokalinja.setText(": " + Integer.toString(a.getRuokalinja() / 10));
+		esikassa.setText(": " + Integer.toString(a.getKassat()));
+		esiryhmia.setText(": " + Integer.toString(a.getRyhmienMaara()));
+		esiporrastusaika.setText(": " + Double.toString(a.getPorrastusMaara()) + " min");
+		
 		
 	}
 	

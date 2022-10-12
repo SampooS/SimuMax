@@ -24,6 +24,9 @@ public class Tulokset implements Serializable{
 	private ArrayList<Double> ruokasalilista = new ArrayList<>();
 	public int ruokalinja;
 	public int kassat;
+	public int ryhmat;
+	public double porrastusaika;
+	public int asiakkaat;
 	
 	private int kassaMaxjono;
 	private int ruokaMaxJono;
@@ -41,6 +44,31 @@ public class Tulokset implements Serializable{
 			instanssi = new Tulokset();	
 		}
 		return instanssi;
+	}
+	
+	
+	public void setAlkuarvot(int ryhmat, double porrastusaika, int asiakkaat) {
+		
+		this.ryhmat = ryhmat;
+		this.porrastusaika = porrastusaika;
+		this.asiakkaat = asiakkaat;
+		
+	}
+	
+	
+	public int getRyhmat() {
+		
+		return ryhmat;
+	}
+	
+	public double getPorrastusAika() {
+		
+		return porrastusaika;
+	}
+	
+	public int getAsiakkaat() {
+		
+		return asiakkaat;
 	}
 	
 	
@@ -66,8 +94,6 @@ public class Tulokset implements Serializable{
 
 	public int getAsiakkaat_A() {
 		
-		
-		System.out.println(asiakaslista.size() + "ksdkfiarigjairjg");
 		return asiakaslista.size();
 	}
 

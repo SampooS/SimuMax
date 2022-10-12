@@ -686,15 +686,15 @@
                               <Bloom threshold="0.23" />
                            </effect>
                         </Label>
-                        <ListView id="tallennuslista" fx:id="loadlist" layoutX="165.0" layoutY="116.0" onMouseClicked="#tallennusEsitiedot" prefHeight="250.0" prefWidth="211.0" stylesheets="@../../OtonTeema.css">
+                        <ListView id="tallennuslista" fx:id="loadlist" layoutX="165.0" layoutY="135.0" onMouseClicked="#tallennusEsitiedot" prefHeight="231.0" prefWidth="211.0" stylesheets="@../../OtonTeema.css">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                            <styleClass>
                               <String fx:value="list-cell" />
-                              <String fx:value="list-view" />
+                              <String fx:value="scroll-bar" />
                            </styleClass></ListView>
-                        <Pane id="esitiedotpaneNONvisible" fx:id="esitiedotpane" layoutX="575.0" layoutY="127.0" prefHeight="227.0" prefWidth="407.0" visible="false">
+                        <Pane id="esitiedotpaneNONvisible" fx:id="esitiedotpane" layoutX="575.0" layoutY="104.0" prefHeight="250.0" prefWidth="407.0" visible="false">
                            <children>
                               <VBox layoutX="30.0" layoutY="28.0" prefHeight="199.0" prefWidth="168.0">
                                  <children>
@@ -709,6 +709,16 @@
                                        </font>
                                     </Label>
                                     <Label layoutX="10.0" layoutY="65.0" prefHeight="55.0" prefWidth="139.0" text="KASSOJA" textFill="#7bcfa5">
+                                       <font>
+                                          <Font name="Britannic Bold" size="22.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="ryhmia" layoutX="10.0" layoutY="120.0" prefHeight="55.0" prefWidth="139.0" text="RYHMIÄ" textFill="#7bcfa5">
+                                       <font>
+                                          <Font name="Britannic Bold" size="22.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="porrastusaika" layoutX="10.0" layoutY="159.0" prefHeight="40.0" prefWidth="168.0" text="PORRASTUSAIKA" textFill="#7bcfa5">
                                        <font>
                                           <Font name="Britannic Bold" size="22.0" />
                                        </font>
@@ -731,6 +741,16 @@
                                        </font>
                                     </Label>
                                     <Label fx:id="esikassa" layoutX="10.0" layoutY="65.0" prefHeight="55.0" prefWidth="139.0" text="KASSOJA" textFill="#7bcfa5">
+                                       <font>
+                                          <Font name="Britannic Bold" size="22.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="ryhmia" fx:id="esiryhmia" layoutX="10.0" layoutY="120.0" prefHeight="55.0" prefWidth="139.0" text="KASSOJA" textFill="#7bcfa5">
+                                       <font>
+                                          <Font name="Britannic Bold" size="22.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="porrastusasikaa" fx:id="esiporrastusaika" layoutX="10.0" layoutY="159.0" prefHeight="55.0" prefWidth="139.0" text="KASSOJA" textFill="#7bcfa5">
                                        <font>
                                           <Font name="Britannic Bold" size="22.0" />
                                        </font>

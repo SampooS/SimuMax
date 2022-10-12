@@ -50,6 +50,8 @@ public class OmaMoottori extends Moottori{
 		this.kassadirection = linjastot;
 		
 		palvelupisteet = new Palvelupiste[linjastot + kassat + 1];
+		
+		tulokset.setAlkuarvot(ryhmienMaara, porrastusMaara, asiakkaat);
 	
 		for (int i = 0; i < linjastot; i++) {
 			

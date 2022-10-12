@@ -51,9 +51,11 @@ public void tallennaAjo(ArrayList<Tapahtuma> tapahtumat) {
 		// ajotauluun
 		int ruokalinjat = Tulokset.getInstance().ruokalinja;
 		int kassat = Tulokset.getInstance().kassat;
-		int asiakkaita = Tulokset.getInstance().asiakasMaara_A;
+		int asiakkaita = Tulokset.getInstance().getAsiakkaat();
+		int ryhmia = Tulokset.getInstance().getRyhmat();
+		double porrastusAika = Tulokset.getInstance().getPorrastusAika();
 		
-		int ajoId = DBAccessObject.addRun(ruokalinjat, kassat, asiakkaita);
+		int ajoId = DBAccessObject.addRun(ruokalinjat, kassat, asiakkaita,ryhmia,porrastusAika);
 		// add to table
 		
 		// asiakastauluun
@@ -132,7 +134,7 @@ public void tallennaAjo(ArrayList<Tapahtuma> tapahtumat) {
 	 * @param int asiakkaita
 	 * @return palauttaa ajon ID:n
 	 */
-	private static int addRun(int ruokalinjat, int kassat, int asiakkaita) {
+	private static int addRun(int ruokalinjat, int kassat, int asiakkaita, int ryhmia, double porrastusAika) {
 		
 		int ajoId = 1;
 		ResultSet results;
@@ -152,10 +154,12 @@ public void tallennaAjo(ArrayList<Tapahtuma> tapahtumat) {
 		}
 		
 		try {
-			query("insert into ajot (ruokalinjat, kassat, asiakkaita) values ("+ 
+			query("insert into ajot (ruokalinjat, kassat, asiakkaita, ryhmia, porrastusaika) values ("+ 
 			ruokalinjat + ", " +
 			kassat + ", " + 
-			asiakkaita + ");"
+			asiakkaita + ", " + 
+			ryhmia + ", " + 
+			porrastusAika + ");"
 			);
 		} catch (SQLException e) {
 			System.out.println("Ajon lisäys ei toiminut");
@@ -264,13 +268,13 @@ public void tallennaAjo(ArrayList<Tapahtuma> tapahtumat) {
 			
 			
 			
-			ResultSet rs = query("select ruokalinjat, kassat, asiakkaita from ajot");
+			ResultSet rs = query("select ruokalinjat, kassat, asiakkaita, ryhmia, porrastusaika from ajot");
 
 			rs.next();
 
 			for(int i = 0; i < count; i++) {
 				
-				alkuarvot.add(new Alkuarvot(rs.getInt(1),rs.getInt(2),rs.getInt(3)));
+				alkuarvot.add(new Alkuarvot(rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getInt(4),rs.getDouble(5)));
 				
 				rs.next(); 
 				

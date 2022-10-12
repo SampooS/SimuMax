@@ -7,6 +7,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import simu.model.Alkuarvot;
@@ -16,8 +17,9 @@ public interface IVisualisointi {
 
 	public void setAsiakasPane(
 	Label asiakasFinal,Label lapiAsiakkaat,Label keskiAsiakkaat,
-	Label keskiJonoAsiakkaat,Label asiakasPalveluAika,
-	BarChart<String,Number> asiakasChart,CategoryAxis asiakascategoryaxis,NumberAxis asiakasnumberaxis);
+	Label keskiJonoAsiakkaat,Label asiakasPalveluAika, ImageView saapunut,
+	ImageView poistunut,ImageView lapimeno,ImageView jonotusaika,ImageView palveluaika
+	);
 	public void setRuokalinjastoPane(Label aktiiviaika,Label palvellutAsiakkaat,Label kayttoaste,Label suoritusteho,Label keskiKayttoaste);
 	public void setKassaPane(Label aktiiviaika,Label palvellutAsiakkaat,Label kayttoaste,Label suoritusteho,Label keskiKayttoaste);
 	public void setLoadPane(ListView<String> loadlist,Pane esitiedotpane,Label esiasiakas,Label esiruokalinja,Label esikassa,Label esiryhmia,Label esiporrastusaika);
@@ -36,6 +38,7 @@ public interface IVisualisointi {
 	public void setLapiPaasseetAsiakkaat(int poistumismaara);
 	public void setAsiakasOdotusAika(double aika);
 	public void setAsiakasKeskiPalveluAika(double aika);
+	public void setAsiakasChart(int saapunut, int poistunut, double lapimeno, double jonotusaika, double palveluaika);
 	
 	
 	public void setRuokalinjastonAsiakkatPalveltu(int maara);

@@ -382,7 +382,7 @@ private static void addPP(Palvelupiste piste, int ajoId) {
 		try {
 		Alkuarvot ladattava = getAlkuarvot(ajoId);
 		
-		Tulokset.getInstance().setAlkuarvot(ladattava.getRyhmienMaara(), ladattava.getPorrastusMaara(), ladattava.getAsiakkaat());
+		Tulokset.getInstance().setAlkuarvot(ladattava.getRyhmienMaara(), ladattava.getPorrastusMaara(), ladattava.getAsiakkaat(),ladattava.getRuokalinja(),ladattava.getKassat());
 		Tulokset.getInstance().setSaapuneetasiakkaat(ladattava.getAsiakkaat());
 		Tulokset.getInstance().setPoistuneetasiakkaat(ladattava.getAsiakkaat());
 		

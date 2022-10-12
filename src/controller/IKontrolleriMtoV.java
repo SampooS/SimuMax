@@ -20,6 +20,7 @@ public interface IKontrolleriMtoV {
 		public void naytaKeskiOdotusAika(double aika);
 		public void naytaAsiakkaanLapimenoAika(double aika);
 		public void naytaAsiakkaidenKeskimaarainenPalveluaika(double aika);
+		public void setAsiakasChart(int saapunut, int poistunut, double lapimeno, double jonotusaika, double palveluaika);
 		
 		
 		public void naytaRuokalinjastoAsiakkaatPalveltu(int maara);

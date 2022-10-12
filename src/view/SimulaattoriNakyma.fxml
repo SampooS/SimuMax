@@ -504,17 +504,58 @@
                               </Label>
                            </children>
                         </VBox>
-                        <BarChart id="asiakaschartti" fx:id="asiakasChart" layoutX="626.0" layoutY="66.0" prefHeight="325.0" prefWidth="356.0" style="-fx-background-color: #00000000;">
-                           <xAxis>
-                              <CategoryAxis fx:id="asiakascategoryaxis" side="BOTTOM" />
-                           </xAxis>
-                           <yAxis>
-                              <NumberAxis fx:id="asiakasnumberaxis" side="LEFT" />
-                           </yAxis>
-                        </BarChart>
-                        <Label id="asiakasinfoorigi" layoutX="462.0" layoutY="55.0" prefHeight="48.0" prefWidth="152.0" text="ASIAKAS INFO" textFill="#7bcfa5">
+                        <Pane layoutX="633.0" layoutY="107.0" prefHeight="212.0" prefWidth="322.0">
+                           <children>
+                              <ImageView fx:id="saapunut" fitHeight="0.1" fitWidth="37.0">
+                                 <image>
+                                    <Image url="@../images/pystypatukka.jpg" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="poistunut" fitHeight="0.1" fitWidth="37.0" layoutX="70.0">
+                                 <image>
+                                    <Image url="@../images/pystypatukka.jpg" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="lapimeno" fitHeight="0.1" fitWidth="37.0" layoutX="140.0">
+                                 <image>
+                                    <Image url="@../images/pystypatukka.jpg" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="jonotusaika" fitHeight="0.1" fitWidth="37.0" layoutX="210.0">
+                                 <image>
+                                    <Image url="@../images/pystypatukka.jpg" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="palveluaika" fitHeight="0.1" fitWidth="37.0" layoutX="280.0">
+                                 <image>
+                                    <Image url="@../images/pystypatukka.jpg" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Label id="saapunut" layoutX="627.0" layoutY="325.0" prefHeight="48.0" prefWidth="78.0" text="SAAPUNUT" textFill="#7bcfa5">
                            <font>
-                              <Font name="Britannic Bold" size="22.0" />
+                              <Font name="Britannic Bold" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label id="saapunut" layoutX="695.7999877929688" layoutY="325.0" prefHeight="48.0" prefWidth="82.0" text="POISTUNUT" textFill="#7bcfa5">
+                           <font>
+                              <Font name="Britannic Bold" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label id="saapunut" layoutX="769.4000244140625" layoutY="325.0" prefHeight="48.0" prefWidth="85.0" text="LÄPIMENO" textFill="#7bcfa5">
+                           <font>
+                              <Font name="Britannic Bold" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label id="saapunut" layoutX="834.0" layoutY="325.0" prefHeight="48.0" prefWidth="64.0" text="JONOTUSAIKA" textFill="#7bcfa5">
+                           <font>
+                              <Font name="Britannic Bold" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label id="saapunut" layoutX="907.0" layoutY="325.0" prefHeight="48.0" prefWidth="64.0" text="PALVELUAIKA" textFill="#7bcfa5">
+                           <font>
+                              <Font name="Britannic Bold" size="10.0" />
                            </font>
                         </Label>
                      </children>

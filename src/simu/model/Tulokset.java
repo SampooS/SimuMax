@@ -30,6 +30,11 @@ public class Tulokset implements Serializable{
 	
 	private int ruokaAsiakas;
 	
+	private int linjasto;
+	private int kassa;
+	
+	private Alkuarvot alkuarvot;
+	
 	public enum Palvelupisteet{RUOKALINJASTO, KASSA, RUOKASALI, KAIKKI}
 	
 	private static Tulokset instanssi;
@@ -41,6 +46,7 @@ public class Tulokset implements Serializable{
 		}
 		return instanssi;
 	}
+	
 	
 	
 	public void alustaTulokset() {	
@@ -56,11 +62,13 @@ public class Tulokset implements Serializable{
 	}
 	
 	
-	public void setAlkuarvot(int ryhmat, double porrastusaika, int asiakkaat) {
+	public void setAlkuarvot(int ryhmat, double porrastusaika, int asiakkaat, int linjasto, int kassa) {
 		
 		this.ryhmat = ryhmat;
 		this.porrastusaika = porrastusaika;
 		this.asiakkaat = asiakkaat;
+		this.linjasto = linjasto;
+		this.kassa = kassa;
 		
 	}
 	
@@ -202,13 +210,13 @@ public class Tulokset implements Serializable{
 		double ruokalinjastoAktiiviAika = 0;
 		double kassaAktiiviAika = 0;
 		
-		for(int i = 0; i < this.ruokalinja; i++) {
+		for(int i = 0; i < linjasto; i++) {
 			
 			ruokalinjastoAktiiviAika += palvelupisteet[i].getActiveTime();	
 			
 		}
 		
-		for(int i = this.ruokalinja; i < (this.ruokalinja + this.kassat); i++) {
+		for(int i = linjasto; i < (linjasto + kassa); i++) {
 			
 			kassaAktiiviAika += palvelupisteet[i].getActiveTime();	
 			
@@ -216,13 +224,13 @@ public class Tulokset implements Serializable{
 		
 		switch (type){
 		
-		case RUOKALINJASTO: return ruokalinjastoAktiiviAika/this.ruokalinja;  //Ruokalinjaston KESKIMÄÄRÄINEN aika kokonaisuudessaan
+		case RUOKALINJASTO: return ruokalinjastoAktiiviAika/linjasto;  //Ruokalinjaston KESKIMÄÄRÄINEN aika kokonaisuudessaan
 			
-		case KASSA: 		return kassaAktiiviAika/this.kassat; //Kassojen KESKIMÄÄRÄINEN aika kokonaisuudessaan
+		case KASSA: 		return kassaAktiiviAika/kassa; //Kassojen KESKIMÄÄRÄINEN aika kokonaisuudessaan
 			
 		case RUOKASALI: 	return getKeskimaarainenRuokasaliAika();
 			
-		case KAIKKI: 		return (kassaAktiiviAika+ruokalinjastoAktiiviAika)/(kassat + ruokalinja + 1);	
+		case KAIKKI: 		return (kassaAktiiviAika+ruokalinjastoAktiiviAika)/(kassa + linjasto + 1);	
 			
 	}
 		return 0;
@@ -236,13 +244,13 @@ public class Tulokset implements Serializable{
 		int ruokalinjastoAsiakkaat = 0;
 		int kassaAsiakkaat = 0;
 		
-		for(int i = 0; i < this.ruokalinja; i++) {
+		for(int i = 0; i < linjasto; i++) {
 			
 			ruokalinjastoAsiakkaat += palvelupisteet[i].getPalvellutAsiakkaat();	
 			
 		}
 		
-		for(int i = this.ruokalinja; i < (this.ruokalinja + this.kassat); i++) {
+		for(int i = linjasto; i < (linjasto + kassa); i++) {
 			
 			kassaAsiakkaat += palvelupisteet[i].getPalvellutAsiakkaat();	
 			
@@ -345,19 +353,19 @@ public class Tulokset implements Serializable{
 		int kassaAsiakkaat = 0;
 		int ruokalaAsiakkaat = 0;
 		
-		for(int i = 0; i < this.ruokalinja; i++) {
+		for(int i = 0; i < linjasto; i++) {
 			
 			ruokaAsiakkaat += palvelupisteet[i].getPalvellutAsiakkaat();
 			
 		}
 		
-		for(int i = this.ruokalinja; i < (this.ruokalinja + this.kassat); i++) {
+		for(int i = linjasto; i < (linjasto + kassa); i++) {
 			
 			kassaAsiakkaat += palvelupisteet[i].getPalvellutAsiakkaat();
 			
 		}
 		
-		for (int i = (ruokalinja + kassat); i < (ruokalinja + kassat + 1); i++) {
+		for (int i = (linjasto + kassa); i < (linjasto + kassa + 1); i++) {
 			
 			ruokalaAsiakkaat += palvelupisteet[i].getPalvellutAsiakkaat();
 			
@@ -383,18 +391,17 @@ public class Tulokset implements Serializable{
 	
 	public int getJononpituus(Palvelupisteet type) {
 		
-		
 		int ruokajono = 0;
 		int kassajono = 0;
 		
 		
-		for(int i = 0; i < ruokalinja; i++) {
+		for(int i = 0; i < linjasto; i++) {
 			
 			ruokajono += palvelupisteet[i].getJononKoko();
 			
 		}
 		
-		for(int i = ruokalinja; i < (ruokalinja + kassat); i++) {
+		for(int i = linjasto; i < (linjasto + kassa); i++) {
 			
 			kassajono += palvelupisteet[i].getJononKoko();
 			
@@ -446,13 +453,13 @@ public class Tulokset implements Serializable{
 		int ruokajono = 0;
 		int kassajono = 0;
 		
-		for(int i = 0; i < ruokalinja; i++) {
+		for(int i = 0; i < linjasto; i++) {
 			
 			ruokajono += palvelupisteet[i].getMaksimiJononKoko();
 			
 		}
 		
-		for(int i = ruokalinja; i < (ruokalinja + kassat); i++) {
+		for(int i = linjasto; i < (linjasto + kassa); i++) {
 			
 			kassajono += palvelupisteet[i].getMaksimiJononKoko();
 			
@@ -500,8 +507,8 @@ public class Tulokset implements Serializable{
 		
 	}
 	
-	public void setAsiakasLista(ArrayList<Asiakas> list) {
-		this.asiakaslista = list;
+	public static void setAsiakasLista(ArrayList<Asiakas> list) {
+		asiakaslista = list;
 	}
 	
 	public String toString() {

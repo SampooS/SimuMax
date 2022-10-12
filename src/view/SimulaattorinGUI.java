@@ -121,6 +121,13 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 	@FXML ImageView nappi1;
 	@FXML ImageView nappi2;
 	
+	
+	@FXML private ImageView saapunut;
+	@FXML private ImageView poistunut;
+	@FXML private ImageView lapimeno;
+	@FXML private ImageView jonotusaika;
+	@FXML private ImageView palveluaika;
+	
 	@FXML Pane tulospane;
 	@FXML Pane ekasivunButtonit;
 	@FXML Pane tokasivunButtonit;
@@ -593,6 +600,7 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
     	
     	visibility = new Visibility(panelista);
     	
+    	
 		naytto = 
 		new Visualisointi(
 		simulaatioPane, pisinruokajono,pisinkassajono,
@@ -604,8 +612,8 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 		
 		naytto.setAsiakasPane(
 		asiakasFinal, lapiAsiakkaat, keskiAsiakkaat, 
-		keskiJonoAsiakkaat, asiakasPalveluAika,asiakasChart,
-		asiakascategoryaxis,asiakasnumberaxis); 
+		keskiJonoAsiakkaat, asiakasPalveluAika,saapunut,
+		poistunut,lapimeno,jonotusaika,palveluaika); 
 		
 		naytto.setRuokalinjastoPane(aktiiviaika, ruokaLinjastoPalveltuAsiakas, kayttoaste, suoritusteho, keskiKayttoaste);
 		
@@ -613,6 +621,9 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 		
 
 		naytto.setLoadPane(loadlist,esitiedotpane,esiasiakas,esiruokalinja,esikassa,esiryhmia,esiporrastusaika);
+		
+		
+		
 		
 
     }

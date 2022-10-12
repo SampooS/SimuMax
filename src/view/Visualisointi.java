@@ -30,6 +30,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import simu.model.Alkuarvot;
 import simu.model.Asiakas;
+import simu.model.Tulokset;
 
 
 public class Visualisointi implements IVisualisointi{
@@ -60,6 +61,11 @@ public class Visualisointi implements IVisualisointi{
 	ImageView saapuneetpalkki;
 	ImageView poistuneetpalkki;
 	ImageView kellopalkki;
+	ImageView saapunut;
+	ImageView poistunut;
+	ImageView lapimeno;
+	ImageView jonotusaika;
+	ImageView palveluaika;
 	
 	
 	private int asiakasmaara = 0;
@@ -108,17 +114,19 @@ public class Visualisointi implements IVisualisointi{
 	
 	public void setAsiakasPane(
 	Label asiakasFinal,Label lapiAsiakkaat,Label keskiAsiakkaat,
-	Label keskiJonoAsiakkaat,Label asiakasPalveluAika, BarChart<String,Number> asiakasChart,
-	CategoryAxis asiakascategoryaxis,NumberAxis asiakasnumberaxis) {
+	Label keskiJonoAsiakkaat,Label asiakasPalveluAika, ImageView saapunut,
+	ImageView poistunut,ImageView lapimeno,ImageView jonotusaika,ImageView palveluaika) {
 		
 		this.asiakasFinal = asiakasFinal;
 		this.lapiAsiakkaat = lapiAsiakkaat;
 		this.keskiAsiakkaat = keskiAsiakkaat;
 		this.keskiJonoAsiakkaat = keskiJonoAsiakkaat;	
 		this.asiakasPalveluAika = asiakasPalveluAika;
-		this.asiakasChart = asiakasChart;
-		this.asiakascategoryaxis = asiakascategoryaxis;
-		this.asiakasnumberaxis = asiakasnumberaxis;
+		this.saapunut = saapunut;
+		this.poistunut = poistunut;
+		this.lapimeno = lapimeno;
+		this.jonotusaika = jonotusaika;
+		this.palveluaika = palveluaika;
 		
 			
 	}
@@ -143,55 +151,7 @@ public class Visualisointi implements IVisualisointi{
 		
 	}
 	
-	public void setAsiakasChart() {
-		
-		asiakasChart = new BarChart<String,Number>(asiakascategoryaxis,asiakasnumberaxis);
-		asiakasChart.setTitle("ASIAKAS INFO");
-		/*
-		XYChart.Series series1 = new XYChart.Series();
-        series1.setName("2003");       
-        series1.getData().add(new XYChart.Data(austria, 25601.34));
-        series1.getData().add(new XYChart.Data(brazil, 20148.82));
-        series1.getData().add(new XYChart.Data(france, 10000));
-        series1.getData().add(new XYChart.Data(italy, 35407.15));
-        series1.getData().add(new XYChart.Data(usa, 12000));      
-        
-        XYChart.Series series2 = new XYChart.Series();
-        series2.setName("2004");
-        series2.getData().add(new XYChart.Data(austria, 57401.85));
-        series2.getData().add(new XYChart.Data(brazil, 41941.19));
-        series2.getData().add(new XYChart.Data(france, 45263.37));
-        series2.getData().add(new XYChart.Data(italy, 117320.16));
-        series2.getData().add(new XYChart.Data(usa, 14845.27));  
-        
-        XYChart.Series series3 = new XYChart.Series();
-        series3.setName("2005");
-        series3.getData().add(new XYChart.Data(austria, 45000.65));
-        series3.getData().add(new XYChart.Data(brazil, 44835.76));
-        series3.getData().add(new XYChart.Data(france, 18722.18));
-        series3.getData().add(new XYChart.Data(italy, 17557.31));
-        series3.getData().add(new XYChart.Data(usa, 92633.68)); 
-		
-		*/
-		
-	}
-	
-	
-	public void uusiAsiakas(int asiakasmaara) {
-		
-		asiakas.setText(Integer.toString(asiakasmaara));
-		asiakasFinal.setText(": " + Integer.toString(asiakasmaara));
-		
-		if(asiakasmaara > 1) {
-			
-			saapuneetpalkki.setFitWidth(asiakasmaara/2.1);
-			
-		}else {
-			
-			saapuneetpalkki.setFitWidth(asiakasmaara);
-			
-		}
-	}
+
 	
 
 	public void setJonoRuokalinjastolle(int maara) {
@@ -255,6 +215,8 @@ public class Visualisointi implements IVisualisointi{
 			kassajonopalkki.setFitWidth(kassakerroin);	
 			
 		}else {
+			
+			
 			
 			kassajonopalkki.setFitWidth(0.1);	
 			
@@ -415,6 +377,37 @@ public class Visualisointi implements IVisualisointi{
 		
 		asiakasPalveluAika.setText(": " + String.format("%.0f", aika/1000) + " s");
 		
+	}
+	
+	@Override
+	public void setAsiakasChart(int saapunuta, int poistunuta, double lapimenoa, double jonotusaikaa, double palveluaikaa) {
+		
+		
+		saapunut.setFitHeight(saapunuta);
+		poistunut.setFitHeight(poistunuta);
+		lapimeno.setFitHeight(lapimenoa);
+		jonotusaika.setFitHeight(jonotusaikaa);
+		palveluaika.setFitHeight(palveluaikaa);
+		
+		
+		
+	}
+	
+	@Override
+	public void uusiAsiakas(int asiakasmaara) {
+		
+		asiakas.setText(Integer.toString(asiakasmaara));
+		asiakasFinal.setText(": " + Integer.toString(asiakasmaara));
+		
+		if(asiakasmaara > 1) {
+			
+			saapuneetpalkki.setFitWidth(asiakasmaara/2.1);
+			
+		}else {
+			
+			saapuneetpalkki.setFitWidth(asiakasmaara);
+			
+		}
 	}
 
 

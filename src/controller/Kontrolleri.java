@@ -8,6 +8,7 @@ import simu.framework.IMoottori;
 import simu.model.Alkuarvot;
 import simu.model.DBAccessObject;
 import simu.model.OmaMoottori;
+import simu.model.Tulokset;
 import view.ISimulaattorinUI;
 
 public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
@@ -264,6 +265,13 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 		
 		//moottori = new OmaMoottori(this);
 		moottori.setLatausTulokset();
+		
+	}
+
+	@Override
+	public void setAsiakasChart(int saapunut, int poistunut, double lapimeno, double jonotusaika, double palveluaika) {
+		
+		Platform.runLater(() -> ui.getVisualisointi().setAsiakasChart(saapunut, poistunut, lapimeno, jonotusaika, palveluaika));
 		
 	}
 

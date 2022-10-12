@@ -3,7 +3,6 @@ package simu.model;
 import java.util.ArrayList;
 
 import simu.framework.*;
-import view.Alkuarvot;
 
 public interface IDao {	
 	abstract void tallennaAjo(ArrayList<Tapahtuma> tapahtumat);

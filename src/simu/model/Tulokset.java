@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import simu.framework.Kello;
 import testi.Simulaattori;
-import view.Alkuarvot;
 
 public class Tulokset implements Serializable{
 	
@@ -50,6 +49,18 @@ public class Tulokset implements Serializable{
 		
 	}
 
+	public void setData(double aktiiviaika, int asiakkaita, double kokonaisaika, ArrayList<Asiakas> asiakkaat) {
+		
+		
+		
+	}
+	
+	public void setPalvelupisteet(ArrayList<Palvelupiste> pisteet) {
+		this.palvelupisteet = new Palvelupiste[pisteet.size()];
+		for (int i = 0; i < pisteet.size(); i++) {
+			palvelupisteet[i] = pisteet.get(i);
+		}
+	}
 	
 	public void setRyhmat(int ryhmat) {
 		this.ryhmat = ryhmat;

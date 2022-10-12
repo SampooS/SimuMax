@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import javafx.application.Platform;
 import simu.framework.IMoottori;
+import simu.model.Alkuarvot;
 import simu.model.DBAccessObject;
 import simu.model.OmaMoottori;
-import view.Alkuarvot;
 import view.ISimulaattorinUI;
 
 public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{

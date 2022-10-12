@@ -31,7 +31,7 @@ public class Palvelupiste {
 			
 	}
 	
-	public Palvelupiste(int aika) {
+	public Palvelupiste(double aika) {
 		
 		this.aktiiviAika = aika;
 		
@@ -43,11 +43,15 @@ public class Palvelupiste {
 		jono.add(a);
 		if (jono.size() > maxJono) {maxJono = jono.size();}	
 		 
-	
-		
 	}
 	
+	
+	
 	public int getJononKoko() {return jono.size();}
+	
+	public void setMaxJononKoko(int i) {
+		this.maxJono = i;
+	}
 	
 	public int getMaksimiJononKoko() {return maxJono;}
 	
@@ -82,6 +86,26 @@ public class Palvelupiste {
 		
 		return jono.size() != 0;
 		
+	}
+	
+	public void setEnum(String tyyppi) {		
+		switch (tyyppi.toUpperCase()) {
+		case "ARR":
+			this.skeduloitavanTapahtumanTyyppi = TapahtumanTyyppi.ARR1;
+			break;
+		case "DEP1":
+			this.skeduloitavanTapahtumanTyyppi = TapahtumanTyyppi.DEP1;
+		case "DEP2":
+			this.skeduloitavanTapahtumanTyyppi = TapahtumanTyyppi.DEP2;
+			break;
+		case "DEP3":
+			this.skeduloitavanTapahtumanTyyppi = TapahtumanTyyppi.DEP3;
+			break;
+		}
+	}
+	
+	public TapahtumanTyyppi getTyyppi() {
+		return this.skeduloitavanTapahtumanTyyppi;
 	}
 	
 	public int getPalvellutAsiakkaat() {

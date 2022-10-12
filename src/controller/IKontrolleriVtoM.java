@@ -2,7 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 
-import view.Alkuarvot;
+import simu.model.Alkuarvot;
 
 public interface IKontrolleriVtoM {
 	

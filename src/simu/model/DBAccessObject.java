@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import simu.framework.*;
-import view.Alkuarvot;
 
 /**
  * @author Sampo Savolainen
@@ -55,8 +54,10 @@ public void tallennaAjo(ArrayList<Tapahtuma> tapahtumat) {
 		int ryhmia = Tulokset.getInstance().getRyhmat();
 		double porrastusAika = Tulokset.getInstance().getPorrastusAika();
 		
+		
 		int ajoId = DBAccessObject.addRun(ruokalinjat, kassat, asiakkaita,ryhmia,porrastusAika);
-		// add to table
+		
+		
 		
 		// asiakastauluun
 		
@@ -78,6 +79,13 @@ public void tallennaAjo(ArrayList<Tapahtuma> tapahtumat) {
 		
 		for (Tapahtuma tapahtuma : tapahtumat) {
 			DBAccessObject.addTapahtuma(tapahtuma, ajoId);
+		}
+		
+		// palvelupistetauluun
+		Palvelupiste[] palvelupisteet = Tulokset.getInstance().palvelupisteet;
+		
+		for (Palvelupiste piste : palvelupisteet) {
+			addPP(piste, ajoId);
 		}
 		
 	}
@@ -161,6 +169,7 @@ public void tallennaAjo(ArrayList<Tapahtuma> tapahtumat) {
 			ryhmia + ", " + 
 			porrastusAika + ");"
 			);
+			System.out.println("");
 		} catch (SQLException e) {
 			System.out.println("Ajon lisäys ei toiminut");
 			e.printStackTrace();
@@ -228,6 +237,25 @@ public void tallennaAjo(ArrayList<Tapahtuma> tapahtumat) {
 			e.printStackTrace();			
 		}
 	}
+	
+private static void addPP(Palvelupiste piste, int ajoId) {
+		
+			int maxJono = piste.getMaksimiJononKoko();
+			double aktiiviaika = piste.getActiveTime();
+			TapahtumanTyyppi tyyppi = piste.getTyyppi();
+			
+			try {
+				query("insert into palvelupisteet (aktiiviaika, maxJono, ajoId, tyyppi) values(" + aktiiviaika + ", " +
+						maxJono + ", " +
+						ajoId + ", '" + 
+						tyyppi + "');"
+			);
+			} catch (SQLException e) {
+				System.out.println("Palvelupisteiden lisäys ei onnistunut");
+				e.printStackTrace();
+			}
+		
+	}
 
 	@Override
 	public int[] getAjo(int ajoId) {
@@ -255,8 +283,6 @@ public void tallennaAjo(ArrayList<Tapahtuma> tapahtumat) {
 		
 		ArrayList<Alkuarvot> alkuarvot = new ArrayList<>();
 
-		
-		
 		try {
 			
 			ResultSet results;
@@ -266,16 +292,12 @@ public void tallennaAjo(ArrayList<Tapahtuma> tapahtumat) {
 			
 			int count = results.getInt(1);
 			
-			
-			
 			ResultSet rs = query("select ruokalinjat, kassat, asiakkaita, ryhmia, porrastusaika from ajot");
-
 			rs.next();
 
 			for(int i = 0; i < count; i++) {
 				
 				alkuarvot.add(new Alkuarvot(rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getInt(4),rs.getDouble(5)));
-				
 				rs.next(); 
 				
 			}
@@ -310,8 +332,6 @@ public void tallennaAjo(ArrayList<Tapahtuma> tapahtumat) {
 				rs.next();
 				
 			}
-			
-
 			
 			return palautettava;
 			
@@ -350,6 +370,126 @@ public void tallennaAjo(ArrayList<Tapahtuma> tapahtumat) {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	
+	/*
+	 * Lataa ID:tä vastaavan ajon tiedot Tulos singletoniin sql:ästä
+	 */
+	
+	public void lataaTuloksiin(int ajoId) {
+		
+		
+		
+		// Ladataan asiakaslista
+		
+		try {
+			
+			Tulokset.getInstance().setAsiakasLista(lataaAsiakkaat(ajoId));
+			Tulokset.getInstance().setAsiakkaat(lataaAsiakkaat(ajoId).size());
+			
+		} catch (SQLException e) {
+			System.out.println("Asiakkaiden lataus ei onnistunut");
+			e.printStackTrace();
+		}
+		
+		// ladataan palvelupisteet
+		
+		try {
+			
+			int linjastot = 0;
+			int kassat = 0;
+			
+			for (Palvelupiste piste : lataaPalvelupisteet(ajoId)) {
+				switch (piste.getTyyppi()) {
+					case DEP1:
+						linjastot++;
+						break;
+					case DEP2:
+						kassat++;
+						break;
+					default:
+						// muut ei kiinnosta tässä
+						break;
+				}
+ 			}
+			
+			Tulokset.getInstance().setPalvelupisteet(lataaPalvelupisteet(ajoId));
+			
+			Tulokset.getInstance().ruokalinja = linjastot;
+			Tulokset.getInstance().kassat = kassat;
+			
+			
+		} catch (SQLException e) {
+			System.out.println("Palvelupisteiden lataus ei onnistunut");
+			e.printStackTrace();
+		}
+		
+		// ladataan tapahtumat
+		
+		
+		
+	}
+	
+	/*
+	 * Lataa ID:tä vastaavan ajon asiakkaat sql:ästä
+	 */
+	
+	private ArrayList<Asiakas> lataaAsiakkaat(int ajoId) throws SQLException {
+		ResultSet count = query("select count (asiakasId) from asiakkaat where ajoId=" + ajoId);
+		count.next();
+		int max = count.getInt(1);
+		ResultSet rs = query("select (saapumisaika, poistumisaika) from asiakkaat where ajoId=" + ajoId);
+		rs.next();
+		
+		ArrayList<Asiakas> asiakaslista = new ArrayList<Asiakas>();
+		
+		int i = 1;
+		while (i < max) {
+			
+			Asiakas uusi = new Asiakas();
+			uusi.setSaapumisaika(rs.getDouble(1));
+			uusi.setPoistumisaika(rs.getDouble(2));
+			
+			asiakaslista.add(uusi);
+			System.out.println("Asiakas ladattu");
+			rs.next();
+		}
+		return asiakaslista;
+	}
+	
+	
+	/*
+	 * Lataa ID:tä vastaavan ajon palvelupisteet sql:ästä
+	 */
+	private ArrayList<Palvelupiste> lataaPalvelupisteet(int ajoId) throws SQLException {
+		
+		ResultSet count = query("select count(ppId) from palvelupisteet where ajoId=" + ajoId);
+		count.next();
+		
+		int max = count.getInt(1);
+		
+		ResultSet rs = query ("select (aktiiviaika, maxJono, tyyppi) from palvelupisteet where ajoId=" + ajoId);
+		rs.next();
+		
+		ArrayList<Palvelupiste> pisteet = new ArrayList<Palvelupiste>();
+		
+		for (int i = 0; i < max; i++) {
+			
+			double active = rs.getDouble(1);
+			int jono = rs.getInt(2);
+			String tyyppi = rs.getString(3);
+			
+			Palvelupiste uusi = new Palvelupiste(active);
+			uusi.setEnum(tyyppi);
+			uusi.setMaxJononKoko(jono);
+			
+			pisteet.add(uusi);
+		}
+		
+		return pisteet;
+		
+		
 	}
 
 }

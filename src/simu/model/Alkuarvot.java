@@ -1,4 +1,4 @@
-package view;
+package simu.model;
 
 
 public class Alkuarvot {

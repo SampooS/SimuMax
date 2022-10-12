@@ -9,7 +9,6 @@ import simu.framework.Moottori;
 import simu.framework.Saapumisprosessi;
 import simu.framework.Tapahtuma;
 import simu.model.Tulokset.Palvelupisteet;
-import view.Alkuarvot;
 
 import java.util.ArrayList;
 import java.util.Random;

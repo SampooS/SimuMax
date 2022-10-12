@@ -69,6 +69,9 @@ public class Visualisointi implements IVisualisointi{
 	ImageView ruokaaktiivi;
 	ImageView ruokakaytto;
 	ImageView ruokakeskikaytto;
+	ImageView kassaaktiivi;
+	ImageView kassakaytto;
+	ImageView kassakeskikaytto;
 	
 	
 	private int asiakasmaara = 0;
@@ -149,13 +152,17 @@ public class Visualisointi implements IVisualisointi{
 		
 	}
 	
-	public void setKassaPane(Label aktiiviaika, Label palvellutAsiakkaat, Label kayttoaste, Label suoritusteho, Label keskiKayttoaste) {
+	public void setKassaPane(Label aktiiviaika, Label palvellutAsiakkaat, Label kayttoaste, Label suoritusteho, Label keskiKayttoaste,
+	ImageView kassaktiivi,ImageView kassakaytto,ImageView kassakeskikaytto) {
 		
 		this.kassaAktiiviaika = aktiiviaika;
 		this.kassaPalvellutAsiakkaat = palvellutAsiakkaat;
 		this.kassaKayttoaste = kayttoaste;
 		this.kassaSuoritusteho = suoritusteho;
 		this.kassaKeskikayttoaste = keskiKayttoaste;
+		this.kassaaktiivi = kassaktiivi;
+		this.kassakaytto = kassakaytto;
+		this.kassakeskikaytto = kassakeskikaytto;
 		
 	}
 	
@@ -471,6 +478,7 @@ public class Visualisointi implements IVisualisointi{
 	public void setKassojenAktiiviaika(double aika) {
 		
 		kassaAktiiviaika.setText(": " + String.format("%.0f", aika/1000) + " s");
+		kassaaktiivi.setFitHeight((aika/1000)/20);
 		
 	}
 
@@ -491,6 +499,7 @@ public class Visualisointi implements IVisualisointi{
 	public void setKassaKayttoaste(double maara) {
 		
 		kassaKayttoaste.setText(": " + String.format("%.2f", maara * 100) + " %");
+		kassakaytto.setFitHeight(maara * 300);
 		
 	}
 
@@ -504,18 +513,11 @@ public class Visualisointi implements IVisualisointi{
 		
 	}
 
-
-
-
-
-
-
-
-
 	@Override
 	public void setKassaKeskiKayttoaste(double maara) {
 		
 		kassaKeskikayttoaste.setText(": " + String.format("%.2f", maara * 100) + " %");
+		kassakeskikaytto.setFitHeight(maara * 300);
 		
 	}
 

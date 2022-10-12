@@ -84,6 +84,9 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 	@FXML private Label kassaKayttoaste;
 	@FXML private Label kassaKeskiKayttoaste;
 	@FXML private Label kassaSuoritusteho;
+	@FXML private ImageView kassaaktiivi;
+	@FXML private ImageView kassakaytto;
+	@FXML private ImageView kassakeskikaytto;
 	
 	@FXML private Label esiasiakas;
 	@FXML private Label esiruokalinja;
@@ -622,7 +625,8 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 		naytto.setRuokalinjastoPane(aktiiviaika, ruokaLinjastoPalveltuAsiakas, 
 		kayttoaste, suoritusteho, keskiKayttoaste,ruokaaktiivi,ruokakaytto,ruokakeskikaytto);
 		
-		naytto.setKassaPane(kassaAktiiviaika, kassaPalveltuAsiakas, kassaKayttoaste, kassaSuoritusteho, kassaKeskiKayttoaste);
+		naytto.setKassaPane(kassaAktiiviaika, kassaPalveltuAsiakas, kassaKayttoaste, kassaSuoritusteho, kassaKeskiKayttoaste,
+		kassaaktiivi,kassakaytto,kassakeskikaytto);
 		
 
 		naytto.setLoadPane(loadlist,esitiedotpane,esiasiakas,esiruokalinja,esikassa,esiryhmia,esiporrastusaika);

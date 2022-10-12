@@ -394,10 +394,10 @@ private static void addPP(Palvelupiste piste, int ajoId) {
 		
 		try {
 			
+			ArrayList<Asiakas> asiakaslista = lataaAsiakkaat(ajoId);
 			
-			
-			Tulokset.getInstance().setAsiakasLista(lataaAsiakkaat(ajoId));
-			Tulokset.getInstance().setAsiakkaat(lataaAsiakkaat(ajoId).size());
+			Tulokset.getInstance().setAsiakasLista(asiakaslista);
+			Tulokset.getInstance().setAsiakkaat(asiakaslista.size());
 			
 		} catch (SQLException e) {
 			System.out.println("Asiakkaiden lataus ei onnistunut");
@@ -456,26 +456,30 @@ private static void addPP(Palvelupiste piste, int ajoId) {
 	 */
 	
 	private ArrayList<Asiakas> lataaAsiakkaat(int ajoId) throws SQLException {
+		
 		ResultSet count = query("select count (asiakasId) from asiakkaat where ajoId=" + ajoId);
 		count.next();
 		int max = count.getInt(1);
 		
 		System.out.println(max + "...............................................................................................");
 		ResultSet rs = query("select saapumisaika, poistumisaika from asiakkaat where ajoId=" + ajoId);
-		rs.next();
 		
 		ArrayList<Asiakas> asiakaslista = new ArrayList<Asiakas>();
 		
 		int i = 1;
-		while (i < max) {
+		while (i <= max) {
+			
+			rs.next();
 			
 			Asiakas uusi = new Asiakas();
 			uusi.setSaapumisaika(rs.getDouble(1));
+			System.out.println("Saapumisaika: " + rs.getDouble(1));
 			uusi.setPoistumisaika(rs.getDouble(2));
+			System.out.println("Saapumisaika: " + rs.getDouble(2));
 			
 			asiakaslista.add(uusi);
-			System.out.println("Asiakas ladattu" + uusi.getId());
-			rs.next();
+			System.out.println("Asiakas ladattu: " + uusi.getId());
+			i++;
 		}
 		
 		for(Asiakas asiakas:asiakaslista) {

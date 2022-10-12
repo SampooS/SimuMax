@@ -65,10 +65,12 @@ public class Tulokset implements Serializable{
 	}
 	
 	public void setPalvelupisteet(ArrayList<Palvelupiste> pisteet) {
+		
 		this.palvelupisteet = new Palvelupiste[pisteet.size()];
-		for (int i = 0; i < pisteet.size(); i++) {
+		for (int i = 0; i < pisteet.size()-1; i++) {
 			palvelupisteet[i] = pisteet.get(i);
 		}
+		
 	}
 	
 	public void setRyhmat(int ryhmat) {

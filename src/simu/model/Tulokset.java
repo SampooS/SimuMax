@@ -307,6 +307,7 @@ public class Tulokset implements Serializable{
 
 	public double getKayttoaste_U(Palvelupisteet type) {		//Palauttaa palvelupisteen käyttöaste B/T
 	
+		
 		return (getAktiiviAika_B(type) / getKokonaisAika_T());
 		
 	}
@@ -318,7 +319,7 @@ public class Tulokset implements Serializable{
 	
 	public double getSuoritusteho_X(Palvelupisteet type) {		// palauttaa Throughput tai suoritusteho. C/T
 		
-		return (double) (getPalvelupisteenPalvelematAsiakkaat(type) / getKokonaisAika_T());
+		return (double) (getPalvelupisteenPalvelematAsiakkaat(type) / 210.0);
 		
 	}
 	

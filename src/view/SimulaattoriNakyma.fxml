@@ -650,8 +650,13 @@
                      </effect></Pane>
                   <Pane id="kassatulosNONvisible" fx:id="kassaPane" prefHeight="442.0" prefWidth="1139.0" visible="false">
                      <children>
-                        <VBox layoutX="143.0" layoutY="200.0" prefHeight="227.0" prefWidth="381.0">
+                        <VBox layoutX="143.0" layoutY="163.0" prefHeight="227.0" prefWidth="381.0">
                            <children>
+                              <Label id="suoritusteho" layoutX="10.0" layoutY="95.0" prefHeight="42.0" prefWidth="407.0" text="Suoritusteho " textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
                               <Label id="aktiiviaika" layoutX="10.0" layoutY="53.0" prefHeight="42.0" prefWidth="418.0" text="Aktiiviaika" textAlignment="CENTER" textFill="#7bcfa5">
                                  <font>
                                     <Font name="Britannic Bold" size="22.0" />
@@ -669,8 +674,13 @@
                               </Label>
                            </children>
                         </VBox>
-                        <VBox layoutX="469.0" layoutY="198.0" prefHeight="212.0" prefWidth="161.0">
+                        <VBox layoutX="469.0" layoutY="161.0" prefHeight="212.0" prefWidth="161.0">
                            <children>
+                              <Label id="suoritus teho" fx:id="kassaSuoritusteho" layoutX="10.0" layoutY="96.0" prefHeight="43.0" prefWidth="157.0" textAlignment="CENTER" textFill="#7bcfa5">
+                                 <font>
+                                    <Font name="Britannic Bold" size="22.0" />
+                                 </font>
+                              </Label>
                               <Label fx:id="kassaAktiiviaika" layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="244.0" textAlignment="CENTER" textFill="#7bcfa5">
                                  <font>
                                     <Font name="Britannic Bold" size="22.0" />
@@ -693,36 +703,46 @@
                               <Font name="Britannic Bold" size="22.0" />
                            </font>
                         </Label>
-                        <HBox layoutX="695.0" layoutY="49.0" prefHeight="250.0" prefWidth="231.0" rotate="180.0" spacing="50.0">
+                        <HBox layoutX="676.0" layoutY="49.0" prefHeight="250.0" prefWidth="286.0" rotate="180.0" spacing="50.0">
                            <children>
-                              <ImageView fx:id="kassakeskikaytto" fitHeight="0.1" fitWidth="37.0">
+                              <ImageView id="suoritus" fx:id="kassasuoritusteho" fitHeight="20.0" fitWidth="37.0" layoutX="10.0" layoutY="10.0">
                                  <image>
                                     <Image url="@../images/pystypatukka.jpg" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="kassakaytto" fitHeight="0.1" fitWidth="37.0" layoutX="10.0" layoutY="10.0">
+                              <ImageView fx:id="kassakeskikaytto" fitHeight="20.0" fitWidth="37.0">
                                  <image>
                                     <Image url="@../images/pystypatukka.jpg" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="kassaaktiivi" fitHeight="0.1" fitWidth="37.0" layoutX="48.0" layoutY="10.0">
+                              <ImageView fx:id="kassakaytto" fitHeight="20.0" fitWidth="37.0" layoutX="10.0" layoutY="10.0">
+                                 <image>
+                                    <Image url="@../images/pystypatukka.jpg" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="kassaaktiivi" fitHeight="20.0" fitWidth="37.0" layoutX="48.0" layoutY="10.0">
                                  <image>
                                     <Image url="@../images/pystypatukka.jpg" />
                                  </image>
                               </ImageView>
                            </children>
                         </HBox>
-                        <Label id="aktiivi" layoutX="705.0" layoutY="288.0" prefHeight="48.0" prefWidth="58.0" text="AKTIIVIAIKA" textFill="#7bcfa5">
+                        <Label id="aktiivi" layoutX="670.0" layoutY="288.0" prefHeight="48.0" prefWidth="58.0" text="AKTIIVIAIKA" textFill="#7bcfa5">
                            <font>
                               <Font name="Britannic Bold" size="10.0" />
                            </font>
                         </Label>
-                        <Label id="aktiivi" layoutX="803.0" layoutY="288.0" prefHeight="48.0" prefWidth="58.0" text="KÄYTTÖ" textFill="#7bcfa5">
+                        <Label id="aktiivi" layoutX="768.0" layoutY="288.0" prefHeight="48.0" prefWidth="58.0" text="KÄYTTÖ" textFill="#7bcfa5">
                            <font>
                               <Font name="Britannic Bold" size="10.0" />
                            </font>
                         </Label>
-                        <Label id="aktiivi" layoutX="882.0" layoutY="288.0" prefHeight="48.0" prefWidth="58.0" text="KÄYTTÖ AVG." textFill="#7bcfa5">
+                        <Label id="aktiivi" layoutX="849.0" layoutY="288.0" prefHeight="48.0" prefWidth="58.0" text="KÄYTTÖ AVG." textFill="#7bcfa5">
+                           <font>
+                              <Font name="Britannic Bold" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label id="aktiivi" layoutX="928.0" layoutY="288.0" prefHeight="48.0" prefWidth="73.0" text="SUORITUSTEHO" textFill="#7bcfa5">
                            <font>
                               <Font name="Britannic Bold" size="10.0" />
                            </font>

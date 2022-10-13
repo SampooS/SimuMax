@@ -23,7 +23,7 @@ public interface IVisualisointi {
 	public void setRuokalinjastoPane(Label aktiiviaika,Label palvellutAsiakkaat,Label kayttoaste,Label suoritusteho,Label keskiKayttoaste,
 	ImageView ruokaaktiivi,ImageView ruokakaytto,ImageView ruokakeskikaytto);
 	public void setKassaPane(Label aktiiviaika,Label palvellutAsiakkaat,Label kayttoaste,Label suoritusteho,Label keskiKayttoaste,
-	ImageView kaasaktiivi,ImageView kassakaytto,ImageView kassakeskikaytto);
+	ImageView kaasaktiivi,ImageView kassakaytto,ImageView kassakeskikaytto, ImageView kassasuoritusteho);
 	public void setLoadPane(ListView<String> loadlist,Pane esitiedotpane,Label esiasiakas,Label esiruokalinja,Label esikassa,Label esiryhmia,Label esiporrastusaika);
 	
 	

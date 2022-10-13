@@ -229,8 +229,7 @@ public class OmaMoottori extends Moottori{
 		kontrolleri.naytaAsiakkaidenKeskimaarainenPalveluaika(tulokset.getAsiakkaidenPalveluAika_S());
 		kontrolleri.naytaKeskiOdotusAika(tulokset.getKeskimaarainenJonotusAika());
         kontrolleri.naytaAsiakkaanLapimenoAika(tulokset.getkeskimaarainenLapiMenoAika());
-        kontrolleri.setAsiakasChart(tulokset.getSaapuneetasiakkaat(), tulokset.getPoistuneetasiakkaat(),
-        tulokset.getkeskimaarainenLapiMenoAika(), tulokset.getKeskimaarainenJonotusAika(), tulokset.getAsiakkaidenPalveluAika_S());
+       
 		
 		kontrolleri.naytaRuokalinjastoAsiakkaatPalveltu(tulokset.getPalvelupisteenPalvelematAsiakkaat(Palvelupisteet.RUOKALINJASTO));
 		kontrolleri.naytaRuokalinjastonAktiiviaika(tulokset.getAktiiviAika_B(Palvelupisteet.RUOKALINJASTO));
@@ -299,38 +298,35 @@ public class OmaMoottori extends Moottori{
 		
 		rs.next();
 		
+		kontrolleri.visualisoiAsiakas(rs.getInt(5));
+		kontrolleri.naytaLapiPaasseetAsiakkaat(rs.getInt(6));
 		
-		
-		
-		kontrolleri.visualisoiAsiakas(rs.getInt(6));
-		kontrolleri.naytaLapiPaasseetAsiakkaat(rs.getInt(7));
-		
-		kontrolleri.naytaRuokaJononPituus(rs.getInt(1));
+		kontrolleri.naytaRuokaJononPituus(0);
 		kontrolleri.naytaPisinJonoRuokalinjastolle(rs.getInt(1));
-		kontrolleri.naytaKassaJononPituus(rs.getInt(2));
+		kontrolleri.naytaKassaJononPituus(0);
 		kontrolleri.naytaPisinJonoKassoille(rs.getInt(2));
 		
 		
 		kontrolleri.naytaAsiakkaidenKeskimaarainenPalveluaika(rs.getDouble(3));
 		kontrolleri.naytaKeskiOdotusAika(rs.getDouble(4));
-        kontrolleri.naytaAsiakkaanLapimenoAika(rs.getDouble(6));
+        kontrolleri.naytaAsiakkaanLapimenoAika(rs.getDouble(7));
         kontrolleri.setAsiakasChart(rs.getInt(5), rs.getInt(6),
         rs.getDouble(6), rs.getDouble(4), rs.getDouble(3));
         
         
 		
-		kontrolleri.naytaRuokalinjastoAsiakkaatPalveltu(rs.getInt(7));
-		kontrolleri.naytaRuokalinjastonAktiiviaika(rs.getDouble(9));
-		kontrolleri.naytaRuokalinjastonKayttoaste(0.1);
-		kontrolleri.naytaRuokalinjastonKeskikayttoaste(rs.getDouble(13));
-		kontrolleri.naytaRuokalinjastonSuoritusteho(rs.getDouble(15));
+		kontrolleri.naytaRuokalinjastoAsiakkaatPalveltu(rs.getInt(8));
+		kontrolleri.naytaRuokalinjastonAktiiviaika(rs.getDouble(10));
+		kontrolleri.naytaRuokalinjastonKayttoaste(0);
+		kontrolleri.naytaRuokalinjastonKeskikayttoaste(rs.getDouble(14));
+		kontrolleri.naytaRuokalinjastonSuoritusteho(rs.getDouble(16));
 		
 		
 		kontrolleri.naytaKassaAsiakkaatPalveltu(rs.getInt(8));
-		kontrolleri.naytaKassaAktiiviaika(rs.getDouble(10));
-		kontrolleri.naytaKassaKayttoaste(0.1);
-		kontrolleri.naytaKassaKeskikayttoaste(rs.getDouble(14));
-		kontrolleri.naytaKassaSuoritusteho(rs.getDouble(16));
+		kontrolleri.naytaKassaAktiiviaika(rs.getDouble(11));
+		kontrolleri.naytaKassaKayttoaste(0);
+		kontrolleri.naytaKassaKeskikayttoaste(rs.getDouble(15));
+		kontrolleri.naytaKassaSuoritusteho(rs.getDouble(17));
 		
 		} catch (SQLException e) {
 		System.out.println("May god help us all.");

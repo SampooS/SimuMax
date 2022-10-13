@@ -450,7 +450,7 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 	
 	private void tuoSimulaatioRuutu() {
 		
-		setReadyButtonColor();
+		//setReadyButtonColor();
 		simulaatioPane.setOpacity(0);
 		simu1.setOpacity(0);
 		simu2.setOpacity(0);
@@ -485,6 +485,7 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
     		simu2.setOpacity(1);
     		simu3.setOpacity(1);
        		kontrolleri.kaynnistaSimulointi();
+    		simulaatioPane.setVisible(true);
        		
 
     		

@@ -63,13 +63,13 @@ public class OmaMoottori extends Moottori{
 		
 		for (int i = 0; i < linjastot; i++) {
 			
-			palvelupisteet[i]=new Palvelupiste(new Normal(120000,60000, (1 + i + (long)Math.random() * 8765)), tapahtumalista, TapahtumanTyyppi.DEP1);
+			palvelupisteet[i]=new Palvelupiste(new Normal(90000,60000, (1 + i + (long)Math.random() * 8765)), tapahtumalista, TapahtumanTyyppi.DEP1);
 			
 		}
 		
 		for (int i = linjastot; i < linjastot + kassat; i++) {
 			
-			palvelupisteet[i]=new Palvelupiste(new Normal(18000, 5000, (1 + i +(long)Math.random() * 5678)), tapahtumalista, TapahtumanTyyppi.DEP2);
+			palvelupisteet[i]=new Palvelupiste(new Normal(8000, 4000, (1 + i +(long)Math.random() * 5678)), tapahtumalista, TapahtumanTyyppi.DEP2);
 			
 		}
 	

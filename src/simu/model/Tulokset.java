@@ -8,8 +8,14 @@ import java.util.ArrayList;
 import simu.framework.Kello;
 import testi.Simulaattori;
 
+/**
+ * @author Mohammed Al-Jewari
+ *
+ */
 public class Tulokset implements Serializable{
-	
+	/**
+	 * This is a class for calculating all the data and return the values.
+	 */
 	private static final long serialVersionUID = 1L;
 	//public int asiakasMaara_A; // A arrival count
 	private double aktiiviAika_B; // B Busy time
@@ -42,6 +48,7 @@ public class Tulokset implements Serializable{
 	public enum Palvelupisteet{RUOKALINJASTO, KASSA, RUOKASALI, KAIKKI}
 	
 	private static Tulokset instanssi;
+
 	
 	public static Tulokset getInstance() {
 		
@@ -50,13 +57,20 @@ public class Tulokset implements Serializable{
 		}
 		return instanssi;
 	}
-	
+	/**
+	 * 
+	 * @param i
+	 * @throws SQLException
+	 * @return the data uploaded to the database.
+	 */
 	public void setDummy(int i) throws SQLException {
 		this.dummy = DBAccessObject.lataaDummy(i);
 	}
 	
 	
-	
+	/**
+	 * this method clear the Tulokset class. 
+	 */
 	public void alustaTulokset() {	
 		
 		asiakaslista.clear();
@@ -69,7 +83,14 @@ public class Tulokset implements Serializable{
 		
 	}
 	
-	
+	/**
+	 * This method sets all user inputs data to the system to calculate depending on them.
+	 * @param ryhmat
+	 * @param porrastusaika
+	 * @param asiakkaat
+	 * @param linjasto
+	 * @param kassa
+	 */
 	public void setAlkuarvot(int ryhmat, double porrastusaika, int asiakkaat, int linjasto, int kassa) {
 		
 		this.ryhmat = ryhmat;
@@ -80,6 +101,10 @@ public class Tulokset implements Serializable{
 		
 	}
 	
+	/**
+	 * This method sets the service points.
+	 * @param pisteet
+	 */
 	public void setPalvelupisteet(ArrayList<Palvelupiste> pisteet) {
 		
 		this.palvelupisteet = new Palvelupiste[pisteet.size()];
@@ -89,35 +114,62 @@ public class Tulokset implements Serializable{
 		
 	}
 	
+	/**
+	 * this method sets the groups if user decide to simulate using groups.
+	 * @param ryhmat
+	 */
 	public void setRyhmat(int ryhmat) {
 		this.ryhmat = ryhmat;
 	}
 	
-	
+	/**
+	 * 
+	 * @return how many groups the program simulating.
+	 */
 	public int getRyhmat() {
 		
 		return ryhmat;
 	}
 	
+	/**
+	 * This method sets how long time between the groups.
+	 * @param porrastusaika
+	 */
 	public void setPorrastusAika(int porrastusaika) {
 		this.porrastusaika = porrastusaika;
 	}
 	
+	/**
+	 *
+	 * @return how long time should the group wait to come to the line.
+	 */
 	public double getPorrastusAika() {
 		
 		return porrastusaika;
 	}
 	
+	/**
+	 * This method sets how many students the program simulates. 
+	 * @param asiakkaat
+	 */
 	public void setAsiakkaat(int asiakkaat) {
 		
 		this.asiakkaat = asiakkaat;
 	}
 	
+	/**
+	 * 
+	 * @return how many students the user decides to simulates.
+ 	 */
 	public int getAsiakkaat() {
 		
 		return asiakkaat;
 	}
 	
+	/**
+	 * This method sets how many students arrive to the system.
+	 * @param maara
+	 */
 	public void setSaapuneetasiakkaat(int maara) {
 		
 		this.saapuneetasiakkaat = 0;
@@ -125,6 +177,10 @@ public class Tulokset implements Serializable{
 		
 	}
 	
+	/**
+	 * This method sets how many students leave the system.
+	 * @param maara
+	 */
 	public void setPoistuneetasiakkaat(int maara) {
 		
 		this.poistuneetasiakkaat = 0;
@@ -132,12 +188,20 @@ public class Tulokset implements Serializable{
 		
 	}
 	
+	/**
+	 * 
+	 * @return how many students arrive the system.
+	 */
 	public int getSaapuneetasiakkaat() {
 		
 		return saapuneetasiakkaat;
 		
 	}
 	
+	/**
+	 * 
+	 * @return how many students leave the system.
+	 */
 	public int getPoistuneetasiakkaat() {
 		
 		return poistuneetasiakkaat;
@@ -145,7 +209,12 @@ public class Tulokset implements Serializable{
 	}
 	
 	
-	
+	/**
+	 * This method sets the service points the system simulates.  
+	 * @param palvelupisteet
+	 * @param ruokalinja
+	 * @param kassat
+	 */
 	public void setPalvelupiste(Palvelupiste [] palvelupisteet, int ruokalinja, int kassat) {
 		
 		this.palvelupisteet = palvelupisteet;
@@ -155,7 +224,10 @@ public class Tulokset implements Serializable{
 		
 	}
 	
-	
+	/**
+	 * This method adds student to the list of the students.
+	 * @param asiakas
+	 */
 	public void lisaaAsiakasTulosListalle(Asiakas asiakas) {
 		
 		asiakaslista.add(asiakas);
@@ -177,25 +249,39 @@ public class Tulokset implements Serializable{
 	}
 	*/
 	
+	/**
+	 * This method sets how many students arrive to the food line.
+	 */
 	public void setRuokaAsiakas() {
 		
 		ruokaAsiakas++;
 		
 	}
 	
-	
+	/**
+	 * 
+	 * @return how many students are lining for the food.
+	 */
 	public int  getRuokaAsiakas() {
 		
 		return ruokaAsiakas;
 		
 	}
 	
+	/**
+	 * This method adds student to the list of dining room.
+	 * @param maara
+	 */
 	public void setRuokasaliAika(double maara) {
 		
 		ruokasalilista.add(maara);
 		
 	}
 
+	/**
+	 * 
+	 * @return the average time of the student spends in the dining room.
+	 */
 	public double getKeskimaarainenRuokasaliAika() {
 		
 		double aika = 0;
@@ -210,8 +296,12 @@ public class Tulokset implements Serializable{
 		
 		
 	}
-
-
+	
+	/**
+	 * This method return the busy time of the service point/s.
+	 * @param type (Service points)
+	 * @return	the busy time of the servie point/s.
+	 */
 	public double getAktiiviAika_B(Palvelupisteet type) {
 		
 		double ruokalinjastoAktiiviAika = 0;
@@ -246,6 +336,11 @@ public class Tulokset implements Serializable{
 	}
 
 
+	/**
+	 * This method return the served students of the service point/s.
+	 * @param type (Service points)
+	 * @return the served students of the service point/s.
+	 */
 	public int getPalvellutAsiakkaat_C(Palvelupisteet type) {
 		
 		int ruokalinjastoAsiakkaat = 0;
@@ -279,6 +374,7 @@ public class Tulokset implements Serializable{
 	}
 
 
+	
 	public void setPalvellutAsiakkaat_C(int palvellutAsiakkaat_C) {
 		
 		this.palvellutAsiakkaat_C = palvellutAsiakkaat_C;
@@ -286,11 +382,19 @@ public class Tulokset implements Serializable{
 	}
 
 
+	/**
+	 * This method returns the simulation time.
+	 * @return the simulation time.
+	 */
 	public double getKokonaisAika_T() {
 		
 		return Kello.getInstance().getAika();
 	}
 	
+	/**
+	 * This method returns simulation's end time.
+	 * @return simulation's end time.
+	 */
 	public double getEndTime() {
 		
 		return Simulaattori.getEndTime();
@@ -305,24 +409,42 @@ public class Tulokset implements Serializable{
 	}
 
 
+	/**
+	 * This method calculate the utilization rate of the service point/s.
+	 * @param type (Service points)
+	 * @return utilization rate of the service point/s.
+	 */
 	public double getKayttoaste_U(Palvelupisteet type) {		//Palauttaa palvelupisteen käyttöaste B/T
 	
 		return (getAktiiviAika_B(type) / getKokonaisAika_T());
 		
 	}
 	
+	/**
+	 * This method calculate the average of the utilization rate of the service point/s.
+	 * @param type (Service points)
+	 * @return the average of utilization rate of the service point/s.
+	 */
 	public double getKeskiKayttoaste(Palvelupisteet type) {
 				
 		return (getAktiiviAika_B(type) / Simulaattori.getEndTime());
 	}
 	
+	/**
+	 * This method calculate the throughput of the service point/s.
+	 * @param type (Service points)
+	 * @return the throughput value of the service point/s.
+	 */
 	public double getSuoritusteho_X(Palvelupisteet type) {		// palauttaa Throughput tai suoritusteho. C/T
 		
 		return (double) (getPalvelupisteenPalvelematAsiakkaat(type) / getKokonaisAika_T());
 		
 	}
 	
-	
+	/**
+	 * This method calculates how long is the waiting time of the students.
+	 * @return the waiting time of the students during the simulation.
+	 */
 	public double getKeskimaarainenJonotusAika() { 
 		
 		double jonotusAika = 0;
@@ -332,6 +454,10 @@ public class Tulokset implements Serializable{
 		return jonotusAika;
 	}
 	
+	/**
+	 * This method calculates how long is the service time of each service point.
+	 * @return  the service time of each service point.
+	 */
 	public double getAsiakkaidenPalveluAika_S() {		// palauttaa palveluaika tai Service time B/C
 		
 		double ruoka = getAktiiviAika_B(Palvelupisteet.RUOKALINJASTO);
@@ -345,13 +471,21 @@ public class Tulokset implements Serializable{
 		return kaikki/asiakaslista.size()-1;
 	}
 	
+	/**
+	 *  This method calculates the response time.
+	 * @return the response time.
+	 */
 	public double getResponseTime_R() {
 		
 		return (double) (getKeskimaarainenJonotusAika() / getPalvellutAsiakkaat_C(Palvelupisteet.KAIKKI));
 		
 	}
 	
-	
+	/**
+	 * This method calculates how many students have been served.
+	 * @param type (Service points)
+	 * @return how many students have been served.
+	 */
 	public int getPalvelupisteenPalvelematAsiakkaat(Palvelupisteet type) {
 		
 		int asiakkaat = 0;
@@ -396,6 +530,11 @@ public class Tulokset implements Serializable{
 		
 	}
 	
+	/**
+	 * This method calculates how long the line of the service point/s.
+	 * @param type (Service points)
+	 * @return the long of the line of the service point/s.
+	 */
 	public int getJononpituus(Palvelupisteet type) {
 		
 		int ruokajono = 0;
@@ -442,19 +581,31 @@ public class Tulokset implements Serializable{
 			
 	}
 	
-	
+	/**
+	 * This method return how long is the longest cashier's line is.
+	 * @return how long is the longest cashier's line is during the simulation.
+	 */
 	public int getKassaMaxJono() {
 		
 		return kassaMaxjono;
 		
 	}
 	
+	/**
+	 *  This method return how long is the longest food line is.
+	 * @return the longest food line.
+	 */
 	public int getRuokalinjastoMaxJono() {
 		
 		return ruokaMaxJono;
 		
 	}
 	
+	/**
+	 * This method returns the longest line of the service point/s line during the simulation. 
+	 * @param type (Service points)
+	 * @return the longest line of the service point/s line during the simulation.
+	 */
 	public int getMaXJononpituus(Palvelupisteet type) {
 		
 		int ruokajono = 0;
@@ -489,10 +640,11 @@ public class Tulokset implements Serializable{
 			
 	}
 	
-
-	
-	
-	public double getkeskimaarainenLapiMenoAika() { //keskimääräinen arvo....toimii näin Mohammed, johtuen "raportti metodista, ei tarvitse koskea.
+	/**
+	 * Ths method return the average of the lead time.
+	 * @return the average of the lead time.
+	 */
+	public double getkeskimaarainenLapiMenoAika() {
 		
 		double lapimeno = 0;
 		
@@ -507,6 +659,10 @@ public class Tulokset implements Serializable{
 		
 	}
 	
+	/**
+	 * This method return the list of the students arrive to the system.
+	 * @return the list of the students arrive to the system.
+	 */
 	public ArrayList<Asiakas> getAsiakasLista() {
 		
 		return asiakaslista;
@@ -514,6 +670,10 @@ public class Tulokset implements Serializable{
 		
 	}
 	
+	/**
+	 * This method sets how many students arrive to the system as a list.
+	 * @param list (Students)
+	 */
 	public static void setAsiakasLista(ArrayList<Asiakas> list) {
 		asiakaslista = list;
 	}

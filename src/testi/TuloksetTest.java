@@ -32,7 +32,8 @@ class TuloksetTest {
 		tulokset = Tulokset.getInstance();
 		kello = Kello.getInstance();
 		kello.setAika(12600000);
-		
+		tulokset.setPalvelupiste(myllypuro, ruokalinja, kassat);
+
 		Asiakas as;
 		for(int i = 0; i < 100; i++) {
 			as = new Asiakas();
@@ -47,7 +48,7 @@ class TuloksetTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		this.myllypuro = new Palvelupiste[ruokalinja + kassat];
+		myllypuro = new Palvelupiste[ruokalinja + kassat];
 	}
 
 	@AfterEach
@@ -156,7 +157,7 @@ class TuloksetTest {
 		assertEquals(3000.0,tulokset.getKokonaisAika_T(),"setKokonaisAika_T metodi ei toimi");
 	}
 	*/
-	@DisplayName("Onko kayttoaste haettu oikein?")
+	@DisplayName("Onko käyttöaste haettu oikein?")
 	@Test
 	void testGetKayttoaste_U() {
 		
@@ -171,7 +172,7 @@ class TuloksetTest {
 		}
 		
 		
-		assertEquals(0.0000284,tulokset.getKayttoaste_U(Palvelupisteet.KAIKKI),0.0000001,"VÃ¤Ã¤rÃ¤ kÃ¤yttÃ¶aste arvo.");
+		assertEquals(0.0000284,tulokset.getKayttoaste_U(Palvelupisteet.KAIKKI),0.0000001,"Väärä arvo.");
 		
 	}
 	/*

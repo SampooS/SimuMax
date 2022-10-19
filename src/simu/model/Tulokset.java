@@ -14,7 +14,7 @@ import testi.Simulaattori;
  */
 public class Tulokset implements Serializable{
 	/**
-	 * This is a class for calculating all the data and return the values.
+	 * This is a class for calculating all the data and return the required values.
 	 */
 	private static final long serialVersionUID = 1L;
 	//public int asiakasMaara_A; // A arrival count

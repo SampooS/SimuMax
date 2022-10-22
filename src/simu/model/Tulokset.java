@@ -164,14 +164,14 @@ public class Tulokset implements Serializable{
 	/**
 	 * this method sets the groups if user decide to simulate using groups.
 	 *
-	 * @param ryhmat the new ryhmat
+	 * @param ryhmat the new groups
 	 */
 	public void setRyhmat(int ryhmat) {
 		this.ryhmat = ryhmat;
 	}
 	
 	/**
-	 * Gets the ryhmat.
+	 * Gets the groups.
 	 *
 	 * @return how many groups the program simulating.
 	 */
@@ -183,14 +183,14 @@ public class Tulokset implements Serializable{
 	/**
 	 * This method sets how long time between the groups.
 	 *
-	 * @param porrastusaika the new porrastus aika
+	 * @param porrastusaika the new gradation time
 	 */
 	public void setPorrastusAika(int porrastusaika) {
 		this.porrastusaika = porrastusaika;
 	}
 	
 	/**
-	 * Gets the porrastus aika.
+	 * Gets the gradation time.
 	 *
 	 * @return how long time should the group wait to come to the line.
 	 */
@@ -202,7 +202,7 @@ public class Tulokset implements Serializable{
 	/**
 	 * This method sets how many students the program simulates. 
 	 *
-	 * @param asiakkaat the new asiakkaat
+	 * @param asiakkaat the new students count
 	 */
 	public void setAsiakkaat(int asiakkaat) {
 		
@@ -318,7 +318,7 @@ public class Tulokset implements Serializable{
 	}
 	
 	/**
-	 * Gets the ruoka asiakas.
+	 * Gets the food client (student).
 	 *
 	 * @return how many students are lining for the food.
 	 */
@@ -331,7 +331,7 @@ public class Tulokset implements Serializable{
 	/**
 	 * This method adds student to the list of dining room.
 	 *
-	 * @param maara the new ruokasali aika
+	 * @param maara the new dining room time
 	 */
 	public void setRuokasaliAika(double maara) {
 		
@@ -340,7 +340,7 @@ public class Tulokset implements Serializable{
 	}
 
 	/**
-	 * Gets the keskimaarainen ruokasali aika.
+	 * Gets the average time spent in the dining room.
 	 *
 	 * @return the average time of the student spends in the dining room.
 	 */
@@ -704,7 +704,7 @@ public class Tulokset implements Serializable{
 	}
 	
 	/**
-	 * Ths method return the average of the lead time.
+	 * The method return the average of the lead time.
 	 * @return the average of the lead time.
 	 */
 	public double getkeskimaarainenLapiMenoAika() {

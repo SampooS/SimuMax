@@ -4,6 +4,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.scene.effect.BoxBlur;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Glow;
 import javafx.scene.effect.SepiaTone;
 import javafx.scene.layout.Pane;
@@ -12,21 +13,11 @@ import javafx.util.Duration;
 public class Visualeffects {
 	
 	
-	public Visualeffects() {
-		
-		
-		
-		
-		
-	}
-	
-	
-	
 	public Glow setHoverOn(double maara) {
 		
 		Glow glow = new Glow();
 		glow.setLevel(maara);
-		
+	
 		return glow;
 		
 	}
@@ -89,5 +80,34 @@ public class Visualeffects {
         timeline.play();	
 		
 	}
-
+	
+	public ColorAdjust setVariJonoPalkeille(int maara) {
+		
+		ColorAdjust vari = new ColorAdjust();
+		
+		if(maara < 100) {
+			
+			vari.setHue(0);
+			vari.setSaturation(0);
+			
+		}else if(maara > 100 && maara < 150) {
+			
+			vari.setSaturation(0.1);
+			vari.setHue(-0.45);
+			
+		}else if(maara > 150 && maara < 200) {
+			
+			vari.setSaturation(0.25);
+			vari.setHue(-0.65);
+			
+		}else if(maara > 200) {
+			
+			vari.setSaturation(0.75);
+			vari.setHue(-0.65);
+			
+		}
+		
+		return vari;
+			
+	}
 }

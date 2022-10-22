@@ -4,18 +4,14 @@ import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import simu.framework.Kello;
 import testi.Simulaattori;
 
 public class Tulokset implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	//public int asiakasMaara_A; // A arrival count
-	private double aktiiviAika_B; // B Busy time
 	public int palvellutAsiakkaat_C = 0; // C completed count
 	public double kokonaisAika_T; // T simuloinnin aika 
-	//Asiakas [] asiakasTaulukko;
 	public static ArrayList<Asiakas> asiakaslista = new ArrayList<>();
 	public Palvelupiste [] palvelupisteet;
 	private ArrayList<Double> ruokasalilista = new ArrayList<>();
@@ -26,17 +22,14 @@ public class Tulokset implements Serializable{
 	public int asiakkaat;
 	public int saapuneetasiakkaat;
 	public int poistuneetasiakkaat;
-	
 	private int kassaMaxjono;
 	private int ruokaMaxJono;
-	
 	private int ruokaAsiakas;
-	
 	private int linjasto;
 	private int kassa;
 	
-	private Alkuarvot alkuarvot;
 	
+	@SuppressWarnings("exports")
 	public ResultSet dummy;
 	
 	public enum Palvelupisteet{RUOKALINJASTO, KASSA, RUOKASALI, KAIKKI}
@@ -163,20 +156,6 @@ public class Tulokset implements Serializable{
 	}
 	
 
-
-
-	/*
-	public int getAsiakkaat_A() {
-		
-		return asiakaslista.size();
-	}
-
-
-	public void setAsiakkaat_A(int asiakasMaara_A) {
-		this.asiakasMaara_A = asiakasMaara_A;
-	}
-	*/
-	
 	public void setRuokaAsiakas() {
 		
 		ruokaAsiakas++;
@@ -206,9 +185,7 @@ public class Tulokset implements Serializable{
 			
 		}
 		
-		return aika;
-		
-		
+		return aika;	
 	}
 
 
@@ -338,11 +315,8 @@ public class Tulokset implements Serializable{
 		double ruoka = getAktiiviAika_B(Palvelupisteet.RUOKALINJASTO);
 		double kassa = getAktiiviAika_B(Palvelupisteet.KASSA);
 		double ruokasali = getAktiiviAika_B(Palvelupisteet.RUOKASALI);
-		
 		double kaikki = ruoka + kassa + ruokasali;
-		
-		//return kaikki/asiakaslista.get(asiakaslista.size() - 1).getId();
-		//vaihdetaan tarvitaessa kun halutaan selvitää yhden palvelupisteen service time
+	
 		return kaikki/asiakaslista.size()-1;
 	}
 	
@@ -356,7 +330,6 @@ public class Tulokset implements Serializable{
 	public int getPalvelupisteenPalvelematAsiakkaat(Palvelupisteet type) {
 		
 		int asiakkaat = 0;
-		
 		int ruokaAsiakkaat = 0;
 		int kassaAsiakkaat = 0;
 		int ruokalaAsiakkaat = 0;
@@ -391,10 +364,7 @@ public class Tulokset implements Serializable{
 		    break;
 		}
 		
-		return asiakkaat;
-		
-		
-		
+		return asiakkaat;		
 	}
 	
 	public int getJononpituus(Palvelupisteet type) {
@@ -473,7 +443,6 @@ public class Tulokset implements Serializable{
 			
 		}
 
-		
 		switch (type){
 		
 		case RUOKALINJASTO: return ruokajono;
@@ -490,9 +459,6 @@ public class Tulokset implements Serializable{
 			
 	}
 	
-
-	
-	
 	public double getkeskimaarainenLapiMenoAika() { //keskimääräinen arvo....toimii näin Mohammed, johtuen "raportti metodista, ei tarvitse koskea.
 		
 		double lapimeno = 0;
@@ -502,7 +468,6 @@ public class Tulokset implements Serializable{
 			lapimeno += asiakas.getLapimenoAika_Ri();
 			
 		}
-		//asiakaslista.get(asiakaslista.size() - 1).getKeskimaarainenLapimenoAika()
 		
 		return (lapimeno / asiakaslista.size()-1);
 		
@@ -517,20 +482,5 @@ public class Tulokset implements Serializable{
 	
 	public static void setAsiakasLista(ArrayList<Asiakas> list) {
 		asiakaslista = list;
-	}
-	
-	public String toString() {
-		
-		return "Ruokalinjaston keskimääräinen aktiiviaika: " + (getAktiiviAika_B(Palvelupisteet.RUOKALINJASTO)/1000) + " sekuntia" + " Kokonaisajasta " + (getKokonaisAika_T()/1000)+ " sekuntia." +  "\n"+
-			   "Kassan keskimääräinen aktiiviaika: " + (getAktiiviAika_B(Palvelupisteet.KASSA)/1000) + " sekuntia" + " Kokonaisajasta " + (getKokonaisAika_T()/1000) + " sekuntia." +  "\n"+
-			   "Ruokasalin aktiiviaika: " + (getAktiiviAika_B(Palvelupisteet.RUOKASALI)/1000)+ " sekuntia" + " Kokonaisajasta " + (getKokonaisAika_T()/1000) + " sekuntia." +  "\n" +
-			   "Asiakkaiden keskimääräinen palveluaika kaikki pisteet yhteensä: " + getAsiakkaidenPalveluAika_S()/1000 + " sekuntia." + "\n" +
-			   "Pisin jono kassoille oli: " + getMaXJononpituus(Palvelupisteet.KASSA) + "\n" +
-			   "Asiakkaiden keskimääräinen läpimenoaika: " + asiakaslista.get(asiakaslista.size() - 1).getKeskimaarainenLapimenoAika()/1000 + " sekuntia." + "\n" +
-			   "Kaikkien pisteiden aktiiviaika: " + (getAktiiviAika_B(Palvelupisteet.KAIKKI)/1000) + " sekuntia." + "\n" + 
-			   // HUOM poista -2, kun ruokala kunnolla toteutettu! Muuten aktiiviajan laskenta hirtt�� ittens�
-			   "Kaikkien pisteiden keskimääräinen aktiiviaika: " + (getAktiiviAika_B(Palvelupisteet.KAIKKI)/(palvelupisteet.length-2)/1000) + " sekuntia.";
-		
-	}
-	
+	}	
 }

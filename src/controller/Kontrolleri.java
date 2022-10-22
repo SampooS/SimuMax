@@ -2,11 +2,8 @@ package controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
-
 import javafx.application.Platform;
 import simu.framework.IMoottori;
-import simu.model.Alkuarvot;
 import simu.model.DBAccessObject;
 import simu.model.OmaMoottori;
 import simu.model.Tulokset;
@@ -51,12 +48,6 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 		
 	}
 	
-	@Override
-	public void pause() {
-				
-		//Tehhää jottai
-		
-	}
 	
 	@Override
 	public void tallenna() {
@@ -66,16 +57,6 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 	}
 	
 
-		
-	/*
-	@Override
-	public void naytaLoppuaika(double aika) {
-		
-		Platform.runLater(()->ui.setLoppuaika(aika));
-		
-	}
-	
-	*/
 
 	@Override
 	public void visualisoiAsiakas(int asiakasmaara) {
@@ -92,25 +73,28 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 
 	}
 	
-	
+	@Override
 	public void naytaAsiakkaidenKeskimaarainenPalveluaika(double aika) { 
 		
 		Platform.runLater(() -> ui.getVisualisointi().setAsiakkaidenKeskimaarainenPalveluaika(aika));
 		
 	}
 	
+	@Override
 	public void naytaPisinJonoRuokalinjastolle(int maara) {
 		
 		Platform.runLater(() -> ui.getVisualisointi().setPisinJonoRuokalinjastolle(maara));
 	
 	}
 	
+	@Override
 	public void naytaLapiPaasseetAsiakkaat(int poistumismaara) {
 		
 		Platform.runLater(() -> ui.getVisualisointi().setLapiPaasseetAsiakkaat(poistumismaara));
 		
 	}
 	
+	@Override
 	public void naytaRuokalinjastonAktiiviaika(double aika) {
 		
 		Platform.runLater(() -> ui.getVisualisointi().setRuokalinjastonAktiiviaika(aika));
@@ -159,13 +143,6 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 
 
 	@Override
-	public void naytaRuokalinjastoAsiakkaatPalveltu(int maara) {
-		
-		Platform.runLater(() -> ui.getVisualisointi().setRuokalinjastonAsiakkatPalveltu(maara));
-		
-	}
-
-	@Override
 	public void naytaRuokalinjastonKayttoaste(double maara) {
 		
 		Platform.runLater(() -> ui.getVisualisointi().setRuokalinjastoKayttoaste(maara));
@@ -179,12 +156,6 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 		
 	}
 
-	@Override
-	public void naytaKassaAsiakkaatPalveltu(int maara) {
-		
-		Platform.runLater(() -> ui.getVisualisointi().setKassaPalvellutAsiakkaat(maara));
-		
-	}
 
 	@Override
 	public void naytaKassaKayttoaste(double maara) {
@@ -231,7 +202,6 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 	@Override
 	public void getLoadlist() {
 		
-
 		String[] ajot = db.getAjoTimeStamp();
 		ArrayList<String> sendajot = new ArrayList<>();
 		
@@ -241,16 +211,13 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 			
 		}
 		
-		//Collections.reverse(sendajot);
 		setLoadlist(sendajot);
 	}
 
 	@Override
 	public void setAjolist() {
 		
-		
 		Platform.runLater(() -> ui.getVisualisointi().setEsitiedotRuudulle(db.getKaikkiAjot()));
-		
 		
 	}
 
@@ -270,18 +237,8 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 	@Override
 	public void getLoadTulokset() {
 		
-		//moottori = new OmaMoottori(this);
 		moottori.setLataukset();
 		
 	}
 	
-
-	@Override
-	public void setAsiakasChart(int saapunut, int poistunut, double lapimeno, double jonotusaika, double palveluaika) {
-		
-		Platform.runLater(() -> ui.getVisualisointi().setAsiakasChart(saapunut, poistunut, lapimeno, jonotusaika, palveluaika));
-		
-	}
-
-
 }

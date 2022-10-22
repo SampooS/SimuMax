@@ -4,7 +4,7 @@ package simu.model;
 public class Alkuarvot {
 
 	
-	private int ruokalinja, kassat, asiakkaat, ryhmienMaara, muuttuvaRyhma;
+	private int ruokalinja, kassat, asiakkaat, ryhmienMaara;
 	private double porrastusMaara;
 
 	public Alkuarvot(int ruokalinja, int kassat, int asiakkaat,int ryhmienMaara, double porrastusMaara) {
@@ -45,11 +45,4 @@ public class Alkuarvot {
 		return porrastusMaara;
 	}
 	
-	
-	
-	public void setPorrastusMaara() {
-		
-		
-		
-	}
 }

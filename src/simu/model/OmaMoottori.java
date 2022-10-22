@@ -1,7 +1,6 @@
 package simu.model;
 
 import eduni.distributions.ContinuousGenerator;
-import eduni.distributions.Generator;
 import eduni.distributions.Negexp;
 import eduni.distributions.Normal;
 import simu.framework.Kello;
@@ -44,7 +43,7 @@ public class OmaMoottori extends Moottori{
 	
 	public void setSimulointiLahtoArvot(int ruokalinja, int rekisteri, int asiakkaat, int ryhmienmaara, double porrastusMaara) {
 			
-		this.linjastot = ruokalinja * 10; //Testi........
+		this.linjastot = ruokalinja * 10;
 		this.kassat = rekisteri;
 		this.ryhmienMaara = ryhmienmaara;
 		final int ryhmaKoko = asiakkaat/ryhmienMaara;
@@ -73,14 +72,9 @@ public class OmaMoottori extends Moottori{
 			
 		}
 	
-		
-		
 		palvelupisteet[linjastot+kassat]=new Palvelupiste(new Normal(1, 1), tapahtumalista, TapahtumanTyyppi.DEP3);	
 		ryhmaSaapumisProsessi = new RyhmaSaapumisProsessi(tapahtumalista,TapahtumanTyyppi.RYHMASAAPUMINEN,porrastusAika);
-		saapumisprosessi = new Saapumisprosessi(new Negexp(6000,3000), tapahtumalista, TapahtumanTyyppi.ARR1,ryhmaKoko);
-		
-		
-		
+		saapumisprosessi = new Saapumisprosessi(new Negexp(6000,3000), tapahtumalista, TapahtumanTyyppi.ARR1,ryhmaKoko);	
 		
 	}
 	
@@ -96,8 +90,6 @@ public class OmaMoottori extends Moottori{
 			ryhmaSaapumisProsessi.generoiSeuraava();
 			
 		}
-		
-		
 	}
 	
 	private boolean onkoVielaRyhmia() {
@@ -201,7 +193,7 @@ public class OmaMoottori extends Moottori{
 					   source = t.getDirection();
 					   a = palvelupisteet[source].otaJonosta();
 				   	   palvelupisteet[linjastot + kassat].lisaaJonoon(a); 
-				   	   tapahtuneet.add(t);// ..........................................................................................onko oikeassa kohdassa???
+				   	   tapahtuneet.add(t);
 		   	     break;  
 				
 				// Asiakas heivataan helvettiin simulaatiosta ja loppuaika kirjataan.
@@ -231,14 +223,12 @@ public class OmaMoottori extends Moottori{
         kontrolleri.naytaAsiakkaanLapimenoAika(tulokset.getkeskimaarainenLapiMenoAika());
        
 		
-		kontrolleri.naytaRuokalinjastoAsiakkaatPalveltu(tulokset.getPalvelupisteenPalvelematAsiakkaat(Palvelupisteet.RUOKALINJASTO));
 		kontrolleri.naytaRuokalinjastonAktiiviaika(tulokset.getAktiiviAika_B(Palvelupisteet.RUOKALINJASTO));
 		kontrolleri.naytaRuokalinjastonKayttoaste(tulokset.getKayttoaste_U(Palvelupisteet.RUOKALINJASTO));
 		kontrolleri.naytaRuokalinjastonKeskikayttoaste(tulokset.getKeskiKayttoaste(Palvelupisteet.RUOKALINJASTO));
 		kontrolleri.naytaRuokalinjastonSuoritusteho(tulokset.getSuoritusteho_X(Palvelupisteet.RUOKALINJASTO));
 		
 		
-		kontrolleri.naytaKassaAsiakkaatPalveltu(tulokset.getPalvelupisteenPalvelematAsiakkaat(Palvelupisteet.KASSA));
 		kontrolleri.naytaKassaAktiiviaika(tulokset.getAktiiviAika_B(Palvelupisteet.KASSA));
 		kontrolleri.naytaKassaKayttoaste(tulokset.getKayttoaste_U(Palvelupisteet.KASSA));
 		kontrolleri.naytaKassaKeskikayttoaste(tulokset.getKeskiKayttoaste(Palvelupisteet.KASSA));
@@ -250,54 +240,15 @@ public class OmaMoottori extends Moottori{
 			
 	}
 	
-	@Override
-	public void setLatausTulokset() {
-		
-		
-		kontrolleri.naytaKellonAika(Simulaattori.getEndTime());
-		
-		/*
-		 * 
-		kontrolleri.visualisoiAsiakas(tulokset.getSaapuneetasiakkaat());
-		kontrolleri.naytaLapiPaasseetAsiakkaat(tulokset.getPoistuneetasiakkaat());
-		
-		kontrolleri.naytaRuokaJononPituus(tulokset.getJononpituus(Palvelupisteet.RUOKALINJASTO));
-		kontrolleri.naytaPisinJonoRuokalinjastolle(tulokset.getMaXJononpituus(Palvelupisteet.RUOKALINJASTO));
-		kontrolleri.naytaKassaJononPituus(tulokset.getJononpituus(Palvelupisteet.KASSA));
-		kontrolleri.naytaPisinJonoKassoille(tulokset.getMaXJononpituus(Palvelupisteet.KASSA));
-		
-		
-		kontrolleri.naytaAsiakkaidenKeskimaarainenPalveluaika(tulokset.getAsiakkaidenPalveluAika_S());
-		kontrolleri.naytaKeskiOdotusAika(tulokset.getKeskimaarainenJonotusAika());
-        kontrolleri.naytaAsiakkaanLapimenoAika(tulokset.getkeskimaarainenLapiMenoAika());
-        kontrolleri.setAsiakasChart(tulokset.getSaapuneetasiakkaat(), tulokset.getPoistuneetasiakkaat(),
-        tulokset.getkeskimaarainenLapiMenoAika(), tulokset.getKeskimaarainenJonotusAika(), tulokset.getAsiakkaidenPalveluAika_S());
-        
-        
-		
-		//kontrolleri.naytaRuokalinjastoAsiakkaatPalveltu(tulokset.getPalvelupisteenPalvelematAsiakkaat(Palvelupisteet.RUOKALINJASTO));
-		kontrolleri.naytaRuokalinjastonAktiiviaika(tulokset.getAktiiviAika_B(Palvelupisteet.RUOKALINJASTO));
-		kontrolleri.naytaRuokalinjastonKayttoaste(tulokset.getKayttoaste_U(Palvelupisteet.RUOKALINJASTO));
-		kontrolleri.naytaRuokalinjastonKeskikayttoaste(tulokset.getKeskiKayttoaste(Palvelupisteet.RUOKALINJASTO));
-		kontrolleri.naytaRuokalinjastonSuoritusteho(tulokset.getSuoritusteho_X(Palvelupisteet.RUOKALINJASTO));
-		
-		
-		//kontrolleri.naytaKassaAsiakkaatPalveltu(tulokset.getPalvelupisteenPalvelematAsiakkaat(Palvelupisteet.KASSA));
-		kontrolleri.naytaKassaAktiiviaika(tulokset.getAktiiviAika_B(Palvelupisteet.KASSA));
-		kontrolleri.naytaKassaKayttoaste(tulokset.getKayttoaste_U(Palvelupisteet.KASSA));
-		kontrolleri.naytaKassaKeskikayttoaste(tulokset.getKeskiKayttoaste(Palvelupisteet.KASSA));
-		//kontrolleri.naytaKassaSuoritusteho(tulokset.getSuoritusteho_X(Palvelupisteet.KASSA));
-		*/
-		
-		
-	}
 	
 	public void setLataukset() {
+		
 		try {
 		ResultSet rs = Tulokset.getInstance().dummy;
 		
 		rs.next();
 		
+		kontrolleri.naytaKellonAika(Simulaattori.getEndTime());
 		kontrolleri.visualisoiAsiakas(rs.getInt(5));
 		kontrolleri.naytaLapiPaasseetAsiakkaat(rs.getInt(6));
 		
@@ -310,19 +261,14 @@ public class OmaMoottori extends Moottori{
 		kontrolleri.naytaAsiakkaidenKeskimaarainenPalveluaika(rs.getDouble(3));
 		kontrolleri.naytaKeskiOdotusAika(rs.getDouble(4));
         kontrolleri.naytaAsiakkaanLapimenoAika(rs.getDouble(7));
-        kontrolleri.setAsiakasChart(rs.getInt(5), rs.getInt(6),
-        rs.getDouble(6), rs.getDouble(4), rs.getDouble(3));
+
         
-        
-		
-		kontrolleri.naytaRuokalinjastoAsiakkaatPalveltu(rs.getInt(8));
 		kontrolleri.naytaRuokalinjastonAktiiviaika(rs.getDouble(10));
 		kontrolleri.naytaRuokalinjastonKayttoaste(0);
 		kontrolleri.naytaRuokalinjastonKeskikayttoaste(rs.getDouble(14));
 		kontrolleri.naytaRuokalinjastonSuoritusteho(rs.getDouble(16));
 		
 		
-		kontrolleri.naytaKassaAsiakkaatPalveltu(rs.getInt(8));
 		kontrolleri.naytaKassaAktiiviaika(rs.getDouble(11));
 		kontrolleri.naytaKassaKayttoaste(0);
 		kontrolleri.naytaKassaKeskikayttoaste(rs.getDouble(15));
@@ -339,17 +285,8 @@ public class OmaMoottori extends Moottori{
 	@Override
 	protected void tulokset() {	
 		
-		System.out.println("\n" + "Simulointi päättyi kello " + (Kello.getInstance().getAika()/1000) + " sekuntia." + "\n");
-		
-		System.out.println(tulokset);
-		
-		System.out.println(Asiakas.kikkeli + " kikkeliä");
-		
-		//System.out.println("W = " + tulokset.getOdotusAika_W());
-		kontrolleri.naytaKeskiOdotusAika(tulokset.getKeskimaarainenJonotusAika()); // Jottain pittee tehä // se on tehty :D
-		kontrolleri.tallenna();
-		//kontrolleri.naytaLoppuaika(Kello.getInstance().getAika());
-				
+		kontrolleri.naytaKeskiOdotusAika(tulokset.getKeskimaarainenJonotusAika());
+		kontrolleri.tallenna();		
 		
 	}
 	

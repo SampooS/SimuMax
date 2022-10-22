@@ -594,9 +594,9 @@ public class Tulokset implements Serializable{
 	}
 	
 	/**
-	 * This method calculates how long the line of the service point/s.
+	 * This method calculates how long the queue of the service point/s.
 	 * @param type (Service points)
-	 * @return the long of the line of the service point/s.
+	 * @return the long of the queue of the service point/s.
 	 */
 	public int getJononpituus(Palvelupisteet type) {
 		
@@ -645,8 +645,8 @@ public class Tulokset implements Serializable{
 	}
 	
 	/**
-	 * This method return how long is the longest cashier's line is.
-	 * @return how long is the longest cashier's line is during the simulation.
+	 * This method return how long is the longest cashier's queue is.
+	 * @return how long is the longest cashier's queue is during the simulation.
 	 */
 	public int getKassaMaxJono() {
 		
@@ -655,8 +655,8 @@ public class Tulokset implements Serializable{
 	}
 	
 	/**
-	 *  This method return how long is the longest food line is.
-	 * @return the longest food line.
+	 *  This method return how long is the longest food queue is.
+	 * @return the longest food queue.
 	 */
 	public int getRuokalinjastoMaxJono() {
 		
@@ -665,9 +665,9 @@ public class Tulokset implements Serializable{
 	}
 	
 	/**
-	 * This method returns the longest line of the service point/s line during the simulation. 
+	 * This method returns the longest queue of the service point/s during the simulation. 
 	 * @param type (Service points)
-	 * @return the longest line of the service point/s line during the simulation.
+	 * @return the longest queue of the service point/s during the simulation.
 	 */
 	public int getMaXJononpituus(Palvelupisteet type) {
 		

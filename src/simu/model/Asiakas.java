@@ -1,8 +1,6 @@
 package simu.model;
 
 import simu.framework.Kello;
-import simu.framework.Trace;
-
 
 /**
  * The Class Asiakas.
@@ -26,6 +24,7 @@ public class Asiakas {
 	
 	/** The direction. */
 	private int direction;
+
 	
 	/** The count . */
 	static int kikkeli = 0;
@@ -126,29 +125,15 @@ public class Asiakas {
 	 */
 	public double getKeskimaarainenLapimenoAika() {
 		
-		
-		//sum += (poistumisaika-saapumisaika);
-		//double keskiarvo = sum/id;
-		
-		return sum/id;
-		
-		
+		return sum/id;	
 		
 	}
 	
 	
 	public void raportti(){
 		
-		/*Trace.out(Trace.Level.INFO, "\nAsiakas "+id+ " valmis! " + ".................................................................................");
-		Trace.out(Trace.Level.INFO, "Asiakas "+id+ " saapui: " +saapumisaika);
-		Trace.out(Trace.Level.INFO,"Asiakas "+id+ " poistui: " +poistumisaika);
-		Trace.out(Trace.Level.INFO,"Asiakas "+id+ " viipyi: " +(poistumisaika-saapumisaika));
-		
-		*/
 		sum += (poistumisaika-saapumisaika);
 		double keskiarvo = sum/id;
-		//System.out.println("Asiakkaiden läpimenoaikojen keskiarvo tähän asti "+ keskiarvo);
-		kikkeli++;
 		
 	}	
 }

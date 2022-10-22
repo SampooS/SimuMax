@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import simu.framework.Kello;
 import testi.Simulaattori;
 
@@ -18,17 +17,21 @@ public class Tulokset implements Serializable{
 	 * This is a class for calculating all the data and return the required values.
 	 */
 	private static final long serialVersionUID = 1L;
+
 	
 	/** The busy time B. */
 	private double aktiiviAika_B; // B Busy time
 	
 	/** The served students count C. */
+
 	public int palvellutAsiakkaat_C = 0; // C completed count
 	
 	/** The simulation time T. */
 	public double kokonaisAika_T; // T simuloinnin aika 
+
 	
 	/** The students list. */
+
 	public static ArrayList<Asiakas> asiakaslista = new ArrayList<>();
 	
 	/** The service points. */
@@ -57,26 +60,36 @@ public class Tulokset implements Serializable{
 	
 	/** The leaving students. */
 	public int poistuneetasiakkaat;
+
 	
 	/** The cashier's max queue size. */
+
 	private int kassaMaxjono;
 	
 	/** The max food queue. */
 	private int ruokaMaxJono;
+
 	
 	/** The students arriving to food queue. */
+
 	private int ruokaAsiakas;
+
 	
 	/** The food queue. */
+
 	private int linjasto;
 	
 	/** The cashier. */
 	private int kassa;
 	
+
 	/** The starting simulating values. */
 	private Alkuarvot alkuarvot;
+
 	
+
 	/** The data for sql. */
+	@SuppressWarnings("exports")
 	public ResultSet dummy;
 	
 	/**
@@ -311,6 +324,7 @@ public class Tulokset implements Serializable{
 	/**
 	 * This method sets how many students arrive to the food line.
 	 */
+
 	public void setRuokaAsiakas() {
 		
 		ruokaAsiakas++;
@@ -354,9 +368,7 @@ public class Tulokset implements Serializable{
 			
 		}
 		
-		return aika;
-		
-		
+		return aika;	
 	}
 	
 	/**
@@ -527,11 +539,8 @@ public class Tulokset implements Serializable{
 		double ruoka = getAktiiviAika_B(Palvelupisteet.RUOKALINJASTO);
 		double kassa = getAktiiviAika_B(Palvelupisteet.KASSA);
 		double ruokasali = getAktiiviAika_B(Palvelupisteet.RUOKASALI);
-		
 		double kaikki = ruoka + kassa + ruokasali;
-		
-		//return kaikki/asiakaslista.get(asiakaslista.size() - 1).getId();
-		//vaihdetaan tarvitaessa kun halutaan selvitää yhden palvelupisteen service time
+	
 		return kaikki/asiakaslista.size()-1;
 	}
 	
@@ -553,7 +562,6 @@ public class Tulokset implements Serializable{
 	public int getPalvelupisteenPalvelematAsiakkaat(Palvelupisteet type) {
 		
 		int asiakkaat = 0;
-		
 		int ruokaAsiakkaat = 0;
 		int kassaAsiakkaat = 0;
 		int ruokalaAsiakkaat = 0;
@@ -588,10 +596,7 @@ public class Tulokset implements Serializable{
 		    break;
 		}
 		
-		return asiakkaat;
-		
-		
-		
+		return asiakkaat;		
 	}
 	
 	/**
@@ -687,7 +692,6 @@ public class Tulokset implements Serializable{
 			
 		}
 
-		
 		switch (type){
 		
 		case RUOKALINJASTO: return ruokajono;
@@ -708,7 +712,8 @@ public class Tulokset implements Serializable{
 	 * The method return the average of the lead time.
 	 * @return the average of the lead time.
 	 */
-	public double getkeskimaarainenLapiMenoAika() {
+	public double getkeskimaarainenLapiMenoAika() { //keskimääräinen arvo....toimii näin Mohammed, johtuen "raportti metodista, ei tarvitse koskea.
+
 		
 		double lapimeno = 0;
 		
@@ -717,7 +722,6 @@ public class Tulokset implements Serializable{
 			lapimeno += asiakas.getLapimenoAika_Ri();
 			
 		}
-		//asiakaslista.get(asiakaslista.size() - 1).getKeskimaarainenLapimenoAika()
 		
 		return (lapimeno / asiakaslista.size()-1);
 		
@@ -740,6 +744,7 @@ public class Tulokset implements Serializable{
 	 */
 	public static void setAsiakasLista(ArrayList<Asiakas> list) {
 		asiakaslista = list;
+
 	}
 	
 	/**
@@ -760,5 +765,5 @@ public class Tulokset implements Serializable{
 			   "Kaikkien pisteiden keskimääräinen aktiiviaika: " + (getAktiiviAika_B(Palvelupisteet.KAIKKI)/(palvelupisteet.length-2)/1000) + " sekuntia.";
 		
 	}
-	
+		
 }

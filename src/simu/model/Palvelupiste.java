@@ -6,7 +6,6 @@ import eduni.distributions.ContinuousGenerator;
 import simu.framework.Kello;
 import simu.framework.Tapahtuma;
 import simu.framework.Tapahtumalista;
-import simu.model.Tulokset.Palvelupisteet;
 
 
 /**
@@ -47,6 +46,7 @@ public class Palvelupiste {
 	 * @param tapahtumalista the event list
 	 * @param tyyppi the type of event
 	 */
+
 	public Palvelupiste(ContinuousGenerator generator, Tapahtumalista tapahtumalista, TapahtumanTyyppi tyyppi){
 		
 		this.tapahtumalista = tapahtumalista;
@@ -114,7 +114,6 @@ public class Palvelupiste {
 	 */
 	public Asiakas otaJonosta(){
 		
-
 		varattu = false;
 		return jono.poll();
 		
@@ -125,7 +124,6 @@ public class Palvelupiste {
 	 */
 	public void aloitaPalvelu(){
 		
-
 					int direction = jono.peek().getDirection();
 					varattu = true;	
 					double palveluaika = generator.sample();

@@ -90,16 +90,13 @@ public abstract class Moottori extends Thread implements IMoottori{
 						
 						p.aloitaPalvelu();
 						
-				}
-					
-					
+					}
+						
 				}catch(Exception e) {
 					
-					e.getStackTrace();
+						e.getStackTrace();
 					
-				}
-				
-
+					}
 		}
 	}
 	
@@ -109,7 +106,7 @@ public abstract class Moottori extends Thread implements IMoottori{
 			
 			sleep(viive);
 			
-		} catch (InterruptedException e) {e.printStackTrace();}
+		}catch (InterruptedException e) {e.printStackTrace();}
 	}
 	
 
@@ -126,12 +123,10 @@ public abstract class Moottori extends Thread implements IMoottori{
 	}
 	
 	
-	public abstract void setLatausTulokset();		
+	protected abstract void alustukset();
 	
-	protected abstract void alustukset(); // Määritellään simu.model-pakkauksessa Moottorin aliluokassa
+	protected abstract void suoritaTapahtuma(Tapahtuma t);
 	
-	protected abstract void suoritaTapahtuma(Tapahtuma t);  // Määritellään simu.model-pakkauksessa Moottorin aliluokassa
-	
-	protected abstract void tulokset(); // Määritellään simu.model-pakkauksessa Moottorin aliluokassa
+	protected abstract void tulokset();
 	
 }

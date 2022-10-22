@@ -6,6 +6,7 @@ package simu.model;
 public class Alkuarvot {
 
 	
+
 	/**  The food line count. */
 	private int ruokalinja;
 	
@@ -18,10 +19,11 @@ public class Alkuarvot {
 	/** The group of student count variable */
 	private int ryhmienMaara;
 	
-
-	private int muuttuvaRyhma;
 	
 	/** The gradation time. */
+
+
+
 	private double porrastusMaara;
 
 	/**
@@ -96,6 +98,7 @@ public class Alkuarvot {
 		return porrastusMaara;
 	}
 	
+
 	
 	
 	/**
@@ -106,4 +109,5 @@ public class Alkuarvot {
 		
 		
 	}
+
 }

@@ -220,13 +220,7 @@ public void tallennaAjo(ArrayList<Tapahtuma> tapahtumat) {
 	private static void addAsiakas(Asiakas asiakas, int ajoId) {
 		
 		try {
-			/*
-			System.out.println("insert into asiakkaat (saapumisaika, poistumisaika, ajoId) values (" + 
-					asiakas.getSaapumisaika() + ", " +
-					asiakas.getPoistumisaika() + ", " +
-					ajoId
-					);
-					*/
+			
 			query("insert into asiakkaat (saapumisaika, poistumisaika, ajoId) values (" + 
 			asiakas.getSaapumisaika() + ", " +
 			asiakas.getPoistumisaika() + ", " +
@@ -249,14 +243,7 @@ public void tallennaAjo(ArrayList<Tapahtuma> tapahtumat) {
 	
 	private static void addTapahtuma(Tapahtuma tapahtuma, int ajoId) {
 		try {
-			/*
-			System.out.println("insert into tapahtumat (tapahtumaAika, tapahtumaTyyppi, suunta, ajoId) values (" +
-					tapahtuma.getAika() + ", " +
-					tapahtuma.getTyyppi() + ", " +
-					tapahtuma.getDirection() + ", " +
-					ajoId + ");"
-			);*/
-			
+
 			query("insert into tapahtumat (tapahtumaAika, tapahtumaTyyppi, suunta, ajoId) values (" +
 					tapahtuma.getAika() + ", " +
 					"\"" + tapahtuma.getTyyppi() + "\"" + ", " +
@@ -398,7 +385,7 @@ private static void addPP(Palvelupiste piste, int ajoId) {
 			return tapahtumat;
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 			return null;
 		}
@@ -412,6 +399,7 @@ private static void addPP(Palvelupiste piste, int ajoId) {
 	public void lataaTuloksiin(int ajoId) {
 		
 		try {
+			
 		Alkuarvot ladattava = getAlkuarvot(ajoId);
 		
 		Tulokset.getInstance().setAlkuarvot(ladattava.getRyhmienMaara(), ladattava.getPorrastusMaara(), ladattava.getAsiakkaat(),ladattava.getRuokalinja(),ladattava.getKassat());

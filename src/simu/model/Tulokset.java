@@ -89,7 +89,6 @@ public class Tulokset implements Serializable{
 	
 
 	/** The data for sql. */
-	@SuppressWarnings("exports")
 	public ResultSet dummy;
 	
 	/**

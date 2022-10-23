@@ -26,7 +26,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-
+/**
+ * Class SimulaattorinGUI.
+ * @author Otto Oksanen
+ */
 public class SimulaattorinGUI extends Application implements ISimulaattorinUI, Initializable{
 
 
@@ -151,6 +154,10 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
                                	
 	}
 	 
+	
+	/**
+	 * Vaihtaa loadnäkymään. 
+	 */
 	@FXML
 	public void loadRuutu() {
 		
@@ -161,6 +168,10 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 		
 	}
 	
+	
+	/**
+	 * Hidastaa simulaation kulkua. 
+	 */
 	@FXML
 	private void hidasta() {
 		
@@ -168,6 +179,10 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 		
 	}
 	
+	
+	/**
+	 * Nopeuttaa simulaation kulkua. 
+	 */
 	@FXML
 	private void nopeuta() {
 			
@@ -176,6 +191,9 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 	}
 	
 
+	/**
+	 * Sulkee sovelluksen. 
+	 */
 	@FXML
 	private void lopeta() {
 		
@@ -183,6 +201,10 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 		
 	}
 	
+	
+	/**
+	 * Hakee tietokannasta vanhojen ajojen aloitusparametrit. 
+	 */
 	@FXML
 	private void tallennusEsitiedot() {
 		
@@ -190,6 +212,10 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 			
 	}
 	
+	
+	/**
+	 * Poistaa porrastustekstin. 
+	 */
 	@FXML
 	public void pyyhiPorrastusTeksti() {
 		
@@ -197,6 +223,9 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 		
 	}
 	
+	/**
+	 * Palauttaa simulaation asiakasmäärän. 
+	 */
 	@Override
 	public int getAsiakasMaara() {
 		
@@ -204,6 +233,9 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 		
 	}
 	
+	/**
+	 * Palauttaa simulaation ruokalinjastojen määrän. 
+	 */
 	@Override
 	public int getRuokalinjojenMaara() {
 		
@@ -211,6 +243,9 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 		
 	}
 	
+	/**
+	 * Palauttaa simulaation kassojen määrän. 
+	 */
 	@Override
 	public int getKassojenMaara() {
 		
@@ -218,6 +253,10 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 			
 	}
 		
+	
+	/**
+	 * Palauttaa simulaation ryhmämäärän. 
+	 */
 	@Override
 	public int getRyhmienMaara() {
 		
@@ -231,7 +270,11 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 			
 		}		
 	}
-
+	
+	
+	/**
+	 * Palauttaa simulaation porrastusajan. 
+	 */
 	@Override
 	public double getPorrastusAika() {
 		
@@ -246,6 +289,9 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 		}	
 	}
 	
+	/**
+	 * Palauttaa simulaation maksimiajan. 
+	 */
 	@Override
 	public double getAika(){
 		
@@ -253,6 +299,9 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 		
 	}
 
+	/**
+	 * Palauttaa simulaation aloitus viiveen. 
+	 */
 	@Override
 	public long getViive(){
 		
@@ -272,6 +321,10 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 		 
 	}
 	
+	
+	/**
+	 * Luo hover-efektin kutsumalla Visualeffects-luokan metodia. 
+	 */
 	@FXML
 	private void hoverOn(Event e) {
 
@@ -280,6 +333,10 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 		
 	}
 	
+	
+	/**
+	 * Luo hover-efektin kutsumalla Visualeffects-luokan metodia. 
+	 */
 	@FXML
 	private void hoverOff(Event e) {
 		
@@ -288,6 +345,10 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 			
 	}
 	
+	
+	/**
+	 * Luo hover-efektin kutsumalla Visualeffects-luokan metodia. 
+	 */
 	@FXML
 	private void controlHoverOn(Event e) {
 
@@ -296,6 +357,9 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 		
 	}
 	
+	/**
+	 * Luo hover-efektin kutsumalla Visualeffects-luokan metodia. 
+	 */
 	@FXML
 	private void controlHoverOff(Event e) {
 		
@@ -316,6 +380,9 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 		
 	}
 	
+	/**
+	 * Avaa tulosnäkymän. 
+	 */
 	@FXML
 	private void siirryEkalleSivulle() {
 		
@@ -331,6 +398,9 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 			
 	}
 	
+	/**
+	 * Avaa asiakasnäkymän. 
+	 */
 	@FXML
 	private void asiakasPaneeli() {
 			
@@ -339,6 +409,9 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 	}
 	
 	
+	/**
+	 * Avaa linjastonäkymän. 
+	 */
 	@FXML
 	private void ruokaPaneeli() {
 		
@@ -346,6 +419,9 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 		
 	}
 	
+	/**
+	 * Avaa kassatnäkymän. 
+	 */
 	@FXML
 	private void kassaPaneeli() {
 		
@@ -353,6 +429,10 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 		
 	}
 	
+	
+	/**
+	 * Avaa loadnäkymän ja lataa tallennusten esitiedot visualisointiluokan käsiteltäväksi. 
+	 */
 	@FXML
 	private void tallennusPaneeli() {
 		
@@ -361,7 +441,9 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 		
 	}
 	
-	
+	/**
+	 * Kutsuu Visualeffects luokan metodia boxBlurToBackground(), joka asettaa visuaalisen efektin taustakuvalle. 
+	 */
 	private void boxBlurToBackground() {
 		
 		visualeffects.boxBlurToBackground(taustakuvapane);
@@ -369,6 +451,9 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 	}
 	
 	
+	/**
+	 * Kutsuu tuoSimulaatioRuutu()-metodia, joka käynnistää simulaation. 
+	 */
 	@FXML
 	public void kaynnistaSimulaatio() {
 	
@@ -376,6 +461,10 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 		
 	}
 	
+	
+	/**
+	 * Tuo simulaationäkymän ja käynnistää simulaation. 
+	 */
 	private void tuoSimulaatioRuutu() {
 		
 		simulaatioPane.setOpacity(0);
@@ -417,6 +506,9 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
         });	
 	}
 	
+	/**
+	 * Vaihtaa näkymän aloitus näkymään. 
+	 */
 	@FXML
 	private void startRuutuun() {
 		
@@ -450,6 +542,10 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
 		});	
 	}
 	
+	
+	/**
+	 * Vaihtaa aloitusnäkymän load näkymään. 
+	 */
 	private void tuoLoadRuutu() {
 		
 		simulaatioPane.setOpacity(0);
@@ -491,14 +587,22 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI, I
         });
 	}
 	
+	
+	/**
+	 * Lataa tulokset tietokannasta ja lähettää ne Visualisointiluokan käsiteltäväksi. 
+	 */
 	@FXML
 	public void lataaVanhaAjoTuloksiin() {
 		
 		kontrolleri.setLoadToTulokset(loadlist.getSelectionModel().getSelectedIndex() + 1);  
+		kontrolleri.getLoadTulokset();
 		
 	}
 
 	
+	/**
+	 * Initialisoi visuaaliset komponentit. 
+	 */
     @Override
     public final void initialize(URL url, ResourceBundle resourceBundle) {
 

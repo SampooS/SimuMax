@@ -9,6 +9,10 @@ import simu.model.OmaMoottori;
 import simu.model.Tulokset;
 import view.ISimulaattorinUI;
 
+/**
+ * Class Kontrolleri.
+ * @author Otto Oksanen
+ */
 public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 	
 	private IMoottori moottori; 
@@ -23,6 +27,9 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 		
 	}
 
+	/**
+	 * Lähettää asiakkaan antamat simulaatioparametrit moottorin käytettäväksi ja käynnistää simulaation. 
+	 */
 	@Override
 	public void kaynnistaSimulointi() {
 		
@@ -34,6 +41,9 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 
 	}
 	
+	/**
+	 * Hidastaa simulaatiota. 
+	 */
 	@Override
 	public void hidasta() { 
 		
@@ -41,6 +51,9 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 		
 	}
 
+	/**
+	 * Nopeuttaa simulaatiota. 
+	 */
 	@Override
 	public void nopeuta() {
 		
@@ -49,6 +62,9 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 	}
 	
 	
+	/**
+	 * Tallentaa simulaation tietokantaan. 
+	 */
 	@Override
 	public void tallenna() {
 		
@@ -57,7 +73,9 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 	}
 	
 
-
+	/**
+	 * Lähettää moottorista dataa Visualisointiluokan käsiteltäväksi. 
+	 */
 	@Override
 	public void visualisoiAsiakas(int asiakasmaara) {
 	
@@ -66,6 +84,9 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 	}
 	
 
+	/**
+	 * Lähettää moottorista dataa Visualisointiluokan käsiteltäväksi. 
+	 */
 	@Override
 	public void naytaPisinJonoKassoille(int jononpituus) {
 		
@@ -73,6 +94,9 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 
 	}
 	
+	/**
+	 * Lähettää moottorista dataa Visualisointiluokan käsiteltäväksi. 
+	 */
 	@Override
 	public void naytaAsiakkaidenKeskimaarainenPalveluaika(double aika) { 
 		
@@ -80,6 +104,9 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 		
 	}
 	
+	/**
+	 * Lähettää moottorista dataa Visualisointiluokan käsiteltäväksi. 
+	 */
 	@Override
 	public void naytaPisinJonoRuokalinjastolle(int maara) {
 		
@@ -87,6 +114,9 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 	
 	}
 	
+	/**
+	 * Lähettää moottorista dataa Visualisointiluokan käsiteltäväksi. 
+	 */
 	@Override
 	public void naytaLapiPaasseetAsiakkaat(int poistumismaara) {
 		
@@ -94,6 +124,9 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 		
 	}
 	
+	/**
+	 * Lähettää moottorista dataa Visualisointiluokan käsiteltäväksi. 
+	 */
 	@Override
 	public void naytaRuokalinjastonAktiiviaika(double aika) {
 		
@@ -102,6 +135,9 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 	}
 
 
+	/**
+	 * Lähettää moottorista dataa Visualisointiluokan käsiteltäväksi. 
+	 */
 	@Override
 	public void naytaKellonAika(double aika) {
 		
@@ -110,6 +146,9 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 	}
 
 
+	/**
+	 * Lähettää moottorista dataa Visualisointiluokan käsiteltäväksi. 
+	 */
 	@Override
 	public void naytaRuokaJononPituus(int maara) {
 		
@@ -118,6 +157,9 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 	}
 
 
+	/**
+	 * Lähettää moottorista dataa Visualisointiluokan käsiteltäväksi. 
+	 */
 	@Override
 	public void naytaKassaJononPituus(int maara) {
 		
@@ -126,6 +168,9 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 	}
 
 
+	/**
+	 * Lähettää moottorista dataa Visualisointiluokan käsiteltäväksi. 
+	 */
 	@Override
 	public void naytaKeskiOdotusAika(double aika) {
 		
@@ -134,6 +179,9 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 	}
 
 
+	/**
+	 * Lähettää moottorista dataa Visualisointiluokan käsiteltäväksi. 
+	 */
 	@Override
 	public void naytaAsiakkaanLapimenoAika(double aika) {
 		
@@ -142,13 +190,20 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 	}
 
 
+	/**
+	 * Lähettää moottorista dataa Visualisointiluokan käsiteltäväksi. 
+	 */
 	@Override
 	public void naytaRuokalinjastonKayttoaste(double maara) {
 		
 		Platform.runLater(() -> ui.getVisualisointi().setRuokalinjastoKayttoaste(maara));
 		
 	}
+	
 
+	/**
+	 * Lähettää moottorista dataa Visualisointiluokan käsiteltäväksi. 
+	 */
 	@Override
 	public void naytaRuokalinjastonSuoritusteho(double maara) {
 		
@@ -157,6 +212,9 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 	}
 
 
+	/**
+	 * Lähettää moottorista dataa Visualisointiluokan käsiteltäväksi. 
+	 */
 	@Override
 	public void naytaKassaKayttoaste(double maara) {
 		
@@ -164,6 +222,9 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 		
 	}
 
+	/**
+	 * Lähettää moottorista dataa Visualisointiluokan käsiteltäväksi. 
+	 */
 	@Override
 	public void naytaKassaSuoritusteho(double maara) {
 		
@@ -171,6 +232,9 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 		
 	}
 
+	/**
+	 * Lähettää moottorista dataa Visualisointiluokan käsiteltäväksi. 
+	 */
 	@Override
 	public void naytaKassaAktiiviaika(double aika) {
 		
@@ -178,6 +242,9 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 		
 	}
 
+	/**
+	 * Lähettää moottorista dataa Visualisointiluokan käsiteltäväksi. 
+	 */
 	@Override
 	public void naytaRuokalinjastonKeskikayttoaste(double maara) {
 		
@@ -185,6 +252,9 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 		
 	}
 
+	/**
+	 * Lähettää moottorista dataa Visualisointiluokan käsiteltäväksi. 
+	 */
 	@Override
 	public void naytaKassaKeskikayttoaste(double maara) {
 		
@@ -192,6 +262,9 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 		
 	}
 
+	/**
+	 * Lähettää esitieto datan tietokannasta Visualisointi luokan käsiteltäväksi. 
+	 */
 	@Override
 	public void setLoadlist(ArrayList<String> lista) {
 		
@@ -199,6 +272,9 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 		
 	}
 
+	/**
+	 * Hakee esitietodatan tietokannasta. 
+	 */
 	@Override
 	public void getLoadlist() {
 		
@@ -214,6 +290,10 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 		setLoadlist(sendajot);
 	}
 
+	
+	/**
+	 * Lähettää tietokannasta dataa Visualisointiluokan käsiteltäväksi. 
+	 */
 	@Override
 	public void setAjolist() {
 		
@@ -221,19 +301,31 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV{
 		
 	}
 
+	/**
+	 * Lähettää tietokannasta dataa Tulokset luokan käsiteltäväksi. 
+	 */
 	@Override
 	public void setLoadToTulokset(int index) {
 		
 		db.lataaTuloksiin(index);
+		
 		try {
+			
 			Tulokset.getInstance().setDummy(index);
+			
 		} catch (SQLException e) {
+			
 			System.out.println("Dummy tulosten asettaminen ei onnistunut");
 			e.printStackTrace();
+			
 		}
 		
 	}
 	
+	
+	/**
+	 * Lähettää moottorista dataa Visualisointiluokan käsiteltäväksi. 
+	 */
 	@Override
 	public void getLoadTulokset() {
 		

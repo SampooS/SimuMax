@@ -6,6 +6,7 @@ import simu.framework.Tapahtumalista;
 
 /**
  * The Class RyhmaSaapumisProsessi (groups arriving process).
+ * @author Otto Oksanen
  */
 public class RyhmaSaapumisProsessi {
 	

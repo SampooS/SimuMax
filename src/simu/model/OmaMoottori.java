@@ -68,7 +68,7 @@ public class OmaMoottori extends Moottori{
 		
 		for (int i = linjastot; i < linjastot + kassat; i++) {
 			
-			palvelupisteet[i]=new Palvelupiste(new Normal(8000, 4000, (1 + i +(long)Math.random() * 5678)), tapahtumalista, TapahtumanTyyppi.DEP2);
+			palvelupisteet[i]=new Palvelupiste(new Normal(14000, 4000, (1 + i +(long)Math.random() * 5678)), tapahtumalista, TapahtumanTyyppi.DEP2);
 			
 		}
 	
@@ -211,6 +211,17 @@ public class OmaMoottori extends Moottori{
 	             break;
 		}
 			
+
+		
+				luoVisuaalit();
+		
+
+			
+	}
+	
+	
+	private void luoVisuaalit() {
+		
 		kontrolleri.naytaKellonAika(Kello.getInstance().getAika());
 		kontrolleri.naytaRuokaJononPituus(tulokset.getJononpituus(Palvelupisteet.RUOKALINJASTO));
 		kontrolleri.naytaPisinJonoRuokalinjastolle(tulokset.getRuokalinjastoMaxJono());
@@ -234,10 +245,7 @@ public class OmaMoottori extends Moottori{
 		kontrolleri.naytaKassaKeskikayttoaste(tulokset.getKeskiKayttoaste(Palvelupisteet.KASSA));
 		kontrolleri.naytaKassaSuoritusteho(tulokset.getSuoritusteho_X(Palvelupisteet.KASSA));
 		
-
 		
-
-			
 	}
 	
 	

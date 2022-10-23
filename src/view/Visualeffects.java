@@ -10,9 +10,16 @@ import javafx.scene.effect.SepiaTone;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
+/**
+ * Class Visualeffects.
+ * @author Otto Oksanen
+ */
 public class Visualeffects {
 	
 	
+	/**
+	 * Luo hoverefektin. 
+	 */
 	public Glow setHoverOn(double maara) {
 		
 		Glow glow = new Glow();
@@ -22,6 +29,9 @@ public class Visualeffects {
 		
 	}
 	
+	/**
+	 * Luo hoverefektin. 
+	 */
 	public Glow setHoverOff(double maara) {
 		
 		Glow glow = new Glow();
@@ -31,6 +41,9 @@ public class Visualeffects {
 			
 	}
 	
+	/**
+	 * Luo hoverefektin. 
+	 */
 	public SepiaTone controlsetHoverOn(double maara) {
 		
 		SepiaTone sepia = new SepiaTone();
@@ -40,6 +53,9 @@ public class Visualeffects {
 		
 	}
 	
+	/**
+	 * Luo hoverefektin. 
+	 */
 	public SepiaTone controlsetHoverOff(double maara) {
 		
 		SepiaTone sepia = new SepiaTone();
@@ -49,7 +65,9 @@ public class Visualeffects {
 			
 	}
 	
-	
+	/**
+	 * Luo boxblurefektin. 
+	 */
 	public void boxBlurToBackground(Pane pane) {
 		
 		BoxBlur blur = new BoxBlur();
@@ -81,6 +99,10 @@ public class Visualeffects {
 		
 	}
 	
+	
+	/**
+	 * Vaihtaa jonoanimaatio palkkien väriä suhteessa siihen kuinka hyväksyttävällä tasolla jonon koko on. 
+	 */
 	public ColorAdjust setVariJonoPalkeille(int maara) {
 		
 		ColorAdjust vari = new ColorAdjust();

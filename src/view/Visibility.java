@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 import javafx.scene.layout.Pane;
 
+/**
+ * Class Visualeffects.
+ * @author Otto Oksanen
+ */
 public class Visibility {
 	
 	private ArrayList<Pane> panelista;
@@ -14,6 +18,10 @@ public class Visibility {
 		
 	}
 	
+	
+	/**
+	 * Vaihtaa näkymän. 
+	 */
 	public void siirrySimulaatioSivulle(Pane simu, Pane tulos, Pane simubuttons, Pane tulosbuttons) {
 		
 		simu.setVisible(true);
@@ -27,6 +35,9 @@ public class Visibility {
 		
 	}
 	
+	/**
+	 * Vaihtaa näkymän. 
+	 */
 	public void siirryTulosNakymaan(Pane simu, Pane tulos, Pane simubuttons, Pane tulosbuttons) {
 		
 		simu.setVisible(false);
@@ -40,6 +51,9 @@ public class Visibility {
 		
 	}
 	
+	/**
+	 * Vaihtaa näkymiä. 
+	 */
 	public void setPaneVisibility(int index) {
 		
 		for(int i = 0; i < panelista.size(); i++) {

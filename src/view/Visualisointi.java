@@ -12,7 +12,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import simu.model.Alkuarvot;
 
-
+/**
+ * Class Visualisointi.
+ * @author Otto Oksanen
+ */
 public class Visualisointi implements IVisualisointi{
 	
 	
@@ -53,6 +56,10 @@ public class Visualisointi implements IVisualisointi{
 	private Pane esitiedotpane;
 	private Label esiasiakas,esiruokalinja,esikassa,esiryhmia,esiporrastusaika;
 
+	
+	/**
+	 * Alustaa tulosnäkymä komponentit Visualisointi luokan käyttöön. 
+	 */
 	public Visualisointi(	
 			
 		Pane pane, Label pisinruokajono, Label pisinkassajono, 
@@ -81,7 +88,9 @@ public class Visualisointi implements IVisualisointi{
 
 	}
 	
-
+	/**
+	 * Piirtää kello palkin tulosnäkymään. 
+	 */
 	@Override
 	public void setKellonAika(double aika) {
 		
@@ -98,6 +107,9 @@ public class Visualisointi implements IVisualisointi{
 	// -> Asiakkaan visualisoinnit ---------------------------------------------------------------------------------------------------------------
 	
 	
+	/**
+	 * Alustaa asiakasnäkymä komponentit Visualisointi luokan käyttöön. 
+	 */
 	public void setAsiakasPane(
 			
 			Label asiakasFinal,Label lapiAsiakkaat,Label keskiAsiakkaat,
@@ -118,6 +130,9 @@ public class Visualisointi implements IVisualisointi{
 				
 	}
 
+	/**
+	 * Piirtää läpipäässeet asiakkaat palkin tulosnäkymään. 
+	 */
 	@Override
 	public void setLapiPaasseetAsiakkaat(int poistumismaara) {
 			
@@ -137,14 +152,20 @@ public class Visualisointi implements IVisualisointi{
 		}	
 	}
 
+	/**
+	 * Pävittää asiakkaan odotusajan  asiakasnäkymään. 
+	 */
 	@Override
 	public void setAsiakasOdotusAika(double aika) {
 		
 		keskiJonoAsiakkaat.setText(": " + String.format("%.0f", aika/1000) + " s");
 		jonotusaika.setFitHeight(aika/17000);
 	}
-
-
+	
+	
+	/**
+	 * Pävittää asiakkaan läpimenoajan  asiakasnäkymään. 
+	 */
 	@Override
 	public void setAsiakkaanLapimenoAika(double aika) {
 		
@@ -152,6 +173,9 @@ public class Visualisointi implements IVisualisointi{
 		lapimeno.setFitHeight(aika/17000);
 	}
 	
+	/**
+	 * Pävittää asiakkaan keskimääräisen palveluajan  asiakasnäkymään. 
+	 */
 	@Override
 	public void setAsiakkaidenKeskimaarainenPalveluaika(double aika) {
 		
@@ -160,6 +184,9 @@ public class Visualisointi implements IVisualisointi{
 	}
 	
 	
+	/**
+	 * Piirtää asiakkaan saapumisen tulosnäkymään ja päivittää asiakkaan saapumisen asiakasnäkymään . 
+	 */
 	@Override
 	public void uusiAsiakas(int asiakasmaara) {
 		
@@ -183,6 +210,9 @@ public class Visualisointi implements IVisualisointi{
 	// -> Ruokalinjasto visualisoinnit ---------------------------------------------------------------------------------------------------------------
 	
 	
+	/**
+	 * Alustaa linjastonäkymän komponentit Visualisointi luokan käyttöön. 
+	 */
 	public void setRuokalinjastoPane(
 			
 			Label aktiiviaika, Label palvellutAsiakkaat, Label kayttoaste, 
@@ -199,6 +229,9 @@ public class Visualisointi implements IVisualisointi{
 				
 	}
 
+	/**
+	 * Pävittää linjaston käyttöasteen linjastonäkymään. 
+	 */
 	@Override
 	public void setRuokalinjastoKayttoaste(double maara) {
 		
@@ -223,6 +256,10 @@ public class Visualisointi implements IVisualisointi{
 		
 	}
 	
+	
+	/**
+	 * Pävittää linjaston aktiiviajan linjastonäkymään. 
+	 */
 	@Override
 	public void setRuokalinjastonAktiiviaika(double aika) {
 
@@ -231,6 +268,10 @@ public class Visualisointi implements IVisualisointi{
 		
 	}
 	
+	
+	/**
+	 * Pävittää linjaston keskikäyttöasteen linjastonäkymään. 
+	 */
 	@Override
 	public void setRuokalinjastoKeskiKayttoaste(double maara) {
 		
@@ -240,6 +281,10 @@ public class Visualisointi implements IVisualisointi{
 	}
 	
 	
+	
+	/**
+	 * Piirtää linjaston jonon tulosnäkymään. 
+	 */
 	public void setJonoRuokalinjastolle(int maara) {
 		
 		ColorAdjust vari = visualeffects.setVariJonoPalkeille(maara);
@@ -260,6 +305,10 @@ public class Visualisointi implements IVisualisointi{
 		}
 	}
 	
+	
+	/**
+	 * Piirtää linjaston maksimijonon tulosnäkymään. 
+	 */
 	@Override
 	public void setPisinJonoRuokalinjastolle(int maara) {
 		
@@ -287,6 +336,9 @@ public class Visualisointi implements IVisualisointi{
 	// -> Kassavisualisoinnit --------------------------------------------------------------------------------------------------------------------------
 	
 	
+	/**
+	 * Alustaa kassatnäkymän komponentit Visualisointi luokan käyttöön. 
+	 */
 	public void setKassaPane(
 			
 			Label aktiiviaika, Label palvellutAsiakkaat, Label kayttoaste, 
@@ -305,6 +357,9 @@ public class Visualisointi implements IVisualisointi{
 		}
 	
 	
+	/**
+	 * Päivittää kassojen aktiiviajan kassanäkymään. 
+	 */
 	@Override
 	public void setKassojenAktiiviaika(double aika) {
 		
@@ -314,6 +369,9 @@ public class Visualisointi implements IVisualisointi{
 	}
 
 
+	/**
+	 * Päivittää kassojen käyttöasteen kassanäkymään. 
+	 */
 	@Override
 	public void setKassaKayttoaste(double maara) {
 			
@@ -332,6 +390,9 @@ public class Visualisointi implements IVisualisointi{
 		}
 	}
 
+	/**
+	 * Päivittää kassojen suoritustehon kassanäkymään. 
+	 */
 	@Override
 	public void setKassaSuoritusteho(double maara) {
 		
@@ -340,6 +401,9 @@ public class Visualisointi implements IVisualisointi{
 		
 	}
 
+	/**
+	 * Päivittää kassojen keskikäyttöasteen kassanäkymään. 
+	 */
 	@Override
 	public void setKassaKeskiKayttoaste(double maara) {
 		
@@ -348,6 +412,10 @@ public class Visualisointi implements IVisualisointi{
 		
 	}
 	
+	
+	/**
+	 * Piirtää kassojen jonon tulosnäkymään. 
+	 */
 	@Override
 	public void setJonoKassoille(int maara) {
 		
@@ -372,6 +440,9 @@ public class Visualisointi implements IVisualisointi{
 	}
 
 	
+	/**
+	 * Piirtää kassojen maksimijonon tulosnäkymään. 
+	 */
 	@Override
 	public void setPisinJonoKassoille(int maara) {
 		
@@ -399,6 +470,10 @@ public class Visualisointi implements IVisualisointi{
 
 
 	// Loadpane stup.....................................................................................................................................
+	
+	/**
+	 * Alustaa loadnäkymän komponentit Visualisointi luokan käyttöön. 
+	 */
 	@Override
 	public void setLoadPane(ListView<String> loadlist,Pane esitiedotPane,Label esiasiakas,Label esiruokalinja,Label esikassa, Label esiryhmia,Label esiporrastusaika) {
 		
@@ -414,7 +489,9 @@ public class Visualisointi implements IVisualisointi{
 
 
 
-
+	/**
+	 * Hakee tietokannasta tallennuksien esitiedot ja laittaa ne listview listaan. 
+	 */
 	@Override
 	public void setLoadlist(ArrayList<String> tallennukset) {
 		
@@ -428,11 +505,12 @@ public class Visualisointi implements IVisualisointi{
 		loadlist.getItems().clear();
 		loadlist.getItems().addAll(loadings);
 		loadlist.setStyle("-fx-cell-background-color: #000000;");
-		System.out.println(loadlist.getItems());
-			
+		
 	}
 	
-	
+	/**
+	 * Päivittää tallennusten esitiedot loadnäkymään katseltavaksi. 
+	 */
 	@Override
 	public void setEsitiedotRuudulle(ArrayList<Alkuarvot> arvot) {
 		
@@ -448,6 +526,9 @@ public class Visualisointi implements IVisualisointi{
 	}
 	
 	
+	/**
+	 * Hakee loadlistin. 
+	 */
 	public ListView<String> getLoadList() {
 		
 		return loadlist;
